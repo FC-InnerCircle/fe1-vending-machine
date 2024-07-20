@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const logContainer = document.getElementById('log-container');
   const moneyInput = document.getElementById('money-input');
 
+  // 로컬 스토리지에서 데이터를 불러오기
+  loadFromLocalStorage();
+
   moneyInput.addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9]/g, '');
   });
@@ -42,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
           balance = 0;
           updateBalance();
         }
+        saveToLocalStorage();
       } else {
         showTemporaryMessage(button, '잔액 부족');
       }
@@ -72,4 +76,27 @@ document.addEventListener('DOMContentLoaded', () => {
       element.innerText = originalText;
     }, 1000);
   }
+
+  function saveToLocalStorage() {
+    localStorage.setItem('balance', balance);
+    localStorage.setItem('log', logDisplay.innerHTML);
+  }
+
+  function loadFromLocalStorage() {
+    const savedBalance = localStorage.getItem('balance');
+    const savedLog = localStorage.getItem('log');
+    if (savedBalance !== null) {
+      balance = parseInt(savedBalance);
+      updateBalance();
+    }
+    if (savedLog !== null) {
+      logDisplay.innerHTML = savedLog;
+      scrollLogToBottom();
+    }
+  }
+
+  function scrollLogToBottom() {
+    logContainer.scrollTop = logContainer.scrollHeight;
+  }
 });
+
