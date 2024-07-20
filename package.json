@@ -1,0 +1,8 @@
+{
+  "name": "fe1-vending-machine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jangwonyoon/fe1-vending-machine.git",
+  "author": "jangwon <yoonjangwon94@gmail.com>",
+  "license": "MIT"
+}
