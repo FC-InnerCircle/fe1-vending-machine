@@ -21,4 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  document.getElementById('return-money').addEventListener('click', () => {
+    if (balance > 0) {
+      addLog(`${balance.toLocaleString()}원을 반환했습니다.`);
+      balance = 0;
+      updateBalance();
+      saveToLocalStorage();
+    }
+  });
+
 });
