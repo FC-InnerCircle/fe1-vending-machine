@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/main.css">
+    <script src="./js/main.js"></script>
     <title>Vending Machine</title>
 </head>
 <body>
 <div class="container">
     <div class="machine">
-        <input type="number" class="screen" value="0">
+        <input type="text" class="screen" value="0" min="0" readonly>
         <div class="buttons">
             <button class="button" value="300">FE300</button>
             <button class="button" value="400">FE400</button>
@@ -24,12 +25,11 @@
     </div>
     <div class="controls">
         <form class="controls-header">
-            <input id="money" type="number" class="input-display" value="" placeholder="자판기에 돈을 투입해 주세요">
+            <input id="money" type="text" class="input-display" value="" placeholder="자판기에 돈을 투입해 주세요">
             <button id="insert" type="button" class="control-button">투입</button>
             <button id="refund" type="button" class="control-button">반환</button>
         </form>
         <textarea class="message-box" readonly>
-            자판기 메세지 박스
         </textarea>
     </div>
 </div>
