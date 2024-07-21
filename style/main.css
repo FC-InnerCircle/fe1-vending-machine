@@ -34,7 +34,7 @@ body {
   width: 40%;
 }
 
-.machine .screen, .controls .controls-header .input-display {
+.machine #screen, .controls .controls-header .input-display {
   text-align: right;
   font-size: 24px;
   padding: 10px;
@@ -42,7 +42,7 @@ body {
   box-sizing: border-box;
 }
 
-.machine .screen {
+.machine #screen {
   margin-bottom: 20px;
 }
 
