@@ -10,6 +10,7 @@ module.exports = {
         test: /\.ts$/,
         use: "ts-loader",
         exclude: /node_modules/,
+        include: path.resolve(__dirname, "src"),
       },
       {
         test: /\.css$/i,
@@ -33,9 +34,9 @@ module.exports = {
   ],
   devServer: {
     static: path.join(__dirname, "dist"), // contentBase를 static으로 변경
-    compress: true,
-    port: 9000,
     open: true, // 브라우저 자동 열기
     hot: true, // 모듈 핫 리플레이스먼트 활성화,
+    // watchFiles: ["src/**/*"],
   },
+  cache: false,
 };
