@@ -25,9 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     inputDisplay.addEventListener("input", () => {
-        let value = inputDisplay.value.replace(/,/g, ''); // Remove existing commas
-        if (!isNaN(value) && value !== "") {
+        let value = inputDisplay.value.replace(/,/g, '');
+        if (!isNaN(value) && value !== "" && value > 0) {
             inputDisplay.value = formatCurrency(value);
+        }else{
+            inputDisplay.value = formatCurrency('');
+        }
+    });
+    inputDisplay.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            insertButton.click();
         }
     });
     insertButton.addEventListener("click", () => {
