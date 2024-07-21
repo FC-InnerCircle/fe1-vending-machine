@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/main.css">
+    <title>Vending Machine</title>
+</head>
+<body>
+<div class="container">
+    <div class="machine">
+        <input type="number" class="screen" value="0">
+        <div class="buttons">
+            <button class="button" value="300">FE300</button>
+            <button class="button" value="400">FE400</button>
+            <button class="button" value="500">FE500</button>
+            <button class="button" value="600">FE600</button>
+            <button class="button" value="700">FE700</button>
+            <button class="button" value="800">FE800</button>
+            <button class="button" value="900">FE900</button>
+            <button class="button" value="1000">FE1000</button>
+            <button class="button" value="1100">FE1100</button>
+        </div>
+    </div>
+    <div class="controls">
+        <form class="controls-header">
+            <input id="money" type="number" class="input-display" value="" placeholder="자판기에 돈을 투입해 주세요">
+            <button id="insert" type="button" class="control-button">투입</button>
+            <button id="refund" type="button" class="control-button">반환</button>
+        </form>
+        <textarea class="message-box" readonly>
+            자판기 메세지 박스
+        </textarea>
+    </div>
+</div>
+</body>
+</html>
