@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const screenInput = document.getElementById("screen");
     const insertButton = document.getElementById("insert");
     const refundButton = document.getElementById("refund");
+    const productMinimum = Math.min(...Array.from(buttons).map(button => parseInt(button.value)));
     let totalInserted = 0;
 
     function formatCurrency(value) {
@@ -57,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
             updateMesaageBox('',"반환할 금액이 없습니다.");
         }
     });
-
     buttons.forEach(button => {
         button.addEventListener("click", () => {
             const feAmount = parseInt(button.value);
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 totalInserted -= feAmount;
                 updateScreen();
                 updateMesaageBox('',`FE${feAmount}을 구매했습니다.`);
-                if (totalInserted > 0 && totalInserted < 300) {
+                if (totalInserted > 0 && totalInserted < productMinimum) {
                     updateMesaageBox(totalInserted,`반환합니다.`);
                     totalInserted = 0;
                     updateScreen();
