@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js",
-    "tbuild": "npx tailwindcss build public/css/tailwind.css -o public/css/styles.css"
+    "dev": "nodemon app.js --exec babel-node",
+    "tbuild": "npx tailwindcss build public/css/tailwind.css -o public/css/styles.css --watch"
   },
   "author": "",
   "license": "ISC",

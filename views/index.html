@@ -7,21 +7,29 @@
     <title>Vanilla JS with Tailwind CSS</title>
   </head>
   <body class="bg-gray-100 p-4">
-    <div class="max-w-[900px] mx-auto bg-white p-8 rounded shadow">
-      <h1 class="text-3xl font-bold text-center">Hello, Tailwind CSS!</h1>
-      <p class="text-center text-blue-500 mt-4">
-        Welcome to Tailwind CSS example with Express and Vanilla JS
-      </p>
-      <button
+    <div class="hidden bg-red-100"></div> 
+    <div class="hidden bg-red-300"></div> 
+    <div class="hidden bg-red-500"></div> 
+    <div class="flex flex-row imtes-center justify-center min-w-[900px] max-w- mx-auto bg-white p-8 rounded shadow">
+    
+      <div class="flex-1 bg-green-500 h-[800px]">
+       <div class="h-[100px] my-[50px] mx-[80px] bg-white">
+1234
+       </div>
+       
+        <div id="itemList" class="mt-4 grid grid-cols-3"></div>
+
+   
+      <div class="flex-1">
+
+      </div>
+      <!-- <button
         id="myButton"
         class="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
       >
         Click me
-      </button>
-      <p class="mt-4 text-center">
-        Button clicked <span id="count">0</span> times
-      </p>
-    </div>
+      </button> -->
+    
     <script src="/js/state.js"></script>
     <script src="/js/render.js"></script>
     <script src="/js/main.js"></script>
