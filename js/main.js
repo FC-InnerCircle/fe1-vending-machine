@@ -17,12 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateScreen() {
         screenInput.value = formatCurrency(totalInserted);
     }
-    function updateMesaageBox(amount,text) {
-        if(amount){
-            messageBox.value += `\n${formatCurrency(amount)}원을${text}`;
-        }else{
-            messageBox.value += `\n${text}`;
-        }
+    function updateMesaageBox(amount, text) {
+        const newMessage = amount ? `${formatCurrency(amount)}원을 ${text}` : `${text}`;
+        messageBox.value += messageBox.value ? `\n${newMessage}` : newMessage;
     }
 
     inputDisplay.addEventListener("input", () => {
