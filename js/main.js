@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const inputDisplay = document.querySelector(".input-display");
     const messageBox = document.querySelector(".message-box");
+    const buttons = document.querySelectorAll(".button");
     const screenInput = document.getElementById("screen");
     const insertButton = document.getElementById("insert");
     const refundButton = document.getElementById("refund");
@@ -15,8 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateScreen() {
         screenInput.value = formatCurrency(totalInserted);
     }
-    function updateMesaageBox(inputText) {
-        messageBox.value += `\n${inputText}`;
+    function updateMesaageBox(amount,text) {
+        if(amount){
+            messageBox.value += `\n${formatCurrency(amount)}원을${text}`;
+        }else{
+            messageBox.value += `\n${text}`;
+        }
     }
 
     inputDisplay.addEventListener("input", () => {
@@ -29,19 +34,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const amount = unFormatCurrency(inputDisplay.value);
         if (amount > 0) {
             totalInserted += amount;
-            updateMesaageBox(`${formatCurrency(amount)}원을 투입했습니다.`);
+            updateMesaageBox(amount,"투입했습니다.");
             updateScreen();
             inputDisplay.value = "";
         }
     });
     refundButton.addEventListener("click", () => {
         if (totalInserted > 0) {
-            updateMesaageBox(`${formatCurrency(totalInserted)}원을 반환했습니다.`);
+            updateMesaageBox(totalInserted,"반환했습니다.");
             totalInserted = 0;
             updateScreen();
             inputDisplay.value = "";
         }else {
-            messageBox.value += `\n반환할 금액이 없습니다.`;
+            updateMesaageBox('',"반환할 금액이 없습니다.");
         }
+    });
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const feAmount = parseInt(button.value);
+            if (totalInserted >= feAmount) {
+                totalInserted -= feAmount;
+                updateScreen();
+                updateMesaageBox('',`FE${feAmount}을 구매했습니다.`);
+                if (totalInserted > 0 && totalInserted < 300) {
+                    updateMesaageBox(totalInserted,`반환합니다.`);
+                    totalInserted = 0;
+                    updateScreen();
+                }
+            } else {
+                updateMesaageBox('',"잔액이 부족합니다.");
+            }
+        });
     });
 });
