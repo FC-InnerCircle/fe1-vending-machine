@@ -1,3 +1,7 @@
+@charset "utf-8";
+@import 'vending-machine.css';
+@import 'controller.css';
+
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -11,59 +15,4 @@ body {
 .container {
   display: flex;
   gap: 20px;
-}
-
-.vending-machine {
-  background-color: #ffffff;
-  border: 2px solid #000;
-  padding: 20px;
-  width: 300px;
-}
-
-.balance {
-  font-size: 24px;
-  text-align: center;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #000;
-}
-
-#buttons-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.item-button {
-  padding: 10px;
-  font-size: 16px;
-  background-color: #e0f0ff;
-  border: 1px solid #007bff;
-  cursor: pointer;
-}
-
-.control-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.current-amount {
-  font-size: 24px;
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #000;
-}
-
-.deposit,
-.return {
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.message-box {
-  border: 1px solid #000;
-  padding: 10px;
-  min-height: 100px;
 }

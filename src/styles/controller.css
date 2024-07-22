@@ -1,0 +1,32 @@
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.current-amount {
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.amount-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.deposit,
+.return {
+  font-size: 16px;
+  cursor: pointer;
+  width: 75px;
+}
+
+.message-box {
+  border: 1px solid #000;
+  background-color: white;
+  padding: 10px;
+  min-height: 250px;
+  overflow-y: auto;
+}
