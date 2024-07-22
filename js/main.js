@@ -8,68 +8,75 @@ document.addEventListener("DOMContentLoaded", () => {
     const productMinimum = Math.min(...Array.from(buttons).map(button => parseInt(button.value)));
     let totalInserted = 0;
 
-    function formatCurrency(value) {
-        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    function unFormatCurrency(value) {
-        return parseInt(value.toString().replaceAll(',',''));
-    }
-    function updateScreen() {
-        screenInput.value = formatCurrency(totalInserted);
-    }
-    function updateMesaageBox(amount, text) {
+    const formatCurrency = value => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const unFormatCurrency = value => parseInt(value.toString().replaceAll(',', ''));
+    const updateScreen = () => screenInput.value = formatCurrency(totalInserted);
+
+    const updateMessageBox = (text, amount) => {
         const newMessage = amount ? `${formatCurrency(amount)}원을 ${text}` : `${text}`;
         messageBox.value += messageBox.value ? `\n${newMessage}` : newMessage;
-    }
+    };
 
-    inputDisplay.addEventListener("input", () => {
-        let value = inputDisplay.value.replace(/,/g, '');
+    const inputDisplayInputListener = () => event => {
+        let value = event.target.value.replace(/,/g, '');
         if (!isNaN(value) && value !== "" && value > 0) {
-            inputDisplay.value = formatCurrency(value);
-        }else{
-            inputDisplay.value = formatCurrency('');
+            event.target.value = formatCurrency(value);
+        } else {
+            event.target.value = "";
         }
-    });
-    inputDisplay.addEventListener("keypress", (event) => {
+    };
+
+    const inputDisplayKeypressListener = button => event => {
         if (event.key === "Enter") {
             event.preventDefault();
-            insertButton.click();
+            button.click();
         }
-    });
-    insertButton.addEventListener("click", () => {
+    };
+
+    const insertButtonListener = () => () => {
         const amount = unFormatCurrency(inputDisplay.value);
         if (amount > 0) {
             totalInserted += amount;
-            updateMesaageBox(amount,"투입했습니다.");
+            updateMessageBox("투입했습니다.", amount);
             updateScreen();
             inputDisplay.value = "";
         }
-    });
-    refundButton.addEventListener("click", () => {
+    };
+
+    const refundButtonListener = () => () => {
         if (totalInserted > 0) {
-            updateMesaageBox(totalInserted,"반환했습니다.");
+            updateMessageBox("반환했습니다.", totalInserted);
             totalInserted = 0;
             updateScreen();
             inputDisplay.value = "";
-        }else {
-            updateMesaageBox('',"반환할 금액이 없습니다.");
+        } else {
+            updateMessageBox("반환할 금액이 없습니다.");
         }
-    });
-    buttons.forEach(button => {
-        button.addEventListener("click", () => {
-            const feAmount = parseInt(button.value);
-            if (totalInserted >= feAmount) {
-                totalInserted -= feAmount;
+    };
+
+    const productButtonClickListener = button => () => {
+        const feAmount = parseInt(button.value);
+        if (totalInserted >= feAmount) {
+            totalInserted -= feAmount;
+            updateScreen();
+            updateMessageBox(`FE${feAmount}을 구매했습니다.`);
+            if (totalInserted > 0 && totalInserted < productMinimum) {
+                updateMessageBox("반환합니다.", totalInserted);
+                totalInserted = 0;
                 updateScreen();
-                updateMesaageBox('',`FE${feAmount}을 구매했습니다.`);
-                if (totalInserted > 0 && totalInserted < productMinimum) {
-                    updateMesaageBox(totalInserted,`반환합니다.`);
-                    totalInserted = 0;
-                    updateScreen();
-                }
-            } else {
-                updateMesaageBox('',"잔액이 부족합니다.");
             }
-        });
-    });
+        } else {
+            updateMessageBox("잔액이 부족합니다.");
+        }
+    };
+
+    const setupEventListeners = () => {
+        inputDisplay.addEventListener("input", inputDisplayInputListener());
+        inputDisplay.addEventListener("keypress", inputDisplayKeypressListener(insertButton));
+        insertButton.addEventListener("click", insertButtonListener());
+        refundButton.addEventListener("click", refundButtonListener());
+        buttons.forEach(button => button.addEventListener("click", productButtonClickListener(button)));
+    };
+
+    setupEventListeners();
 });
