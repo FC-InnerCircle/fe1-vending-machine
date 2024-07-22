@@ -1,7 +1,7 @@
 import "./style.css";
+import { VendingMachine } from "./vending-machine";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
-app.innerHTML = `
-  <h1>Vending Machine</h1>
-`;
+const vendingMachine = new VendingMachine(app);
+vendingMachine.render();
