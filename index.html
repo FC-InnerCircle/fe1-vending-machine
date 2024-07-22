@@ -5,10 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vending-machine</title>
     <link rel="stylesheet" href="./output.css" />
+    <script src="./script.js"></script>
   </head>
   <body>
-    <div class="container m-auto bg-red-400">
-      <h1 class="uppercase">test</h1>
+    <div class="flex justify-center">
+      <div class="p-4 m-4 border">
+        <div id="output" class="border p-4 text-center">15,000</div>
+        <div
+          id="item-container"
+          class="grid grid-rows-3 grid-flow-col gap-4 pt-4"
+        ></div>
+      </div>
+      <div class="p-4">
+        <div class="flex gap-4">
+          <input id="input" class="border text-center" type="text" />
+          <div class="flex gap-2">
+            <div
+              id="insert"
+              class="border p-4 cursor-pointer bg-gray-400 hover:bg-gray-600 active:bg-gray-700 text-white"
+            >
+              투입
+            </div>
+            <div
+              id="return"
+              class="border p-4 cursor-pointer bg-gray-400 hover:bg-gray-600 active:bg-gray-700 text-white"
+            >
+              반환
+            </div>
+          </div>
+        </div>
+        <div
+          id="log-container"
+          class="mt-4 px-3 border h-60 min-h-60 max-h-60 overflow-auto"
+        >
+          <div id="log-item">600원을 투입했습니다.</div>
+          <div id="log-item">FE500을 구매했습니다.</div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
