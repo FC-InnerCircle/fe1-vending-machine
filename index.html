@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/index.css" />
+    <script type="module" src="./js/app.js"></script>
     <title>Vending Machine</title>
   </head>
   <body>
@@ -11,34 +12,34 @@
       <main class="content">
         <div class="machine">
           <div class="balance-box">
-            <span id="balance">15,000</span>
+            <span id="balance">0</span>
           </div>
           <div class="product-box">
             <div class="row">
-              <button>FE300</button>
-              <button>FE400</button>
-              <button>FE500</button>
+              <button value="300">FE300</button>
+              <button value="400">FE400</button>
+              <button value="500">FE500</button>
             </div>
             <div class="row">
-              <button>FE600</button>
-              <button>FE700</button>
-              <button>FE800</button>
+              <button value="600">FE600</button>
+              <button value="700">FE700</button>
+              <button value="800">FE800</button>
             </div>
             <div class="row">
-              <button>FE900</button>
-              <button>FE1000</button>
-              <button>FE1100</button>
+              <button value="900">FE900</button>
+              <button value="1000">FE1000</button>
+              <button value="1100">FE1100</button>
             </div>
           </div>
         </div>
         <div class="controls">
           <div class="coin-control">
-            <input type="text" />
-            <button>투입</button>
-            <button>반환</button>
+            <input id="input-coin" type="text" />
+            <button id="btn-insert">투입</button>
+            <button id="btn-return">반환</button>
           </div>
           <ul class="coin-history">
-            <li>
+            <!-- <li>
               <span class="log">600원을 투입했습니다.</span>
             </li>
             <li>
@@ -46,7 +47,7 @@
             </li>
             <li>
               <span class="log">100원을 반환합니다.</span>
-            </li>
+            </li> -->
           </ul>
         </div>
       </main>
