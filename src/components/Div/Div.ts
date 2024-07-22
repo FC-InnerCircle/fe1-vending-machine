@@ -12,4 +12,8 @@ export default class Div extends BaseComponent {
   render() {
     this.element.textContent = this.props.text;
   }
+
+  setText(text: string) {
+    this.element.textContent = text;
+  }
 }
