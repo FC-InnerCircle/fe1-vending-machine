@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>자판기</title>
-</head>
-<body>
-  <!-- hidden stack: 자판기에 금액을 투입하지 않고 상품을 클릭하였을때, 그 상품의 가격이 표시되어야한다. -->
-</body>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.css" />
+    <title>Vending Machine</title>
+  </head>
+  <body>
+    <div class="container">
+      <main class="content">
+        <div class="machine">
+          <div class="balance-box">
+            <span id="balance">15,000</span>
+          </div>
+          <div class="product-box">
+            <div class="row">
+              <button>FE300</button>
+              <button>FE400</button>
+              <button>FE500</button>
+            </div>
+            <div class="row">
+              <button>FE600</button>
+              <button>FE700</button>
+              <button>FE800</button>
+            </div>
+            <div class="row">
+              <button>FE900</button>
+              <button>FE1000</button>
+              <button>FE1100</button>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="coin-control">
+            <input type="text" />
+            <button>투입</button>
+            <button>반환</button>
+          </div>
+          <ul class="coin-history">
+            <li>
+              <span class="log">600원을 투입했습니다.</span>
+            </li>
+            <li>
+              <span class="log">FE500을 구매했습니다.</span>
+            </li>
+            <li>
+              <span class="log">100원을 반환합니다.</span>
+            </li>
+          </ul>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
