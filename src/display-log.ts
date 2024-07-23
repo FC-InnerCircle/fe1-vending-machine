@@ -23,7 +23,7 @@ export class DisplayLog {
     const logs = this.$container.querySelector(".logs") as HTMLDivElement;
     if (logs) {
       logs.innerHTML = this.state.logs
-        .map((log) => `<div>${log}</div>`)
+        .map((log) => `<div role="log">${log}</div>`)
         .join("");
     }
     this.scrollToBottom();
