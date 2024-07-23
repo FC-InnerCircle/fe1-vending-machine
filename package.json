@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "vending-machine-nuxt3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,8 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.17.0",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@pinia/nuxt": "^0.5.1",
     "nuxt": "^3.12.4",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "eslint": "^8.57.0"
   }
 }
