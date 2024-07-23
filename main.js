@@ -53,6 +53,7 @@ function onDeposit() {
   const currentAmount = document.querySelector('.current-amount');
   const amount = currentAmount.value;
   BalanceState.add(amount);
+  addLog(amount, 'deposit');
   updateDisplay(BalanceState.get());
   currentAmount.value = null;
 }
