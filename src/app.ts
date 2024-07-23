@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const buttonContainer = document.getElementById("button-container");
+  const app = document.getElementById("app");
 
-  if (buttonContainer) {
+  if (app) {
   }
 });

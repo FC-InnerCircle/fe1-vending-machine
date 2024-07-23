@@ -3,11 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Website</title>
+    <title>Vending Machine</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="button-container"></div>
+    <div id="app">
+      <div id="products-container" class="container">
+        <div id="input-wrapper">
+          <input id="current-price-input" disabled value="0" />
+        </div>
+        <ul id="product-list">
+          <li><button class="product-button">1</button></li>
+          <li><button class="product-button">2</button></li>
+          <li><button class="product-button">3</button></li>
+          <li><button class="product-button">4</button></li>
+          <li><button class="product-button">5</button></li>
+          <li><button class="product-button">6</button></li>
+          <li><button class="product-button">7</button></li>
+          <li><button class="product-button">8</button></li>
+          <li><button class="product-button">9</button></li>
+        </ul>
+      </div>
+      <div id="controls" class="container"></div>
+    </div>
     <script type="module" src="dist/app.js"></script>
   </body>
 </html>
