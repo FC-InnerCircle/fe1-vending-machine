@@ -18,6 +18,7 @@ export default class Input extends BaseComponent {
     this.element.setAttribute("placeholder", this.props.placeholder as string);
     this.element.setAttribute("value", this.props.value as string);
     this.element.setAttribute("min", this.props.min as string);
+    this.element.setAttribute("step", this.props.step as string);
   }
 
   resetValue() {
