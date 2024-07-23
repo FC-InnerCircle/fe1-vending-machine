@@ -9,20 +9,29 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <main id="Wrap">
+    <main id="Wrap" class="flex jc">
         <div class="balance_btns_warp">
-            <input type="text">
-            <div id="Btns"></div>
+            <input type="text" class="balance" value="0">
+            <div class="btn_wrap grid">
+                <button class="item">GT300</button>
+                <button class="item">GT400</button>
+                <button class="item">GT500</button>
+                <button class="item">GT600</button>
+                <button class="item">GT700</button>
+                <button class="item">GT800</button>
+                <button class="item">GT900</button>
+                <button class="item">GT1000</button>
+                <button class="item">GT1100</button>
+            </div>
         </div>
         <div class="controler_history_wrap">
-            <div id="controller">
-                <input type="number">
-                <div class="flex">
-                    <button class="insert_coin">투입</button>
-                    <button class="return_balance">반환</button>
-                </div>
+            <div class="controller grid">
+                <input type="number" class="controller_input" min="0">
+                <button class="controller_btn insert_coin">투입</button>
+                <button class="controller_btn return_balance">반환</button>
             </div>
-            <textarea id="history" readonly></textarea>
+            <textarea class="history" readonly>
+            </textarea>
         </div>
     </main>
     <script src="./index.js" type="module"></script>
