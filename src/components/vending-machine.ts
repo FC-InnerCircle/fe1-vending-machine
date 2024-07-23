@@ -13,7 +13,7 @@ export default class VendingMachine extends Component<Props> {
     const {balance} = this.props;
 
     return `
-      <div class="vending-machine__balance">${balance}</div>
+      <div class="vending-machine__balance">${balance.toLocaleString()}</div>
       <div class="vending-machine__purchase-container">
         ${prices
           .map(price => `<button type="button" class="vending-machine__purchase-button" data-price=${price}>FE${price}</button>`)

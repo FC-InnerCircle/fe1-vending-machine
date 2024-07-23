@@ -11,7 +11,7 @@ interface State {
 export default class App extends Component<{}, State> {
   protected initializeState(): State {
     return {
-      balance: 0,
+      balance: 10000000,
       logs: ['로그', '로그', '로그', '로그', '로그', '로그', '로그', '로그', '로그', '로그', '로그'],
     };
   }
