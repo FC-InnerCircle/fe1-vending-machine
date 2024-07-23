@@ -4,32 +4,45 @@ import HistoryManager from "../history/HistoryManager";
 import ProductManager from "../product/ProductManager";
 
 export default class VendingMachine {
-  constructor(
-    private productManager: ProductManager,
-    private balanceManager: BalanceManager,
-    private historyManager: HistoryManager
-  ) {
+  private productManager: ProductManager;
+  private balanceManager: BalanceManager;
+  private historyManager: HistoryManager;
+
+  constructor() {
     this.productManager = new ProductManager();
     this.balanceManager = new BalanceManager();
     this.historyManager = new HistoryManager();
   }
 
   insertMoney(amount: number) {
-    this.historyManager.addHistory(
-      `${formatNumberWithCommas(amount)}원을 투입했습니다.`
-    );
+    if (amount <= 0) {
+      return;
+    }
+
+    this.addHistory(`${formatNumberWithCommas(amount)}원을 투입했습니다.`);
     this.balanceManager.insertMoney(amount);
+    this.resetInputBalance();
   }
 
   refundMoney() {
     const refundMoney = this.balanceManager.refundMoney();
-    this.historyManager.addHistory(
-      `${formatNumberWithCommas(refundMoney)}원을 반환합니다.`
-    );
+    this.addHistory(`${formatNumberWithCommas(refundMoney)}원을 반환합니다.`);
   }
 
   getBalanceWithCommas() {
-    return this.balanceManager.getBalanceWithCommas();
+    return formatNumberWithCommas(this.balanceManager.getBalance());
+  }
+
+  getInputBalance() {
+    return this.balanceManager.getInputBalance();
+  }
+
+  setInputBalance(value: string | number) {
+    this.balanceManager.setInputBalance(value);
+  }
+
+  private resetInputBalance() {
+    this.balanceManager.resetInputBalance();
   }
 
   isLowBalance(name: string) {
@@ -52,7 +65,7 @@ export default class VendingMachine {
     const product = this.productManager.getProduct(name);
 
     if (!product) {
-      this.historyManager.addHistory("상품이 존재하지 않습니다.");
+      this.addHistory("상품이 존재하지 않습니다.");
       return;
     }
 
@@ -61,7 +74,7 @@ export default class VendingMachine {
     }
 
     this.balanceManager.subtractMoney(product.getPrice());
-    this.historyManager.addHistory(`${product.getName()}을 구입했습니다.`);
+    this.addHistory(`${product.getName()}을 구입했습니다.`);
 
     if (this.isRefundable()) {
       this.refundMoney();
@@ -86,5 +99,9 @@ export default class VendingMachine {
 
   getHistory() {
     return this.historyManager.getHistory();
+  }
+
+  private addHistory(history: string) {
+    this.historyManager.addHistory(history);
   }
 }

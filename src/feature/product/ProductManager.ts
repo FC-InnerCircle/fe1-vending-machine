@@ -5,6 +5,7 @@ export default class ProductManager {
     this.products = this.initProducts();
   }
 
+  // 요구사항에 맞게 상품을 초기화하는 메서드
   private initProducts() {
     const productList = [];
 

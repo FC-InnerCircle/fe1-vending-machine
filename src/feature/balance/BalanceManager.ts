@@ -1,7 +1,8 @@
-import formatNumberWithCommas from "../../utils/formatNumberWithCommas";
-
 export default class BalanceManager {
-  constructor(private balance: number = 0) {}
+  constructor(
+    private balance: number = 0,
+    private inputBalance: string | number = ""
+  ) {}
 
   insertMoney(amount: number) {
     this.balance += amount;
@@ -19,6 +20,7 @@ export default class BalanceManager {
   }
 
   subtractMoney(amount: number) {
+    // 잔고가 부족하면 -1을 반환
     if (this.isBalanceLowProductPrice(amount)) {
       return -1;
     }
@@ -31,7 +33,15 @@ export default class BalanceManager {
     return this.balance;
   }
 
-  getBalanceWithCommas() {
-    return formatNumberWithCommas(this.balance);
+  getInputBalance() {
+    return this.inputBalance;
+  }
+
+  setInputBalance(value: string | number) {
+    this.inputBalance = value;
+  }
+
+  resetInputBalance() {
+    this.inputBalance = "";
   }
 }
