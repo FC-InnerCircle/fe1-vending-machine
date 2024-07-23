@@ -2,7 +2,13 @@
   "name": "fe1-vending-machine",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "css": "npx tailwindcss -i ./src/style/input.css -o ./src/style/output.css --watch"
+  },
   "repository": "https://github.com/jangwonyoon/fe1-vending-machine.git",
   "author": "jangwon <yoonjangwon94@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "tailwindcss": "^3.4.6"
+  }
 }
