@@ -1,0 +1,19 @@
+@import '../utils/mixins';
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  @include input-size(100%, 40px, 10px);
+
+  @media (min-width: 768px) {
+    @include input-size(100%, 40px, 10px);
+  }
+
+  @media (min-width: 1024px) {
+    @include input-size(100%, 40px, 10px);
+  }
+}
+
+button {
+  
+}

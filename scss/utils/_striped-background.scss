@@ -1,0 +1,16 @@
+.striped-background {
+  width: 100%;
+  height: 100vh;
+  /* viewport height, adjust as necessary */
+  background: repeating-linear-gradient(-60deg,
+      /* angle of stripes */
+      #A4D8FF,
+      /* color of the stripe */
+      #A4D8FF 1px,
+      /* end of the stripe */
+      #ffffff 1px,
+      /* start of the gap */
+      #ffffff 10px
+      /* end of the gap */
+    );
+}
