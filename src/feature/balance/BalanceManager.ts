@@ -1,3 +1,5 @@
+import formatNumberWithCommas from "../../utils/formatNumberWithCommas";
+
 export default class BalanceManager {
   constructor(private balance: number = 0) {}
 
@@ -12,12 +14,12 @@ export default class BalanceManager {
     return returnedAmount;
   }
 
-  isBalanceLowPrice(price: number) {
+  isBalanceLowProductPrice(price: number) {
     return this.balance < price;
   }
 
   subtractMoney(amount: number) {
-    if (this.isBalanceLowPrice(amount)) {
+    if (this.isBalanceLowProductPrice(amount)) {
       return -1;
     }
 
@@ -30,10 +32,6 @@ export default class BalanceManager {
   }
 
   getBalanceWithCommas() {
-    return this.formatNumberWithCommas(this.balance);
-  }
-
-  private formatNumberWithCommas(num: number): string {
-    return num.toLocaleString();
+    return formatNumberWithCommas(this.balance);
   }
 }
