@@ -6,7 +6,6 @@ const render = (function () {
 
 
         const itemList = document.getElementById('itemList');
-        const inputField = document.getElementById('priceInputBox');
 
         itemList.innerHTML = '';
         itemList.innerHTML = state.items.map(item => `
@@ -23,9 +22,13 @@ const render = (function () {
 
                 if (item) {
                     if (state.price > item.price) {
-                        setState({ price: state.price - item.price });
+                        setState({
+                            price: state.price - item.price,
+                            textLog: [...state.textLog,
+                            `물건(${item.text})를 구매하셨습니다. 구매금액(${item.price}) 남은금액(${state.price - item.price})`]
+                        });
                     } else if (state.price < state.minPrice) {
-                        setState({ price: 0, textLog: [...state.textLog, `최소물건가격(${item.price})보다 현재금액(${state.price})이 부족합니다. 잔돈 반환합니다.`] })
+                        setState({ price: 0, textLog: [...state.textLog, `최소물건가격(${item.price})보다 현재금액(${state.price})이 부족합니다. 잔돈을 반환합니다.`] })
                     }
 
                 }
@@ -88,6 +91,11 @@ const render = (function () {
     function priceInputBoxUpdate(state, setState) {
 
         const inputField = document.getElementById('priceInputBox');
+
+
+        console.log("state.inputValue:", state.inputValue)
+        inputField.value = state.inputValue.toLocaleString();
+
         const handleInput = (event) => {
 
             let value = event.target.value.replace(/,/g, '');
@@ -97,17 +105,18 @@ const render = (function () {
                 let numberValue = Number(value);
 
                 // 변환된 숫자 값을 상태에 저장하고, input 필드에 표시
+                console.log("numberValue;", numberValue)
                 setState({ inputValue: numberValue });
-                inputField.value = numberValue.toLocaleString();
+
             } else {
+                console.log("이거니?")
                 // 숫자가 아닌 값이 입력되면 상태를 초기화합니다.
                 setState({ inputValue: state.inputValue });
-                inputField.value = state.inputValue.toLocaleString();
+
             }
         }
 
-        inputField.innerHTML = state.inputValue.toLocaleString()
-        inputField.value = state.inputValue;
+
 
         if (!isInputEventListenerAdded) {
             isInputEventListenerAdded = true
@@ -115,12 +124,39 @@ const render = (function () {
         }
     }
 
+    function prisceInsert(state, setState) {
+        const insertButton = document.getElementById('insertButton');
+
+        insertButton.addEventListener("click", (event) => {
+            console.log(state)
+            console.log("event.target:", state.price + state.inputValue)
+            setState({ price: state.price + state.inputValue, inputValue: 0, textLog: [...state.textLog, `${event.target.value} 금액이 충전 되었습니다.`] })
+
+
+        })
+
+    }
+    function prisceRefund(state, setState) {
+        const refundButton = document.getElementById('refundButton');
+
+        refundButton.addEventListener("click", () => {
+            if (state.price > 0) {
+                setState({ inputValue: 0, price: 0, textLog: [...state.textLog, `금액을 반환합니다.`] })
+            } else {
+                setState({ textLog: [...state.textLog, `반환 금액 부족`] })
+            }
+
+        })
+
+    }
 
 
 
     return {
         update,
         priceUpdate,
-        priceInputBoxUpdate
+        priceInputBoxUpdate,
+        prisceRefund,
+        prisceInsert
     };
 })();
