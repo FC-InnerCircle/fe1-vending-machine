@@ -1,4 +1,4 @@
-import { formatNumber, updateDisplay } from './src/js/utils.js';
+import { addLog, formatNumber, updateDisplay } from './src/js/utils.js';
 import { BalanceState } from './src/js/state.js';
 import {
   onHoverButton,
@@ -52,16 +52,15 @@ function onChangeCurrentAmount(e) {
 function onDeposit() {
   const currentAmount = document.querySelector('.current-amount');
   const amount = currentAmount.value;
-  const display = document.querySelector('.display');
   BalanceState.add(amount);
-  updateDisplay(BalanceState.get(), display);
+  updateDisplay(BalanceState.get());
   currentAmount.value = null;
 }
 
 function onReturn() {
-  const display = document.querySelector('.display');
-  updateDisplay(0, display);
-  // Todo : 로그 남기기 이벤트
+  addLog(BalanceState.get(), 'return');
+  BalanceState.set(0);
+  updateDisplay(0);
 }
 
 function addEvent() {
