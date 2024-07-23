@@ -24,11 +24,14 @@ const state = (function () {
         listeners.push(listener);
     }
 
-    function setState(newState) {
-
+    function setState(updater) {
+        const newState = typeof updater === 'function' ? updater(state) : updater;
         state = { ...state, ...newState };
 
-        listeners.forEach(listener => listener(state, setState));
+        listeners.forEach(listener => {
+
+            listener(state, setState)
+        });
 
     }
 

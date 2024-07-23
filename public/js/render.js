@@ -2,6 +2,8 @@
 const render = (function () {
 
     let isInputEventListenerAdded = false;
+    let isInsertButtonListenerAdded = false;
+    let isRefundButtonListenerAdded = false;
     function update(state, setState) {
 
 
@@ -93,7 +95,6 @@ const render = (function () {
         const inputField = document.getElementById('priceInputBox');
 
 
-        console.log("state.inputValue:", state.inputValue)
         inputField.value = state.inputValue.toLocaleString();
 
         const handleInput = (event) => {
@@ -104,12 +105,13 @@ const render = (function () {
                 // 숫자 앞의 0을 제거하고 숫자로 변환
                 let numberValue = Number(value);
 
+                console.log("numberValue:", numberValue)
                 // 변환된 숫자 값을 상태에 저장하고, input 필드에 표시
-                console.log("numberValue;", numberValue)
                 setState({ inputValue: numberValue });
 
             } else {
-                console.log("이거니?")
+
+                console.log("숫자가아닐까?")
                 // 숫자가 아닌 값이 입력되면 상태를 초기화합니다.
                 setState({ inputValue: state.inputValue });
 
@@ -119,6 +121,7 @@ const render = (function () {
 
 
         if (!isInputEventListenerAdded) {
+
             isInputEventListenerAdded = true
             inputField.addEventListener('input', handleInput);
         }
@@ -127,26 +130,36 @@ const render = (function () {
     function prisceInsert(state, setState) {
         const insertButton = document.getElementById('insertButton');
 
-        insertButton.addEventListener("click", (event) => {
-            console.log(state)
-            console.log("event.target:", state.price + state.inputValue)
-            setState({ price: state.price + state.inputValue, inputValue: 0, textLog: [...state.textLog, `${event.target.value} 금액이 충전 되었습니다.`] })
+        if (!isInsertButtonListenerAdded) {
 
+            isInsertButtonListenerAdded = true
+            insertButton.addEventListener("click", (event) => {
 
-        })
+                setState(currentState => {
+                    console.log("currentState:", currentState)
+                    return {
+                        price: currentState.price + currentState.inputValue,
+                        inputValue: 0,
+                        textLog: [...state.textLog, `${event.target.value} 금액이 충전 되었습니다.`]
+                    }
+                })
+            })
+        }
 
     }
     function prisceRefund(state, setState) {
         const refundButton = document.getElementById('refundButton');
+        if (!isRefundButtonListenerAdded) {
+            isRefundButtonListenerAdded = true
+            refundButton.addEventListener("click", () => {
+                if (state.price > 0) {
+                    setState({ inputValue: 0, price: 0, textLog: [...state.textLog, `금액을 반환합니다.`] })
+                } else {
+                    setState({ textLog: [...state.textLog, `반환 금액 부족`] })
+                }
 
-        refundButton.addEventListener("click", () => {
-            if (state.price > 0) {
-                setState({ inputValue: 0, price: 0, textLog: [...state.textLog, `금액을 반환합니다.`] })
-            } else {
-                setState({ textLog: [...state.textLog, `반환 금액 부족`] })
-            }
-
-        })
+            })
+        }
 
     }
 
