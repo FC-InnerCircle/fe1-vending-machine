@@ -593,6 +593,11 @@ video {
   margin-right: 30px;
 }
 
+.my-\[10px\] {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -623,6 +628,14 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-\[20px\] {
+  height: 20px;
+}
+
+.h-\[440px\] {
+  height: 440px;
 }
 
 .w-\[60\%\] {
@@ -679,6 +692,18 @@ video {
 
 .gap-\[10px\] {
   gap: 10px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .rounded {
@@ -784,12 +809,20 @@ video {
   font-size: 25px;
 }
 
+.text-\[15px\] {
+  font-size: 15px;
+}
+
 .font-\[600\] {
   font-weight: 600;
 }
 
 .font-\[400\] {
   font-weight: 400;
+}
+
+.leading-\[23px\] {
+  line-height: 23px;
 }
 
 .text-white {

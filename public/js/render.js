@@ -29,8 +29,8 @@ const render = (function () {
                             textLog: [...state.textLog,
                             `물건(${item.text})를 구매하셨습니다. 구매금액(${item.price}) 남은금액(${state.price - item.price})`]
                         });
-                    } else if (state.price < state.minPrice) {
-                        setState({ price: 0, textLog: [...state.textLog, `최소물건가격(${item.price})보다 현재금액(${state.price})이 부족합니다. 잔돈을 반환합니다.`] })
+                    } else if (state.price !== 0 && state.price < state.minPrice) {
+                        setState({ price: 0, textLog: [...state.textLog, `최소물건가격(${state.minPrice})보다 현재금액(${state.price})이 부족합니다. 잔돈을 반환합니다.`] })
                     }
 
                 }
@@ -102,17 +102,12 @@ const render = (function () {
             let value = event.target.value.replace(/,/g, '');
 
             if (!isNaN(value)) {
-                // 숫자 앞의 0을 제거하고 숫자로 변환
                 let numberValue = Number(value);
 
-                console.log("numberValue:", numberValue)
-                // 변환된 숫자 값을 상태에 저장하고, input 필드에 표시
                 setState({ inputValue: numberValue });
 
             } else {
 
-                console.log("숫자가아닐까?")
-                // 숫자가 아닌 값이 입력되면 상태를 초기화합니다.
                 setState({ inputValue: state.inputValue });
 
             }
@@ -136,12 +131,15 @@ const render = (function () {
             insertButton.addEventListener("click", (event) => {
 
                 setState(currentState => {
-                    console.log("currentState:", currentState)
+
                     return {
                         price: currentState.price + currentState.inputValue,
                         inputValue: 0,
-                        textLog: [...state.textLog, `${event.target.value} 금액이 충전 되었습니다.`]
-                    }
+                        textLog: currentState.inputValue > 0
+                            ? [...currentState.textLog, `${currentState.inputValue} 금액이 충전 되었습니다.`]
+                            : [...currentState.textLog]
+                    };
+
                 })
             })
         }
@@ -152,14 +150,24 @@ const render = (function () {
         if (!isRefundButtonListenerAdded) {
             isRefundButtonListenerAdded = true
             refundButton.addEventListener("click", () => {
-                if (state.price > 0) {
-                    setState({ inputValue: 0, price: 0, textLog: [...state.textLog, `금액을 반환합니다.`] })
-                } else {
-                    setState({ textLog: [...state.textLog, `반환 금액 부족`] })
-                }
+
+                setState((currentState) => {
+
+                    return { inputValue: 0, price: 0, textLog: currentState.price > 0 ? [...currentState.textLog, `금액을 반환합니다.`] : [...currentState.textLog, `반환 금액 부족`] }
+                })
 
             })
         }
+
+    }
+    function viewTextLog(state) {
+        const textLogBox = document.getElementById('textLogBox');
+        textLogBox.innerHTML = state.textLog.map(item => `
+            <div class="text-[15px]  leading-[23px] trackig-[-0.6px] " data-id="${item.id}">
+              ${item} 
+            </div>
+          `).join('');
+        textLogBox.scrollTop = textLogBox.scrollHeight;
 
     }
 
@@ -170,6 +178,7 @@ const render = (function () {
         priceUpdate,
         priceInputBoxUpdate,
         prisceRefund,
-        prisceInsert
+        prisceInsert,
+        viewTextLog
     };
 })();

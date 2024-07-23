@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     state.subscribe(render.priceInputBoxUpdate);
     state.subscribe(render.prisceInsert);
     state.subscribe(render.prisceRefund);
+    state.subscribe(render.viewTextLog);
 
 
 
@@ -13,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     render.priceInputBoxUpdate(state.getState(), state.setState)
     render.prisceInsert(state.getState(), state.setState)
     render.prisceRefund(state.getState(), state.setState)
+    render.viewTextLog(state.getState())
+
     // document.getElementById('myButton').addEventListener('click', function () {
     //     state.setState({ count: state.getState().count + 1 });
     // });
