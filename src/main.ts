@@ -1,7 +1,4 @@
-import './style.css'
+import App from './app.ts';
+import './style.css';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <h1>Vending Machine</h1>
-  </div>
-`
+new App(document.querySelector('#app')!, {});
