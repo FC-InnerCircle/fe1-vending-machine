@@ -42,3 +42,12 @@ function setValue() {
 
   balanceDiv.textContent = Number(balance).toLocaleString();
 }
+function addLog(logMessage) {
+  let logContainer = document.getElementById("log-container");
+
+  let logItem = document.createElement("div");
+  logItem.id = "log-item";
+  logItem.textContent = logMessage;
+  logContainer.appendChild(logItem);
+  logContainer.scrollTop = logContainer.scrollHeight;
+}
