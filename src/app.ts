@@ -38,7 +38,7 @@ export default class App extends Component<{}, State> {
     const {balance, logs} = this.state;
 
     new VendingMachine(vendingMachineElement, {balance, onPurchase: this.purchase.bind(this)});
-    new Amount(amountElement, {onDeposit: this.deposit.bind(this)});
+    new Amount(amountElement, {onDeposit: this.deposit.bind(this), onWithdraw: this.withdraw.bind(this)});
     new Log(logElement, {logs});
   }
 
@@ -51,6 +51,12 @@ export default class App extends Component<{}, State> {
   private deposit(amount: number) {
     const balance = this.state.balance + amount;
     const logs = [...this.state.logs, `${amount.toLocaleString()}원을 투입했습니다.`];
+    this.setState({balance, logs});
+  }
+
+  private withdraw() {
+    const balance = 0;
+    const logs = [...this.state.logs, `${this.state.balance.toLocaleString()}원을 반환했습니다.`];
     this.setState({balance, logs});
   }
 }
