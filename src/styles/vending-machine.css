@@ -32,3 +32,11 @@
   border: 1px solid #007bff;
   cursor: pointer;
 }
+
+.item-button:hover {
+  background-color: #7db9f9;
+}
+
+.active {
+  background-color: #007bff;
+}
