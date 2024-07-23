@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const productMinimum = Math.min(...Array.from(buttons).map(button => parseInt(button.value)));
     let totalInserted = 0;
 
-    const formatCurrency = value => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    const unFormatCurrency = value => parseInt(value.toString().replaceAll(',', ''));
+    const formatCurrency = value => Number(value).toLocaleString();
     const updateScreen = () => screenInput.value = formatCurrency(totalInserted);
 
     const updateMessageBox = (text, amount) => {
@@ -34,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const insertButtonListener = () => () => {
-        const amount = unFormatCurrency(inputDisplay.value);
+        const amount = parseInt(inputDisplay.value.replace(/,/g, ''));
         if (amount > 0) {
             totalInserted += amount;
             updateMessageBox("투입했습니다.", amount);
