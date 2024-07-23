@@ -1,4 +1,4 @@
-# fe1-vending-machine
+## fe1-vending-machine
 자판기 애플리케이션 과제. 바닐라 자바스크립트 버전으로 단순한 자판기를 구현하는 과제입니다.
 
 ## 요구 사항
