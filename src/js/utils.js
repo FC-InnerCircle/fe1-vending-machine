@@ -1,3 +1,4 @@
+import { BUY, DEPOSIT, RETURN } from './consts.js';
 import { BalanceState } from './state.js';
 
 function formatNumber(number) {
@@ -13,13 +14,13 @@ function addLog(value, type) {
   if (value == 0) return;
   let content = '';
   switch (type) {
-    case 'deposit':
+    case DEPOSIT:
       content = `${formatNumber(value)}을 투입했습니다.`;
       break;
-    case 'return':
+    case RETURN:
       content = `${formatNumber(value)}을 반환합니다.`;
       break;
-    case 'buy':
+    case BUY:
       content = `${value}을 구매했습니다.`;
       break;
   }
@@ -31,7 +32,7 @@ function addLog(value, type) {
 }
 
 function onReturn() {
-  addLog(BalanceState.get(), 'return');
+  addLog(BalanceState.get(), RETURN);
   BalanceState.set(0);
   updateDisplay(0);
 }

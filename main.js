@@ -6,7 +6,7 @@ import {
   onClickButton,
   onReleaseButton,
 } from './src/js/eventHandler.js';
-import { items } from './src/js/consts.js';
+import { DEPOSIT, items } from './src/js/consts.js';
 
 function init() {
   const display = document.querySelector('.display');
@@ -42,7 +42,7 @@ function onDeposit() {
   const currentAmount = document.querySelector('.current-amount');
   const amount = currentAmount.value;
   BalanceState.add(amount);
-  addLog(amount, 'deposit');
+  addLog(amount, DEPOSIT);
   updateDisplay(BalanceState.get());
   currentAmount.value = null;
 }
