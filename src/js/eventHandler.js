@@ -1,5 +1,6 @@
+import { items } from './consts.js';
 import { BalanceState } from './state.js';
-import { addLog, updateDisplay } from './utils.js';
+import { addLog, onReturn, updateDisplay } from './utils.js';
 
 export function onHoverButton(e) {
   const elem = e.target;
@@ -11,6 +12,12 @@ export function onLeaveButton(e) {
   elem.classList.remove('hover');
 }
 
+function CheckBalance() {
+  if (BalanceState.get() < items[0].slice(2)) {
+    onReturn();
+  }
+}
+
 export function onClickButton(e) {
   const elem = e.target;
   elem.classList.add('active');
@@ -18,7 +25,8 @@ export function onClickButton(e) {
   if (BalanceState.get() >= itemValue) {
     BalanceState.sub(itemValue);
     updateDisplay(BalanceState.get());
-    addLog(itemValue, 'buy');
+    addLog(elem.textContent, 'buy');
+    CheckBalance();
   } else {
     updateDisplay(itemValue);
   }

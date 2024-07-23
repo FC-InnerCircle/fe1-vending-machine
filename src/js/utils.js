@@ -1,3 +1,5 @@
+import { BalanceState } from './state.js';
+
 function formatNumber(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
@@ -8,8 +10,7 @@ function updateDisplay(amount) {
 }
 
 function addLog(value, type) {
-  const messageBox = document.querySelector('.message-box');
-  const log = document.createElement('p');
+  if (value == 0) return;
   let content = '';
   switch (type) {
     case 'deposit':
@@ -19,12 +20,20 @@ function addLog(value, type) {
       content = `${formatNumber(value)}을 반환합니다.`;
       break;
     case 'buy':
-      content = `${formatNumber(value)}을 구매했습니다.`;
+      content = `${value}을 구매했습니다.`;
       break;
   }
+  const messageBox = document.querySelector('.message-box');
+  const log = document.createElement('p');
   log.textContent = content;
   messageBox.appendChild(log);
   messageBox.scrollTop = messageBox.scrollHeight;
 }
 
-export { formatNumber, updateDisplay, addLog };
+function onReturn() {
+  addLog(BalanceState.get(), 'return');
+  BalanceState.set(0);
+  updateDisplay(0);
+}
+
+export { formatNumber, updateDisplay, addLog, onReturn };

@@ -1,4 +1,4 @@
-import { addLog, formatNumber, updateDisplay } from './src/js/utils.js';
+import { addLog, onReturn, updateDisplay } from './src/js/utils.js';
 import { BalanceState } from './src/js/state.js';
 import {
   onHoverButton,
@@ -6,18 +6,7 @@ import {
   onClickButton,
   onReleaseButton,
 } from './src/js/eventHandler.js';
-
-const items = [
-  'FE300',
-  'FE400',
-  'FE500',
-  'FE600',
-  'FE700',
-  'FE800',
-  'FE900',
-  'FE1000',
-  'FE1100',
-];
+import { items } from './src/js/consts.js';
 
 function init() {
   const display = document.querySelector('.display');
@@ -56,12 +45,6 @@ function onDeposit() {
   addLog(amount, 'deposit');
   updateDisplay(BalanceState.get());
   currentAmount.value = null;
-}
-
-function onReturn() {
-  addLog(BalanceState.get(), 'return');
-  BalanceState.set(0);
-  updateDisplay(0);
 }
 
 function addEvent() {
