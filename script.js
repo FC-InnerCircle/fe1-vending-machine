@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setStorage();
   createItems();
   repayment();
+  insertAmount();
 });
 
 /**
@@ -27,6 +28,59 @@ function createItems() {
     itemContainer.appendChild(item);
   }
 }
+
+function getItemValue() {
+  let { value } = document.getElementById("input");
+  document.getElementById("input").value = "";
+
+  return Number(value);
+}
+
+function insertAmount() {
+  let insertBtn = document.getElementById("insert");
+  let balanceDiv = document.getElementById("balance");
+
+  insertBtn.addEventListener("click", function () {
+    let amountValue = getItemValue();
+    if (amountValue > 1) {
+      let balance =
+        Number(localStorage.getItem("balance")) + Number(amountValue);
+      localStorage.setItem("balance", balance);
+      balanceDiv.textContent = balance.toLocaleString();
+      addLog(`${amountValue.toLocaleString()}원을 투입했습니다.`);
+    }
+  });
+}
+
+function purchaseItem() {
+  let itemValue = this.getAttribute("value");
+  let balanceDiv = document.getElementById("balance");
+  let balance = localStorage.getItem("balance");
+  let calBalance = Number(balance) - Number(itemValue);
+
+  if (calBalance >= 0) {
+    localStorage.setItem("balance", calBalance);
+    balanceDiv.textContent = calBalance.toLocaleString();
+
+    addLog(`${this.textContent}을 구매했습니다.`);
+
+    // 잔금 최소값 이하일 경우, 전액 반환
+    if (calBalance < 300 && calBalance > 1) {
+      resetBalance();
+      addLog("잔액이 300원미만이므로 자동잔액반환되었습니다.");
+    }
+  } else {
+    addLog("잔액이 부족합니다.");
+
+    if (Number(balance) === 0) {
+      balanceDiv.textContent = itemValue;
+      setTimeout(() => {
+        balanceDiv.textContent = "0";
+      }, 1000);
+    }
+  }
+}
+
 function setStorage() {
   let balance = localStorage.getItem("balance");
 
