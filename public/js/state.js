@@ -1,16 +1,18 @@
 const state = (function () {
     let state = {
-        count: 0,
+        price: 500,
+        minPrice: 300,
+        textLog: [],
         items: [
             { id: 1, text: 'FE300', price: 300 },
-            { id: 2, text: 'FE600', price: 600 },
-            { id: 3, text: 'FE1200', price: 1200 },
-            { id: 4, text: 'FE1500', price: 1500 },
-            { id: 5, text: 'FE1800', price: 1800 },
-            { id: 6, text: 'FE2100', price: 2100 },
-            { id: 7, text: 'FE2200', price: 2200 },
-            { id: 8, text: 'FE2400', price: 2400 },
-            { id: 9, text: 'FE2500', price: 2500 }
+            { id: 2, text: 'FE400', price: 400 },
+            { id: 3, text: 'FE500', price: 500 },
+            { id: 4, text: 'FE600', price: 600 },
+            { id: 5, text: 'FE700', price: 700 },
+            { id: 6, text: 'FE800', price: 800 },
+            { id: 7, text: 'FE900', price: 900 },
+            { id: 8, text: 'FE1000', price: 1000 },
+            { id: 9, text: 'FE1100', price: 1100 }
         ]
 
     };
@@ -22,8 +24,11 @@ const state = (function () {
     }
 
     function setState(newState) {
+
         state = { ...state, ...newState };
-        listeners.forEach(listener => listener(state));
+
+        listeners.forEach(listener => listener(state, setState));
+
     }
 
     function getState() {
