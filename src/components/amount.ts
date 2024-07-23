@@ -8,13 +8,26 @@ interface Props {
 export default class Amount extends Component<Props> {
   template () {
     return `
-      <input type="number" class="amount__input" value="0">
+      <input type="number" class="amount__input" step="1" value="0">
       <button type="button" class="amount__deposit-button">투입</button>
       <button type="button" class="amount__withdraw-button">반환</button>
     `;
   }
 
   protected setEvent() {
+    this.addEvent('input', '.amount__input', (e) => {
+      const input = e.target as HTMLInputElement;
+
+      const value = Math.floor(Number(input.value));
+
+      if (isNaN(value) || value < 1) {
+        input.value = '';
+        return;
+      }
+
+      input.value = value.toString();
+    });
+
     const handleClick = (handler?: (value: number) => void) => {
       const input = this.target.querySelector('.amount__input') as HTMLInputElement;
       handler?.(Number(input.value));
