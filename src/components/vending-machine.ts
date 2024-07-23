@@ -2,7 +2,7 @@ import Component from "../core/component.ts";
 
 interface Props {
   balance: number;
-  onPurchase?: (price: number) => void;
+  onPurchase?: (title: string, price: number) => void;
 }
 
 const prices = Array.from({ length: 9 })
@@ -25,7 +25,9 @@ export default class VendingMachine extends Component<Props> {
   protected setEvent() {
     this.addEvent('click', '.vending-machine__purchase-button', (e: MouseEvent) => {
       const button = e.target as HTMLButtonElement;
-      this.props.onPurchase?.(Number(button.dataset.price));
+      const title = button.textContent ?? '';
+      const price = Number(button.dataset.price);
+      this.props.onPurchase?.(title, price);
     })
   }
 }
