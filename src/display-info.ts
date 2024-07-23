@@ -1,21 +1,29 @@
 export class DisplayInfo {
-  private template = `
+  private getTemplate(): string {
+    return `
       <div class="display"></div>  
-  `;
+    `;
+  }
 
   constructor(
     private $container: HTMLElement,
     private state: {
       totalAmount: number;
     }
-  ) {}
+  ) {
+    this.initialize();
+  }
+
+  private initialize() {
+    this.render();
+  }
 
   render() {
-    this.$container.innerHTML = this.template;
-    const display = this.$container.querySelector(
-      ".display"
-    )! as HTMLDivElement;
-    display.textContent = `${this.state.totalAmount.toLocaleString()}원`;
+    this.$container.innerHTML = this.getTemplate();
+    const display = this.$container.querySelector(".display") as HTMLDivElement;
+    if (display) {
+      display.textContent = `${this.state.totalAmount.toLocaleString()}원`;
+    }
   }
 
   setState(nextState: Partial<typeof this.state>) {
