@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vending Machine</title>
     <link rel="stylesheet" href="src/styles/globals.css" />
-    <script src="main.js" defer></script>
+    <script type="module" src="/main.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -15,7 +15,7 @@
       </div>
       <div class="control-panel">
         <div class="amount-inputs">
-          <input class="current-amount" type="text" />
+          <input class="current-amount" type="number" min="0" />
           <button class="deposit">투입</button>
           <button class="return">반환</button>
         </div>

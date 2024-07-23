@@ -11,39 +11,34 @@ const items = [
 ];
 
 let selectItem = '';
-let Balance = 0;
+
+const BalanceState = (function () {
+  let Balance = 0;
+  return {
+    get() {
+      return Balance;
+    },
+    set(value) {
+      Balance = value;
+    },
+    add(value) {
+      Balance += +value;
+    },
+    sub(value) {
+      Balance -= +value;
+    },
+  };
+})();
 
 function init() {
   const display = document.querySelector('.display');
-  display.textContent = Balance;
+  display.textContent = BalanceState.get();
   const currentAmount = document.querySelector('.current-amount');
   currentAmount.value = 0;
 }
 
-function btnRender() {
-  const buttonsContainer = document.getElementById('buttons-container');
-  items.forEach((item) => {
-    const button = document.createElement('button');
-    button.textContent = item;
-    button.classList.add('item-button');
-
-    function onClickButton(e) {
-      const elem = e.target;
-      elem.classList.add('active');
-      setTimeout(() => {
-        elem.classList.remove('active');
-      }, 1000);
-    }
-
-    button.addEventListener('mousedown', onClickButton);
-
-    buttonsContainer.appendChild(button);
-  });
-}
-
 function main() {
   init();
-  btnRender();
 }
 
 main();
