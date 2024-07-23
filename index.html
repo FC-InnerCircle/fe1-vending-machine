@@ -3,12 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Vending Machine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="css/app.css" rel="stylesheet">
+    <script src="js/app.js"></script>
+    <title>FE1-Vending-Machine</title>
 </head>
 <body>
-    <h1>Welcome to My Vending Machine</h1>
-    
-    <!-- Your vending machine content goes here -->
-    
+    <div class="container ">
+        <div class="row">
+          <div class="col">
+            <div class="row">
+                <input type="text" id="input" value="0" disabled>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button value="300">FE300</button>
+                    <button value="400">FE400</button>
+                    <button value="500">FE500</button>
+                </div>
+                <div class="col">
+                    <button value="600">FE600</button>
+                    <button value="700">FE700</button>
+                    <button value="800">FE800</button>
+                </div>
+                <div class="col">
+                    <button value="900">FE900</button>
+                    <button value="1000">FE1000</button>
+                    <button value="1100">FE1100</button>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+                <div class="col-6">
+                    <input type="text" id="input" value="0">
+                </div>
+                <div class="col-2">
+                    <button value="insert">투입</button>
+                </div>
+                <div class="col-2">
+                    <button value="return">반환</button>
+                </div>
+                    <textarea id="output" disabled></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        
+    </div>
 </body>
 </html>
