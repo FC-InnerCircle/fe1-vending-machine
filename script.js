@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   setStorage();
   createItems();
+  repayment();
 });
 
 /**
@@ -42,6 +43,27 @@ function setValue() {
 
   balanceDiv.textContent = Number(balance).toLocaleString();
 }
+
+function repayment() {
+  let repaymentBtn = document.getElementById("repayment");
+
+  repaymentBtn.addEventListener("click", function () {
+    let balance = localStorage.getItem("balance");
+
+    if (balance > 0) {
+      addLog(`${Number(balance).toLocaleString()}원을 반환합니다.`);
+      // 잔액 초기화
+      resetBalance();
+    }
+  });
+}
+
+function resetBalance() {
+  let balanceDiv = document.getElementById("balance");
+  localStorage.setItem("balance", 0);
+  balanceDiv.textContent = 0;
+}
+
 function addLog(logMessage) {
   let logContainer = document.getElementById("log-container");
 
