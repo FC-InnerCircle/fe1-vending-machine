@@ -11,7 +11,7 @@ interface State {
 export default class App extends Component<{}, State> {
   protected initializeState(): State {
     return {
-      balance: 10000000,
+      balance: 0,
       logs: [],
     };
   }
@@ -38,13 +38,19 @@ export default class App extends Component<{}, State> {
     const {balance, logs} = this.state;
 
     new VendingMachine(vendingMachineElement, {balance, onPurchase: this.purchase.bind(this)});
-    new Amount(amountElement, {});
+    new Amount(amountElement, {onDeposit: this.deposit.bind(this)});
     new Log(logElement, {logs});
   }
 
   private purchase(title: string, price: number) {
     const balance = this.state.balance - price;
     const logs = [...this.state.logs, `${title}을 구매했습니다.`];
+    this.setState({balance, logs});
+  }
+
+  private deposit(amount: number) {
+    const balance = this.state.balance + amount;
+    const logs = [...this.state.logs, `${amount.toLocaleString()}원을 투입했습니다.`];
     this.setState({balance, logs});
   }
 }
