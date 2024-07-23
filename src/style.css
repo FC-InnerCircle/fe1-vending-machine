@@ -12,3 +12,8 @@ body {
   padding: 2rem;
   text-align: center;
 }
+
+.main {
+  display: flex;
+  gap: 16px;
+}
