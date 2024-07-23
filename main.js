@@ -1,3 +1,6 @@
+import { formatNumber, updateDisplay } from './src/js/utils.js';
+import { BalanceState } from './src/js/state.js';
+
 const items = [
   'FE300',
   'FE400',
@@ -9,26 +12,6 @@ const items = [
   'FE1000',
   'FE1100',
 ];
-
-let selectItem = '';
-
-const BalanceState = (function () {
-  let Balance = 0;
-  return {
-    get() {
-      return Balance;
-    },
-    set(value) {
-      Balance = value;
-    },
-    add(value) {
-      Balance += +value;
-    },
-    sub(value) {
-      Balance -= +value;
-    },
-  };
-})();
 
 function init() {
   const display = document.querySelector('.display');
@@ -58,9 +41,40 @@ function btnRender() {
   });
 }
 
+function onChangeCurrentAmount(e) {
+  const currentAmount = document.querySelector('.current-amount');
+  const value = e.target.value;
+  value >= 0 ? (currentAmount.value = value) : (currentAmount.value = 0);
+  currentAmount.value = value;
+}
+
+function onDeposit() {
+  const currentAmount = document.querySelector('.current-amount');
+  const amount = currentAmount.value;
+  const display = document.querySelector('.display');
+  BalanceState.add(amount);
+  updateDisplay(BalanceState.get(), display);
+  currentAmount.value = 0;
+}
+
+function onReturn() {
+  const display = document.querySelector('.display');
+  updateDisplay(0, display);
+  // Todo : 로그 남기기 이벤트
+}
+
+function addEvent() {
+  document
+    .querySelector('.current-amount')
+    .addEventListener('input', onChangeCurrentAmount);
+  document.querySelector('.deposit').addEventListener('click', onDeposit);
+  document.querySelector('.return').addEventListener('click', onReturn);
+}
+
 function main() {
   init();
   btnRender();
+  addEvent();
 }
 
 main();
