@@ -12,8 +12,8 @@ export default class App extends Component {
   }
 
   protected mounted() {
-    const amount = document.querySelector('.amount') as HTMLInputElement;
+    const amountElement = document.querySelector('.amount') as HTMLDivElement;
 
-    new Amount(amount, {});
+    new Amount(amountElement, {});
   }
 }
