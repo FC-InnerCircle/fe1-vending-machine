@@ -37,8 +37,30 @@ function init() {
   currentAmount.value = 0;
 }
 
+function onClickButton(e) {
+  const elem = e.target;
+  elem.classList.add('active');
+  setTimeout(() => {
+    elem.classList.remove('active');
+  }, 1000);
+}
+
+function btnRender() {
+  const buttonsContainer = document.getElementById('buttons-container');
+  items.forEach((item) => {
+    const button = document.createElement('button');
+    button.textContent = item;
+    button.classList.add('item-button');
+
+    button.addEventListener('mousedown', onClickButton);
+
+    buttonsContainer.appendChild(button);
+  });
+}
+
 function main() {
   init();
+  btnRender();
 }
 
 main();
