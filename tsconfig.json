@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "es6",
+    "moduleResolution": "node",
     "outDir": "./dist",
-    "rootDir": "./",
-    "strict": true
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true
   },
-  "include": ["app.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

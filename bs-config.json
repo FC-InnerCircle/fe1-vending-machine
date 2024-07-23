@@ -1,0 +1,7 @@
+{
+  "server": {
+    "baseDir": "./",
+    "files": ["./*.html", "./dist/*.js", "./styles.css"],
+    "directory": true
+  }
+}
