@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-  setItems();
+  createItems();
 });
 
 /**
  * @desc item html 생성
  */
-function setItems() {
-  var itemContainer = document.getElementById("item-container");
+function createItems() {
+  let itemContainer = document.getElementById("item-container");
 
   // 아이템 block 생성
-  for (var value = 300; value <= 1100; value += 100) {
-    var item = document.createElement("div");
+  for (let value = 300; value <= 1100; value += 100) {
+    let item = document.createElement("div");
     item.id = "item";
     item.setAttribute("value", value);
     item.className =
