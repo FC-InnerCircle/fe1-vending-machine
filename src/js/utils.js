@@ -6,21 +6,4 @@ function updateDisplay(amount, elem) {
   elem.textContent = formatNumber(amount);
 }
 
-const BalanceState = (function () {
-  let Balance = 0;
-  return {
-    get() {
-      return Balance;
-    },
-    set(value) {
-      Balance = value;
-    },
-    add(value) {
-      Balance += +value;
-    },
-    sub(value) {
-      Balance -= +value;
-    },
-  };
-})();
-export { formatNumber, updateDisplay, BalanceState };
+export { formatNumber, updateDisplay };

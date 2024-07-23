@@ -1,5 +1,11 @@
 import { formatNumber, updateDisplay } from './src/js/utils.js';
 import { BalanceState } from './src/js/state.js';
+import {
+  onHoverButton,
+  onLeaveButton,
+  onClickButton,
+  onReleaseButton,
+} from './src/js/eventHandler.js';
 
 const items = [
   'FE300',
@@ -17,15 +23,7 @@ function init() {
   const display = document.querySelector('.display');
   display.textContent = BalanceState.get();
   const currentAmount = document.querySelector('.current-amount');
-  currentAmount.value = 0;
-}
-
-function onClickButton(e) {
-  const elem = e.target;
-  elem.classList.add('active');
-  setTimeout(() => {
-    elem.classList.remove('active');
-  }, 1000);
+  currentAmount.value = null;
 }
 
 function btnRender() {
@@ -35,7 +33,10 @@ function btnRender() {
     button.textContent = item;
     button.classList.add('item-button');
 
+    button.addEventListener('mouseover', onHoverButton);
+    button.addEventListener('mouseout', onLeaveButton);
     button.addEventListener('mousedown', onClickButton);
+    button.addEventListener('mouseup', onReleaseButton);
 
     buttonsContainer.appendChild(button);
   });
@@ -54,7 +55,7 @@ function onDeposit() {
   const display = document.querySelector('.display');
   BalanceState.add(amount);
   updateDisplay(BalanceState.get(), display);
-  currentAmount.value = 0;
+  currentAmount.value = null;
 }
 
 function onReturn() {

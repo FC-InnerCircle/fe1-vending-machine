@@ -33,10 +33,10 @@
   cursor: pointer;
 }
 
-.item-button:hover {
+.item-button.hover {
   background-color: #7db9f9;
 }
 
-.active {
-  background-color: #007bff;
+.item-button.active {
+  background-color: #247bdf;
 }
