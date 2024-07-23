@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  setStorage();
   createItems();
 });
 
@@ -24,4 +25,20 @@ function createItems() {
 
     itemContainer.appendChild(item);
   }
+}
+function setStorage() {
+  let balance = localStorage.getItem("balance");
+
+  if (!balance) {
+    localStorage.setItem("balance", 0);
+  }
+
+  setValue();
+}
+
+function setValue() {
+  let balance = localStorage.getItem("balance");
+  let balanceDiv = document.getElementById("balance");
+
+  balanceDiv.textContent = Number(balance).toLocaleString();
 }
