@@ -1,25 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const App: React.FC = () => {
+    const [totalInserted, setTotalInserted] = useState(0);
+    const [formattedTotalInserted, setFormattedTotalInserted] = useState('0');
+    const [message, setMessage] = useState<string[]>([]);
+    const [inputValue, setInputValue] = useState('');
+
+    const formatCurrency = (value: number): string => {
+        return value.toLocaleString();
+    };
+
+    const handleInsert = (amount: number) => {
+        setTotalInserted(prev => prev + amount);
+        setMessage(prev => prev.length > 0
+            ? [...prev, `\n${formatCurrency(amount)}원을 투입했습니다.`]
+            : [`${formatCurrency(amount)}원을 투입했습니다.`]);
+    };
+
+    const handleInsertButton = () => {
+        const amount = Number(inputValue.replace(/,/g, ''));
+        if (amount > 0) {
+            handleInsert(amount);
+            setInputValue('');
+        }
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/,/g, '');
+        if (!isNaN(Number(value))) {
+            setInputValue(value);
+        }
+    };
+
+    useEffect(() => {
+        setFormattedTotalInserted(formatCurrency(totalInserted));
+    }, [totalInserted]);
 
     return (
         <Container>
             <VendingMachine>
-                <Screen type="text" value={''} readOnly />
+                <Screen type="text" value={formattedTotalInserted} readOnly />
                 <Buttons>
                     {[300, 400, 500, 600, 700, 800, 900, 1000, 1100].map((price) => (
-                        <Button key={price} onClick={()=>{}}>FE{price}</Button>
+                        <Button key={price} onClick={() => {}}>FE{price}</Button>
                     ))}
                 </Buttons>
             </VendingMachine>
             <Controls>
                 <ControlDisplay>
-                    <InputDisplay id="money" name="money" type="text" placeholder="자판기에 돈을 투입해 주세요" />
-                    <ControlButton type="submit">투입</ControlButton>
-                    <ControlButton type="button" onClick={()=>{}}>반환</ControlButton>
+                    <InputDisplay
+                        id="money"
+                        name="money"
+                        type="text"
+                        placeholder="자판기에 돈을 투입해 주세요"
+                        value={inputValue ? formatCurrency(Number(inputValue)) : ''}
+                        onChange={handleInputChange}
+                    />
+                    <ControlButton type="button" onClick={handleInsertButton}>투입</ControlButton>
+                    <ControlButton type="button" onClick={() => {}}>반환</ControlButton>
                 </ControlDisplay>
-                <MessageBox readOnly value={''} />
+                <MessageBox readOnly value={message.join('\n')} />
             </Controls>
         </Container>
     );
