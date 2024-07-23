@@ -1,45 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vending Machine</title>
     <link href="build.css" rel="stylesheet">
   </head>
-  <body class="flex justify-center items-center h-screen bg-gray-100">
+  <body class="flex items-center justify-center h-screen bg-gray-100">
     <div class="flex flex-row space-x-5">
-      <!-- Vending Machine -->
-      <div id="vending-machine" class="w-96 h-72 bg-white border-1 border-black p-5 rounded-lg shadow-lg space-y-5">
-        <div id="balance-display" class="bg-gray-400 text-white text-xl text-center py-2 rounded mb-2">0</div>
-        <div class="grid grid-cols-3 gap-2">
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="300">FE300</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="400">FE400</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="500">FE500</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="600">FE600</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="700">FE700</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="800">FE800</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="900">FE900</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="1000">FE1000</button>
-          <button class="item bg-blue-200 p-4 rounded hover:bg-blue-300 active:bg-blue-400" data-price="1100">FE1100</button>
-        </div>
+      <div id="vending-machine" class="p-5 space-y-5 bg-white border-black rounded-lg shadow-lg w-96 h-72 border-1">
+        <div id="balance-display" class="py-2 mb-2 text-xl text-center text-white bg-gray-400 rounded">0</div>
+        <div id="items-container" class="grid grid-cols-3 gap-2"></div>
       </div>
 
-      <!-- Control Panel -->
-      <div id="control-panel" class="w-96 h-72 bg-white border-1 border-black p-5 rounded-lg shadow-lg flex flex-col space-y-5">
-        <div class="w-full flex gap-2">
+      <div id="control-panel" class="flex flex-col p-5 space-y-5 bg-white border-black rounded-lg shadow-lg w-96 h-72 border-1">
+        <div class="flex w-full gap-2">
           <input type="number" id="money-input" class="flex-auto p-2 border rounded" min="0" placeholder="자판기에 돈을 투입해 주세요.">
           <div class="flex space-x-2">
-            <button id="insert-money" class="w-1/2 p-2 bg-blue-500 text-white rounded hover:bg-green-600">투입</button>
-            <button id="return-money" class="w-1/2 p-2 bg-slate-500 text-white rounded hover:bg-red-600">반환</button>
+            <button id="insert-money" class="w-1/2 p-2 text-white bg-blue-500 rounded hover:bg-green-600">투입</button>
+            <button id="return-money" class="w-1/2 p-2 text-white rounded bg-slate-500 hover:bg-red-600">반환</button>
           </div>
         </div>
-        <div id="log-container" class="w-full h-44 overflow-y-auto flex-1 border rounded p-2">
-          <!-- 로그 -->
+        <div id="log-container" class="flex-1 w-full p-2 overflow-y-auto border rounded h-44">
           <div id="log"></div>
         </div>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
