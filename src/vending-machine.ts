@@ -4,18 +4,20 @@ import { DisplayLog } from "./display-log";
 import { VendingItems } from "./vending-items";
 
 export class VendingMachine {
-  private template = `<div>
+  private template = `<div class="vending-machine-container">
+  <div class="vending-machine">
     <div class="display-container"></div>
+    <div class="item-container"></div>
+  </div>
 
+  <div class="control-box">
     <div class="coin-control-container">
       <input class="amount-input" type="number" />
       <button class="insert">투입</button>
       <button class="return">반환</button>
     </div>
-
     <div class="log-container"></div>
-
-    <div class="item-container"></div>
+  </div>
   </div>`;
 
   private displayInfo: DisplayInfo | undefined;
@@ -74,6 +76,7 @@ export class VendingMachine {
 
   setState(nextState: Partial<typeof this.state>) {
     this.state = { ...this.state, ...nextState };
+
     this.displayInfo?.setState({
       totalAmount:
         this.state.totalAmount - (this.state.displayOnlyPrice ?? 0) > 0

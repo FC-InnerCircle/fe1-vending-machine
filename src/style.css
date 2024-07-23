@@ -1,96 +1,102 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+* {
+  box-sizing: border-box;
 }
 
 #app {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1em;
   text-align: center;
+  width: 360px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+input {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 0.3em 0.6em;
+  font-size: 0.8em;
+  font-family: inherit;
+  appearance: none;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 0.3em 0.6em;
+  font-size: 0.8em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
+  border-width: 1px;
+  background-color: #77e4c8;
   transition: border-color 0.25s;
+  cursor: pointer;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #478ccf;
+}
+button:active {
+  background-color: #478ccf;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.vending-machine-container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+.vending-machine {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  background-color: hsla(160, 100%, 75%, 0.5);
+  width: 250px;
+}
+
+.control-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 250px;
+}
+
+.item-list {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.display-container {
+  border: 2px solid #ccc;
+  padding-block: 0.5em;
+}
+
+.coin-control-container {
+  display: flex;
+  gap: 0.4em;
+  width: 250px;
+}
+
+.log-container {
+  font-size: 0.6em;
+  text-align: left;
+  border: 2px solid #ccc;
+  padding-block: 0.5em;
+  overflow-y: auto;
+  height: 15em;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  #app {
+    width: 768px;
+    margin: 0 auto;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  .vending-machine-container {
+    flex-direction: row;
   }
 }

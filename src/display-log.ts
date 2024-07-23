@@ -26,10 +26,15 @@ export class DisplayLog {
         .map((log) => `<div>${log}</div>`)
         .join("");
     }
+    this.scrollToBottom();
   }
 
   setState(nextState: Partial<typeof this.state>) {
     this.state = { ...this.state, ...nextState };
     this.render();
+  }
+
+  private scrollToBottom() {
+    this.$container.scrollTop = this.$container.scrollHeight;
   }
 }
