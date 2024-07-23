@@ -44,6 +44,8 @@ const purchaseItem = (price, label) => {
     }
     saveToLocalStorage();
   } else {
-    showTemporaryMessage(label, '잔액 부족');
+    const message = '잔액 부족';
+    addLog(message);
+    showTemporaryMessage(label, message);
   }
 };
