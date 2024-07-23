@@ -96,6 +96,7 @@ export class VendingMachine {
   }
 
   private returnCoin() {
+    if (this.state.totalAmount === 0) return;
     const refundAmount = this.state.totalAmount;
     this.setState({
       totalAmount: 0,
