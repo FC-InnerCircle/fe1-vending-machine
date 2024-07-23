@@ -1,12 +1,10 @@
+import {prices} from "../constants.ts";
 import Component from "../core/component.ts";
 
 interface Props {
   balance: number;
   onPurchase?: (title: string, price: number) => void;
 }
-
-const prices = Array.from({ length: 9 })
-  .map((_, i) => (i + 3) * 100);
 
 export default class VendingMachine extends Component<Props> {
   template () {

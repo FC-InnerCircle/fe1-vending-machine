@@ -2,6 +2,7 @@ import Component from "./core/component.ts";
 import Amount from "./components/amount.ts";
 import Log from "./components/log.ts";
 import VendingMachine from "./components/vending-machine.ts";
+import {prices} from "./constants.ts";
 
 interface State {
   balance: number;
@@ -43,8 +44,14 @@ export default class App extends Component<{}, State> {
   }
 
   private purchase(title: string, price: number) {
-    const balance = this.state.balance - price;
-    const logs = [...this.state.logs, `${title}을 구매했습니다.`];
+    let balance = this.state.balance - price;
+    let logs = [...this.state.logs, `${title}을 구매했습니다.`];
+
+    if (balance < prices[0]) {
+      logs = [...logs, `${balance}원을 반환했습니다.`];
+      balance = 0;
+    }
+
     this.setState({balance, logs});
   }
 
