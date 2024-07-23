@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./util.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <main id="Wrap">
+        <div class="balance_btns_warp">
+            <input type="text">
+            <div id="Btns"></div>
+        </div>
+        <div class="controler_history_wrap">
+            <div id="controller">
+                <input type="number">
+                <div class="flex">
+                    <button class="insert_coin">투입</button>
+                    <button class="return_balance">반환</button>
+                </div>
+            </div>
+            <textarea id="history" readonly></textarea>
+        </div>
+    </main>
     <script src="./index.js" type="module"></script>
 </body>
 </html>
+
