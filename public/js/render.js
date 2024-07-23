@@ -1,9 +1,12 @@
 
 const render = (function () {
+
+    let isInputEventListenerAdded = false;
     function update(state, setState) {
 
 
         const itemList = document.getElementById('itemList');
+        const inputField = document.getElementById('priceInputBox');
 
         itemList.innerHTML = '';
         itemList.innerHTML = state.items.map(item => `
@@ -77,16 +80,47 @@ const render = (function () {
     }
     function priceUpdate(state) {
         const priceDisplay = document.getElementById('priceDisplay');
-        console.log("state:", state)
+
         priceDisplay.innerHTML = state.price.toLocaleString()
 
 
     }
+    function priceInputBoxUpdate(state, setState) {
+
+        const inputField = document.getElementById('priceInputBox');
+        const handleInput = (event) => {
+
+            let value = event.target.value.replace(/,/g, '');
+
+            if (!isNaN(value)) {
+                // 숫자 앞의 0을 제거하고 숫자로 변환
+                let numberValue = Number(value);
+
+                // 변환된 숫자 값을 상태에 저장하고, input 필드에 표시
+                setState({ inputValue: numberValue });
+                inputField.value = numberValue.toLocaleString();
+            } else {
+                // 숫자가 아닌 값이 입력되면 상태를 초기화합니다.
+                setState({ inputValue: state.inputValue });
+                inputField.value = state.inputValue.toLocaleString();
+            }
+        }
+
+        inputField.innerHTML = state.inputValue.toLocaleString()
+        inputField.value = state.inputValue;
+
+        if (!isInputEventListenerAdded) {
+            isInputEventListenerAdded = true
+            inputField.addEventListener('input', handleInput);
+        }
+    }
+
 
 
 
     return {
         update,
-        priceUpdate
+        priceUpdate,
+        priceInputBoxUpdate
     };
 })();

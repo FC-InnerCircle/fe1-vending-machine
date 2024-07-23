@@ -1,7 +1,8 @@
 const state = (function () {
     let state = {
-        price: 500,
+        price: 50000,
         minPrice: 300,
+        inputValue: 0,
         textLog: [],
         items: [
             { id: 1, text: 'FE300', price: 300 },
