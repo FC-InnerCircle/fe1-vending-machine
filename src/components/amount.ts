@@ -8,7 +8,7 @@ interface Props {
 export default class Amount extends Component<Props> {
   template () {
     return `
-      <input type="number" class="amount__input" step="1" value="0">
+      <input type="number" class="amount__input" step="1">
       <button type="button" class="amount__deposit-button">투입</button>
       <button type="button" class="amount__withdraw-button">반환</button>
     `;
