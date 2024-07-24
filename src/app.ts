@@ -3,6 +3,7 @@ import { InsertAmountInput } from "./insert.js";
 import { ItemButton } from "./components/item-button.js";
 import { addLog } from "./log.js";
 
+const MIN_ITEM_PRICE = 300;
 let insertAmountInput: InsertAmountInput;
 let currentAmountInput: CurrentAmountInput;
 
@@ -35,21 +36,24 @@ const handleReturnButton = () => {
 };
 
 const handlePurchaseItem = (price: number, itemName: string) => {
+  const currentAmount = currentAmountInput.getCurrentAmount();
   //price보다 current amount가 작으면 current amount에 상품 가격 3초동안 띄우고 리턴
-  //값 만큼 current amount에서 빼기
-  //구매했다고 로그남기기
-  //만약 잔액이 최소 상품보다 작으면 남은 금액 반환하기
+  if (currentAmount < price) return;
 
-  console.log(price, itemName);
+  //price보다 current amount가 크거나 같으면
+  //값 만큼 current amount에서 빼기
+  currentAmountInput.subtractAmount(price);
+  //구매했다고 로그남기기
+  addLog(`${itemName}을 구매했습니다.`);
+
+  //만약 잔액이 최소 상품보다 작으면 남은 금액 반환하기
+  const remainingAmount = currentAmountInput.getCurrentAmount();
+  if (remainingAmount < MIN_ITEM_PRICE) handleReturnButton();
 };
 
 const handleClickItem = (e: MouseEvent) => {
   const target = e.target as HTMLElement;
-  console.log(
-    target.className === "product-button",
-    target.dataset.price,
-    target.textContent
-  );
+
   if (
     target.className === "product-button" &&
     target.dataset.price &&
