@@ -1,11 +1,16 @@
-button {
-    background-color: rgb(30, 138, 178);
+.purchase-item-class {
+    background-color: #A4D8FF;
+    min-height: 3rem;
 }
 
-button:hover {
-    background-color: rgb(39, 135, 230);
+.purchase-item-class:hover {
+    background-color: #4DABF7;
 }
 
-button:active {
-    background-color: rgb(5, 4, 41);
+.purchase-item-class:active {
+    background-color: #1871C2;
+}
+
+#output {
+    min-height: 3rem;
 }
