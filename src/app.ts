@@ -1,4 +1,5 @@
 import { InsertAmountInput } from "./insert.js";
+import { addLog } from "./log.js";
 
 let insertAmountInput: InsertAmountInput;
 
@@ -7,6 +8,7 @@ const handleInsertButton = () => {
   const amount = insertAmountInput.getInsertAmount();
   if (insertAmountInput.validateAmount()) {
     //log쌓고
+    addLog(`${amount}원을 투입했습니다.`);
     //current-amount에 추가해주기
     //input 0으로 초기화
     insertAmountInput.resetInsertAmount();
