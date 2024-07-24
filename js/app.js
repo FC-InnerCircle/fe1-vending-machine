@@ -31,8 +31,10 @@ function purchaseItem(price) {
         amount -= price;
         inputAmountDisplay.value = formatAmount(amount);
         logVendingMachine(price, "purchased");
-    } else {
-        returnMoney();
+
+        if(amount < 300) {
+            returnMoney();
+        }
     }
 }
 
