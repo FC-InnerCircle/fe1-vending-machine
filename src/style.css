@@ -62,6 +62,20 @@ body {
   background-color: #004EA2;
 }
 
+.amount__input {
+  width: 240px;
+  height: 60px;
+  font-size: 1.5rem;
+}
+
+.amount__deposit-button {
+  font-size: 1.125rem;
+}
+
+.amount__withdraw-button {
+  font-size: 1.125rem;
+}
+
 .log {
   display: flex;
   flex-direction: column;
