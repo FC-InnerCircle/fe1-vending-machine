@@ -72,7 +72,6 @@ const AppContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  width: 90%;
-  height: 60%;
-  margin: 0 auto;
+  width: 60%;
+  margin: 10% auto;
 `;

@@ -50,8 +50,8 @@ const ControlDisplay = styled.div`
 const InputDisplay = styled.input`
   width: 100%;
   text-align: right;
-  font-size: 24px;
-  padding: 10px;
+  font-size: 15px;
+  padding: 1em;
   border: 2px solid black;
   box-sizing: border-box;
   margin-right: 10px;
@@ -59,8 +59,9 @@ const InputDisplay = styled.input`
 
 const ControlButton = styled.button`
   background-color: #D3D3D3;
-  padding: 10px 20px;
-  margin: 0 5px;
+  padding: 1em 1em;
+  margin: 0 3px;
+  white-space: nowrap;
 `;
 
 const MessageBox = styled.textarea`

@@ -50,7 +50,7 @@ const Buttons = styled.div`
 const Button = styled.button`
   background-color: #87CEFA;
   text-align: center;
-  padding: 20px;
+  padding: 30%;
   font-size: 18px;
   cursor: pointer;
   border: 2px solid black;
