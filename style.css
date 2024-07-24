@@ -94,3 +94,45 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+#app {
+  display: flex;
+}
+
+#vendingMachine {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#totalAmountDisplay {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.product-button {
+  padding: 10px;
+  text-align: center;
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-button:hover {
+  background-color: deepskyblue;
+}
+
+.product-button:active {
+  background-color: blue;
+  color: white;
+}
