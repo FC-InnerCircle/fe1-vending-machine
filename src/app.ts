@@ -44,6 +44,8 @@ export default class App extends Component<{}, State> {
   }
 
   private purchase(title: string, price: number) {
+    if (price > this.state.balance) return;
+
     let balance = this.state.balance - price;
     let logs = [...this.state.logs, `${title}을 구매했습니다.`];
 

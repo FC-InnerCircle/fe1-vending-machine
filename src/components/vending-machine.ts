@@ -26,6 +26,29 @@ export default class VendingMachine extends Component<Props> {
       const title = button.textContent ?? '';
       const price = Number(button.dataset.price);
       this.props.onPurchase?.(title, price);
-    })
+    });
+
+    let isPriceShowing = false;
+
+    this.addEvent('mousedown', '.vending-machine__purchase-button', (e: MouseEvent) => {
+      const purchaseButtonElement = e.target as HTMLButtonElement;
+      const price = Number(purchaseButtonElement.dataset.price);
+
+      if (this.props.balance >= price) return;
+
+      const balanceElement = this.target.querySelector('.vending-machine__balance') as HTMLDivElement;
+      balanceElement.textContent = price.toLocaleString();
+
+      isPriceShowing = true;
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!isPriceShowing) return;
+
+      const balanceElement = this.target.querySelector('.vending-machine__balance') as HTMLDivElement;
+      balanceElement.textContent = this.props.balance.toLocaleString();
+
+      isPriceShowing = false;
+    });
   }
 }
