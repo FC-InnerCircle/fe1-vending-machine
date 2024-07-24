@@ -37,7 +37,15 @@ const makeBtns = () => {
     btn.classList.add("item");
     btn.innerHTML = `${GT}${price}`;
     btn.addEventListener("click", () => onClickItem(price));
-
+    btn.addEventListener("mousedown", () => {
+      balance < price && changeBalance(price);
+    });
+    btn.addEventListener("mouseup", () => {
+      balance < price && changeBalance(balance);
+    });
+    btn.addEventListener("mouseout", () => {
+      balance < price && changeBalance(balance);
+    });
     $btnWrap.appendChild(btn);
   }
 };
