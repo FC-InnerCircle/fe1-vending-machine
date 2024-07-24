@@ -1,17 +1,18 @@
-import { CurrentAmountInput } from "./current-amount.js";
-import { InsertAmountInput } from "./insert.js";
+import { CurrentAmountInput } from "./components/current-amount.js";
+import { InsertAmountInput } from "./components/insert.js";
 import { ItemButton } from "./components/item-button.js";
-import { addLog } from "./log.js";
+import { LogDisplay } from "./components/log-display.js";
 
 const MIN_ITEM_PRICE = 300;
 let insertAmountInput: InsertAmountInput;
 let currentAmountInput: CurrentAmountInput;
+let logDisplay: LogDisplay;
 
 const handleInsertButton = () => {
   const amount = insertAmountInput.getInsertAmount();
   if (insertAmountInput.validateAmount()) {
     //log쌓고
-    addLog(`${amount}원을 투입했습니다.`);
+    logDisplay.addLog(`${amount}원을 투입했습니다.`);
     //current-amount에 추가해주기
     currentAmountInput.addAmount(amount);
     //input 0으로 초기화
@@ -26,7 +27,7 @@ const handleReturnButton = () => {
   const currentAmount = currentAmountInput.getCurrentAmount();
   if (currentAmount > 0) {
     //log쌓고
-    addLog(`${currentAmount}원을 반환합니다.`);
+    logDisplay.addLog(`${currentAmount}원을 반환합니다.`);
     //current-amount 빈스트링으로 만들기
     currentAmountInput.resetInsertAmount();
   } else {
@@ -45,7 +46,7 @@ const handlePurchaseItem = (price: number, itemName: string) => {
   //값 만큼 current amount에서 빼기
   currentAmountInput.subtractAmount(price);
   //구매했다고 로그남기기
-  addLog(`${itemName}을 구매했습니다.`);
+  logDisplay.addLog(`${itemName}을 구매했습니다.`);
 
   //만약 잔액이 최소 상품보다 작으면 남은 금액 반환하기
   const remainingAmount = currentAmountInput.getCurrentAmount();
@@ -83,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
     insertAmountInput = new InsertAmountInput();
     currentAmountInput = new CurrentAmountInput();
+    logDisplay = new LogDisplay();
     const insertButton = document.querySelector<HTMLButtonElement>(
       ".control-button#insert"
     );
