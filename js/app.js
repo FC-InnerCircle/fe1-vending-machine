@@ -17,6 +17,24 @@ function insertMoney() {
     logVendingMachine(insertedMoney, "inserted");
 }
 
+function returnMoney () {
+    if(amount > 0) {
+        amount = 0;
+
+        logVendingMachine(inputAmountDisplay.value, "returned");
+        inputAmountDisplay.value = formatAmount(amount);
+    }
+}
+
+function purchaseItem(price) {
+    if(amount >= price) {
+        amount -= price;
+        inputAmountDisplay.value = formatAmount(amount);
+        logVendingMachine(price, "purchased");
+    } else {
+        returnMoney();
+    }
+}
 
 function formatAmount(amount) {
     return amount.toLocaleString();
