@@ -1,5 +1,6 @@
 import { CurrentAmountInput } from "./current-amount.js";
 import { InsertAmountInput } from "./insert.js";
+import { ItemButton } from "./components/item-button.js";
 import { addLog } from "./log.js";
 
 let insertAmountInput: InsertAmountInput;
@@ -33,10 +34,48 @@ const handleReturnButton = () => {
   }
 };
 
+const handlePurchaseItem = (price: number, itemName: string) => {
+  //price보다 current amount가 작으면 current amount에 상품 가격 3초동안 띄우고 리턴
+  //값 만큼 current amount에서 빼기
+  //구매했다고 로그남기기
+  //만약 잔액이 최소 상품보다 작으면 남은 금액 반환하기
+
+  console.log(price, itemName);
+};
+
+const handleClickItem = (e: MouseEvent) => {
+  const target = e.target as HTMLElement;
+  console.log(
+    target.className === "product-button",
+    target.dataset.price,
+    target.textContent
+  );
+  if (
+    target.className === "product-button" &&
+    target.dataset.price &&
+    target.textContent
+  ) {
+    const price = parseInt(target.dataset.price);
+    const itemName = target.textContent;
+    handlePurchaseItem(price, itemName);
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
 
   if (app) {
+    const itemButtons = [
+      new ItemButton("FE300", 300),
+      new ItemButton("FE500", 500),
+      new ItemButton("FE800", 800),
+      new ItemButton("FE900", 900),
+      new ItemButton("FE1000", 1000),
+      new ItemButton("FE1200", 1200),
+      new ItemButton("FE1500", 1500),
+      new ItemButton("FE2000", 2000),
+      new ItemButton("FE3000", 3000),
+    ];
     insertAmountInput = new InsertAmountInput();
     currentAmountInput = new CurrentAmountInput();
     const insertButton = document.querySelector<HTMLButtonElement>(
@@ -45,10 +84,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const returnButton = document.querySelector<HTMLButtonElement>(
       ".control-button#return"
     );
+    const productContainer = document.getElementById("product-list");
 
     if (insertButton)
       insertButton.addEventListener("click", handleInsertButton);
     if (returnButton)
       returnButton.addEventListener("click", handleReturnButton);
+    if (productContainer) {
+      itemButtons.forEach((button) => {
+        productContainer.appendChild(button.render());
+      });
+
+      //이벤트 위임
+      productContainer.addEventListener("click", handleClickItem);
+    }
   }
 });
