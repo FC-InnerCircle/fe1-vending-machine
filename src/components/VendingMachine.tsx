@@ -31,7 +31,7 @@ const Container = styled.div`
 `;
 
 const Screen = styled.input`
-  text-align: right;
+  text-align: center;
   font-size: 24px;
   padding: 10px;
   border: 2px solid black;

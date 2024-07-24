@@ -25,6 +25,15 @@ const AppMain: React.FC = () => {
             setInputValue(0);
         }
     };
+    const handleRefundButton = () => {
+        const totalValue = state.totalInserted;
+        if (totalValue > 0) {
+            setMessage(prev => prev.length > 0
+                ? [...prev, `${totalValue.toLocaleString()}원을 반환했습니다.`]
+                : [`${totalValue.toLocaleString()}원을 반환했습니다.`]);
+            dispatch({ type: 'REFUND'});
+        }
+    };
 
     return (
         <AppContainer>
@@ -37,7 +46,7 @@ const AppMain: React.FC = () => {
                 message={message}
                 onInputChange={handleInputChange}
                 onInsertButton={handleInsertButton}
-                onRefundButton={()=>{}}
+                onRefundButton={handleRefundButton}
             />
         </AppContainer>
     );

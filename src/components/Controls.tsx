@@ -23,7 +23,7 @@ const Controls: React.FC<ControlsProps> = ({ inputValue, message, onInputChange,
                     onChange={onInputChange}
                 />
                 <ControlButton type="button" onClick={onInsertButton}>투입</ControlButton>
-                <ControlButton type="button" onClick={()=>{}}>반환</ControlButton>
+                <ControlButton type="button" onClick={onRefundButton}>반환</ControlButton>
             </ControlDisplay>
             <MessageBox readOnly value={message.join('\n')} />
         </Container>
