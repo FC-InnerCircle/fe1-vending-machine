@@ -56,7 +56,13 @@
     font-size: 24px;    
 }
 .controler_history_wrap .history{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     width: 100%;
-    height: 314px;
+    height: 321px;
     padding: 16px;
+    background-color: white;
+    overflow: auto;
+    
 }
