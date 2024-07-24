@@ -58,12 +58,14 @@ export default class App extends Component<{}, State> {
   }
 
   private deposit(amount: number) {
+    if (amount <= 0) return;
     const balance = this.state.balance + amount;
     const logs = [...this.state.logs, `${amount.toLocaleString()}원을 투입했습니다.`];
     this.setState({balance, logs});
   }
 
   private withdraw() {
+    if (this.state.balance <= 0) return;
     const balance = 0;
     const logs = [...this.state.logs, `${this.state.balance.toLocaleString()}원을 반환했습니다.`];
     this.setState({balance, logs});
