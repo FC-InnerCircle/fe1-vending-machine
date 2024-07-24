@@ -1,15 +1,17 @@
+import { CurrentAmountInput } from "./current-amount.js";
 import { InsertAmountInput } from "./insert.js";
 import { addLog } from "./log.js";
 
 let insertAmountInput: InsertAmountInput;
+let currentAmountInput: CurrentAmountInput;
 
 const handleInsertButton = () => {
-  console.log("insert button");
   const amount = insertAmountInput.getInsertAmount();
   if (insertAmountInput.validateAmount()) {
     //log쌓고
     addLog(`${amount}원을 투입했습니다.`);
     //current-amount에 추가해주기
+    currentAmountInput.addAmount(amount);
     //input 0으로 초기화
     insertAmountInput.resetInsertAmount();
   } else {
@@ -19,10 +21,12 @@ const handleInsertButton = () => {
 };
 
 const handleReturnButton = () => {
-  console.log("return button");
-  if (insertAmountInput.validateAmount()) {
+  const currentAmount = currentAmountInput.getCurrentAmount();
+  if (currentAmount > 0) {
     //log쌓고
+    addLog(`${currentAmount}원을 반환합니다.`);
     //current-amount 빈스트링으로 만들기
+    currentAmountInput.resetInsertAmount();
   } else {
     // 아무일도 일어나지 않음
     return;
@@ -34,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (app) {
     insertAmountInput = new InsertAmountInput();
+    currentAmountInput = new CurrentAmountInput();
     const insertButton = document.querySelector<HTMLButtonElement>(
       ".control-button#insert"
     );
