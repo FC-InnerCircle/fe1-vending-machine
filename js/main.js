@@ -64,8 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 totalInserted = 0;
                 updateScreen();
             }
-        } else {
-            updateMessageBox("잔액이 부족합니다.");
         }
     };
 

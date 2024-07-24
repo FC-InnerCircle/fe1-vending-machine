@@ -44,6 +44,7 @@ body {
 
 .machine #screen {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .machine .buttons {
