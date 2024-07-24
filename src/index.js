@@ -1,3 +1,4 @@
+import './style/main.css';
 document.addEventListener("DOMContentLoaded", () => {
     const inputDisplay = document.querySelector(".input-display");
     const messageBox = document.querySelector(".message-box");
