@@ -31,4 +31,14 @@ export class CurrentAmountInput {
       parseInt(this.inputElement.value) - value
     ).toString();
   }
+  alertInsufficientAmount(value: number) {
+    const currentValue = this.inputElement.value;
+    //필요한 금액 알리기
+    this.inputElement.value = value.toString();
+
+    setTimeout(() => {
+      //원래 금액으로
+      this.inputElement.value = currentValue;
+    }, 2000);
+  }
 }

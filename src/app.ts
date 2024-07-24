@@ -17,7 +17,7 @@ const handleInsertButton = () => {
     //input 0으로 초기화
     insertAmountInput.resetInsertAmount();
   } else {
-    // 아무것도 일어나지 않거나, input 화면에 숫자 입력하라고 알려주기
+    // 아무것도 일어나지 않음
     return;
   }
 };
@@ -38,7 +38,8 @@ const handleReturnButton = () => {
 const handlePurchaseItem = (price: number, itemName: string) => {
   const currentAmount = currentAmountInput.getCurrentAmount();
   //price보다 current amount가 작으면 current amount에 상품 가격 3초동안 띄우고 리턴
-  if (currentAmount < price) return;
+  if (currentAmount < price)
+    return currentAmountInput.alertInsufficientAmount(price);
 
   //price보다 current amount가 크거나 같으면
   //값 만큼 current amount에서 빼기
@@ -71,14 +72,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (app) {
     const itemButtons = [
       new ItemButton("FE300", 300),
+      new ItemButton("FE400", 400),
       new ItemButton("FE500", 500),
+      new ItemButton("FE600", 600),
+      new ItemButton("FE700", 700),
       new ItemButton("FE800", 800),
       new ItemButton("FE900", 900),
       new ItemButton("FE1000", 1000),
-      new ItemButton("FE1200", 1200),
-      new ItemButton("FE1500", 1500),
-      new ItemButton("FE2000", 2000),
-      new ItemButton("FE3000", 3000),
+      new ItemButton("FE1100", 1100),
     ];
     insertAmountInput = new InsertAmountInput();
     currentAmountInput = new CurrentAmountInput();
