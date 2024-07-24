@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -16,4 +20,44 @@ body {
 .main {
   display: flex;
   gap: 16px;
+}
+
+.vending-machine {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  padding: 20px;
+  background-color: #DAE5F1;
+}
+
+.vending-machine__balance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 80px;
+  font-size: 1.5rem;
+  background-color: white;
+}
+
+.vending-machine__purchase-container {
+  display: grid;
+  margin-top: 40px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.vending-machine__purchase-button {
+  height: 80px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: #91B3D7;
+}
+
+.vending-machine__purchase-button:hover {
+  background-color: #6D99C9;
+}
+
+.vending-machine__purchase-button:active {
+  background-color: #004EA2;
 }
