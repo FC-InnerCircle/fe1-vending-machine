@@ -74,6 +74,10 @@ body {
   color: #29d8ff;
 }
 
+#products-container #current-amount-input {
+  text-align: center;
+}
+
 #product-list {
   width: 100%;
   flex: 1;

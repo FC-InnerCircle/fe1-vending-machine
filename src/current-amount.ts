@@ -2,7 +2,18 @@ const INIT_VALUE = "0";
 
 export class CurrentAmountInput {
   private inputElement: HTMLInputElement;
-  private initialValue: string;
+  private dataValue: number;
+  private formatter = new Intl.NumberFormat("en", {
+    style: "currency",
+    currency: "krw",
+    maximumSignificantDigits: 21,
+  });
+  private updateValue(value: number) {
+    this.dataValue = value;
+    this.inputElement.value = this.formatter
+      .format(this.dataValue)
+      .toLowerCase();
+  }
 
   constructor() {
     this.inputElement = document.getElementById(
@@ -11,30 +22,30 @@ export class CurrentAmountInput {
     if (!this.inputElement) {
       throw new Error(`Element with id amount-input not found`);
     }
-    this.initialValue = INIT_VALUE;
+    this.inputElement.value = INIT_VALUE;
+    this.dataValue = 0;
   }
 
   getCurrentAmount() {
-    return parseInt(this.inputElement.value);
+    return this.dataValue;
   }
 
   resetInsertAmount() {
-    this.inputElement.value = this.initialValue;
+    this.dataValue = 0;
+    this.inputElement.value = INIT_VALUE;
   }
   addAmount(value: number) {
-    this.inputElement.value = (
-      parseInt(this.inputElement.value) + value
-    ).toString();
+    const amount = this.dataValue + value;
+    this.updateValue(amount);
   }
   subtractAmount(value: number) {
-    this.inputElement.value = (
-      parseInt(this.inputElement.value) - value
-    ).toString();
+    const amount = this.dataValue - value;
+    this.updateValue(amount);
   }
   alertInsufficientAmount(value: number) {
     const currentValue = this.inputElement.value;
     //필요한 금액 알리기
-    this.inputElement.value = value.toString();
+    this.inputElement.value = this.formatter.format(value).toLowerCase();
 
     setTimeout(() => {
       //원래 금액으로
