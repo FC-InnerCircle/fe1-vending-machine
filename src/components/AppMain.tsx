@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import VendingMachine from './VendingMachine';
 import Controls from './Controls';
 import { AppContext } from '../context/AppContext';
-import {formatCurrency} from "../reducers/reducer";
+import {formatCurrency, productPrice} from "../reducers/reducer";
 
 const AppMain: React.FC = () => {
     const { state, dispatch } = useContext(AppContext)!;
@@ -26,12 +26,26 @@ const AppMain: React.FC = () => {
         }
     };
     const handleRefundButton = () => {
-        const totalValue = state.totalInserted;
-        if (totalValue > 0) {
+        const { totalInserted } = state;
+        if (totalInserted > 0) {
             setMessage(prev => prev.length > 0
-                ? [...prev, `${totalValue.toLocaleString()}원을 반환했습니다.`]
-                : [`${totalValue.toLocaleString()}원을 반환했습니다.`]);
+                ? [...prev, `${totalInserted.toLocaleString()}원을 반환했습니다.`]
+                : [`${totalInserted.toLocaleString()}원을 반환했습니다.`]);
             dispatch({ type: 'REFUND'});
+        }
+    };
+    const handlePurchaseButton = (price: number) => {
+        const { totalInserted } = state;
+        const remainingAmount = totalInserted - price;
+
+        if (totalInserted >= price) {
+            setMessage(prev => [...prev, `FE${price}을 구매했습니다.`]);
+            dispatch({ type: 'PURCHASE', inputValue: price });
+
+            if (remainingAmount > 0 && remainingAmount < Math.min(...productPrice)) {
+                setMessage(prev => [...prev, `${formatCurrency(remainingAmount)}원을 반환합니다.`]);
+                dispatch({ type: 'REFUND' });
+            }
         }
     };
 
@@ -39,7 +53,7 @@ const AppMain: React.FC = () => {
         <AppContainer>
             <VendingMachine
                 formattedTotalInserted={formatCurrency(state.totalInserted)}
-                onPurchase={()=>{}}
+                onPurchase={handlePurchaseButton}
             />
             <Controls
                 inputValue={inputValue}

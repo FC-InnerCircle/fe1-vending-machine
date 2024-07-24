@@ -6,12 +6,15 @@ export type State = {
     totalInserted: number;
 };
 
+export const productPrice : Array<number> = [300, 400, 500, 600, 700, 800, 900, 1000, 1100];
+
 export const initState : State = {
     totalInserted: 0,
 };
 export type Action =
     |{ type: 'INSERT'; inputValue: number }
     |{ type: 'REFUND'}
+    |{ type: 'PURCHASE'; inputValue: number}
 
 export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
@@ -25,6 +28,12 @@ export const reducer = (state: State, action: Action): State => {
             return {
                 ...state,
                 totalInserted: 0,
+            };
+        case 'PURCHASE':
+            const updatedTotalInserted  = state.totalInserted - action.inputValue;
+            return {
+                ...state,
+                totalInserted: updatedTotalInserted ,
             };
         default:
             throw new Error('알수 없는 액션입니다.');

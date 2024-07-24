@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {productPrice} from "../reducers/reducer";
 
 interface VendingMachineProps {
     formattedTotalInserted: string;
@@ -11,7 +12,7 @@ const VendingMachine: React.FC<VendingMachineProps> = ({ formattedTotalInserted,
         <Container>
             <Screen type="text" value={formattedTotalInserted} readOnly />
             <Buttons>
-                {[300, 400, 500, 600, 700, 800, 900, 1000, 1100].map((price) => (
+                {productPrice.map((price) => (
                     <Button key={price} onClick={() => onPurchase(price)}>FE{price}</Button>
                 ))}
             </Buttons>
