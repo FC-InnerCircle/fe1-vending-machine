@@ -1,6 +1,6 @@
 export const addLog = (message) => {
   const logDisplay = document.getElementById('log');
-  const logEntry = document.createElement('div');
+  const logEntry = document.createElement('li');
   logEntry.textContent = message;
   logDisplay.appendChild(logEntry);
   scrollLogToBottom();
