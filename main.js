@@ -1,4 +1,6 @@
+import './styles/reset.css';
 import './styles/style.css';
+
 import { createProducts, createProductButtons } from './src/services/productService.js';
 import { setupEventListeners, updateTotalAmount } from './src/services/uiService.js';
 import { INITIAL_TOTAL_AMOUNT, MIN_PRODUCT_PRICE } from './src/constants.js';
@@ -63,4 +65,6 @@ function appendLog(text) {
 
   const logScreen = document.querySelector('#logScreen');
   logScreen.append(newLog);
+
+  logScreen.scrollTop = logScreen.scrollHeight;
 }
