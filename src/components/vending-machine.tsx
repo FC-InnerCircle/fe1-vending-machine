@@ -22,6 +22,8 @@ const initialState: State = {
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "INSERT_MONEY": {
+      if (action.value <= 0) return state;
+
       const newTotalAmount = state.totalAmount + action.value;
       return {
         ...state,

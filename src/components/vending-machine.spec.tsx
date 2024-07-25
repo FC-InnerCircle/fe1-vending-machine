@@ -24,6 +24,21 @@ describe("VendingMachine", () => {
     expect(input.value).toBe("1000");
   });
 
+  it("자판기에 0원을 투입하면 로그가 표시되지 않는다", () => {
+    render(<VendingMachine />);
+
+    const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
+    const insertButton = screen.getByText("투입");
+
+    fireEvent.change(input, { target: { value: "0" } });
+    fireEvent.click(insertButton);
+
+    expect(screen.getByTestId("display")).toHaveTextContent("0");
+    expect(screen.getByTestId("logs")).not.toHaveTextContent(
+      "0원을 넣었습니다."
+    );
+  });
+
   it("자판기 컴포넌트가 금액을 입력받고 상태를 업데이트한다.", () => {
     render(<VendingMachine />);
 
