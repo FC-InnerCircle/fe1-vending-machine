@@ -118,19 +118,15 @@ window.addEventListener("load", () => {
 
   // product 가 active 될때
   store.on("active:product", (product) => {
-    // 1. 누른 상품은 active 상태가 된다.
-    product.classList.add("active");
-    // 2. 0원일때 상품을 클릭하는 경우 상품의 가격을 보여준다.
+    // 0원일때 상품을 클릭하는 경우 상품의 가격을 보여준다.
     if (store.getCoin() === 0) {
       els.balance.textContent = product.price.toLocaleString();
     }
   });
   // product 가 deactive 될때
   store.on("deactive:product", (product) => {
-    // 1. 기존에 active 되어있는 product를 deactive
-    product.classList.remove("active");
+    // 0원인 경우 다시 0으로 돌아온다.
     if (store.getCoin() === 0) {
-      // 2. 0원인 경우 다시 0으로 돌아온다.
       els.balance.textContent = "0";
     }
   });

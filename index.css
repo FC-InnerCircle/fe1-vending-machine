@@ -87,7 +87,7 @@ body {
   background-color: #3f97f5;
 }
 
-.machine .product-box .row > button.active {
+.machine .product-box .row > button:active {
   background-color: #165bb5;
 }
 
