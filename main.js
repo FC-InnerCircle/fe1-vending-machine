@@ -1,7 +1,7 @@
 import './styles/style.css'
 import { createProducts, createProductButtons } from './src/services/productService.js';
 import { setupEventListeners, updateTotalAmount } from './src/services/uiService.js';
-import { INITIAL_TOTAL_AMOUNT } from './src/constants.js'
+import { INITIAL_TOTAL_AMOUNT, MIN_PRODUCT_PRICE } from './src/constants.js'
 import { formatPrice } from './src/utils/formatUtils.js'
 
 
@@ -9,7 +9,7 @@ let globalTotalAmount = INITIAL_TOTAL_AMOUNT;
 let temporaryUpdateTimeout = null;
 
 
-const products = createProducts(9, 100, 300);
+const products = createProducts(9, 100, MIN_PRODUCT_PRICE);
 createProductButtons(products, handleProductPurchase);
 setupEventListeners(handleDeposit, handleRefund);
 
@@ -24,7 +24,13 @@ function handleProductPurchase(product) {
   if (globalTotalAmount >= product.price) {
     appendLog(`${product.name}을 구매했습니다.`);
     globalTotalAmount -= product.price;
-    updateTotalAmount(globalTotalAmount);
+
+    if (globalTotalAmount === 0 || globalTotalAmount >= MIN_PRODUCT_PRICE) {
+      updateTotalAmount(globalTotalAmount);
+      return;
+    }
+
+    handleRefund();
   } else {
     const prevTotalAmount = globalTotalAmount;
     updateTotalAmount(product.price);
