@@ -9,7 +9,9 @@ const AppMain: React.FC = () => {
     const { state, dispatch } = useContext(AppContext)!;
     const [message, setMessage] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState(0);
-
+    const handleLog = ((message:string) => {
+        setMessage(prev => [...prev, message]);
+    })
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/,/g, '');
         if (!isNaN(Number(value))) {
@@ -19,14 +21,14 @@ const AppMain: React.FC = () => {
     const handleInsertButton = () => {
         if (inputValue > 0) {
             dispatch({ type: 'INSERT', inputValue });
-            setMessage(prev => [...prev, `${inputValue.toLocaleString()}원을 투입했습니다.`]);
+            handleLog(`${inputValue.toLocaleString()}원을 투입했습니다.`);
             setInputValue(0);
         }
     };
     const handleRefundButton = () => {
         const { totalInserted } = state;
         if (totalInserted > 0) {
-            setMessage(prev => [...prev, `${totalInserted.toLocaleString()}원을 반환했습니다.`]);
+            handleLog(`${totalInserted.toLocaleString()}원을 반환했습니다.`);
             dispatch({ type: 'REFUND'});
         }
     };
@@ -34,11 +36,11 @@ const AppMain: React.FC = () => {
         const { totalInserted } = state;
         const remainingAmount = totalInserted - price;
         if (totalInserted >= price) {
-            setMessage(prev => [...prev, `FE${price}을 구매했습니다.`]);
+            handleLog(`FE${price}을 구매했습니다.`);
             dispatch({ type: 'PURCHASE', inputValue: price });
             dispatch({ type: 'DISPLAY', inputValue: remainingAmount });
             if (remainingAmount && remainingAmount < Math.min(...productPrice)) {
-                setMessage(prev => [...prev, `${formatCurrency(remainingAmount)}원을 반환합니다.`]);
+                handleLog(`${formatCurrency(remainingAmount)}원을 반환합니다.`);
                 dispatch({ type: 'REFUND' });
             }
         }else{
