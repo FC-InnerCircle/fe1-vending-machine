@@ -8,9 +8,9 @@ export default class Layout {
   }
 
   render(): HTMLElement {
-    const container = document.createElement("div");
+    const $layout = document.createElement("div");
 
-    container.innerHTML = `
+    $layout.innerHTML = `
     <div class="mx-auto max-w-2xl lg:max-w-7xl">
       <div class="grid grid-cols-1 sm:grid-cols-2">
         <div id="layout-left-slot" class="group"></div>
@@ -19,12 +19,12 @@ export default class Layout {
     </div>
     `;
 
-    const leftSlotContainer = container.querySelector("#layout-left-slot");
-    leftSlotContainer?.appendChild(this.leftSlot);
+    const $layoutLeftSlot = $layout.querySelector("#layout-left-slot");
+    $layoutLeftSlot?.appendChild(this.leftSlot);
 
-    const rightSlotContainer = container.querySelector("#layout-right-slot");
-    rightSlotContainer?.appendChild(this.rightSlot);
+    const $layoutRightSlot = $layout.querySelector("#layout-right-slot");
+    $layoutRightSlot?.appendChild(this.rightSlot);
 
-    return container;
+    return $layout;
   }
 }
