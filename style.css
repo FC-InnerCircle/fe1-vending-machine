@@ -1,11 +1,11 @@
 #Wrap{
-    max-width: 1024px;
+    max-width: 747px;
     margin: 0 auto;
     gap: 8px;
 }
 
 .balance_btns_warp{
-    width: 50%;
+    width: 100%;
     padding: 16px;
     background-color: skyblue;
 }
@@ -37,7 +37,7 @@
 }
 
 .controler_history_wrap{
-    width: 50%;
+    width: 100%;
     padding: 16px;
     background-color: yellowgreen;
 }
@@ -65,4 +65,13 @@
     background-color: white;
     overflow: auto;
     
+}
+@media screen and (min-width : 1024px) {
+    #Wrap{
+        display: flex;
+        max-width: 1024px;
+    }
+    .balance_btns_warp, .controler_history_wrap{
+        width: 50%;
+    }
 }
