@@ -30,6 +30,7 @@ body {
   flex-wrap: wrap;
   gap: 40px;
 }
+/* 공통영역 */
 
 .container {
   flex: 1;
@@ -39,18 +40,6 @@ body {
   @media (max-width: 720px) {
     padding: 20px;
   }
-}
-
-#products-container {
-  display: flex;
-  gap: 40px;
-  flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    rgba(227, 227, 227, 1) 0%,
-    rgb(227, 229, 230) 65%,
-    rgb(211, 212, 212) 100%
-  );
 }
 
 .input-wrapper {
@@ -76,6 +65,20 @@ body {
   letter-spacing: 5px;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   color: #29d8ff;
+}
+
+/* products 영역 */
+
+#products-container {
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  background: linear-gradient(
+    90deg,
+    rgba(227, 227, 227, 1) 0%,
+    rgb(227, 229, 230) 65%,
+    rgb(211, 212, 212) 100%
+  );
 }
 
 #products-container #current-amount-input {
@@ -122,6 +125,8 @@ body {
   }
 }
 
+/* 컨트롤러 영역 */
+
 #controls {
   display: flex;
   flex-direction: column;
@@ -147,7 +152,7 @@ body {
   border-radius: 50%;
   width: 80px;
   height: 80px;
-  font-size: 1.5em;
+  font-size: 24px;
   color: #fff;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s, box-shadow 0.3s;

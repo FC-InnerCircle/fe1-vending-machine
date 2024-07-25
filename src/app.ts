@@ -98,9 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (returnButton)
       returnButton.addEventListener("click", handleReturnButton);
     if (productContainer) {
-      itemButtons.forEach((button) => {
-        productContainer.appendChild(button.render());
-      });
+      itemButtons.forEach((button) =>
+        productContainer.appendChild(button.render())
+      );
 
       //이벤트 위임
       productContainer.addEventListener("click", handleClickItem);
