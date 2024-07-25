@@ -15,11 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeItems();
   
   moneyInput.addEventListener('input', function() {
-    this.value = this.value.replace(/[^0-9]/g, '');
-  
-    if (parseInt(this.value, 10) > MAX_INPUT_AMOUNT) {
-      this.value = MAX_INPUT_AMOUNT;
-    }
+  // 숫자가 아닌 문자 제거
+  this.value = this.value.replace(/[^0-9]/g, '');
+
+  // 입력값이 0 이하인 경우 무시
+  if (parseInt(this.value, 10) <= 0) {
+    this.value = '';
+  } else if (parseInt(this.value, 10) > MAX_INPUT_AMOUNT) {
+    // 최대 값 초과 시 최대 값으로 설정
+    this.value = MAX_INPUT_AMOUNT;
+  }
   });
 
   moneyInput.addEventListener('keypress', (event) => {
