@@ -55,28 +55,35 @@ export function VendingMachine() {
   };
 
   return (
-    <div>
-      <VendingMachineControlPanel
-        value={value}
-        onChangeNumber={onChangeNumber}
-        onInsert={onInsert}
-        onReturn={onReturn}
-      />
-      <VendingMachineLogs logs={state.logs} />
-      <VendingMachineDisplayPanel displayText={displayScreen} />
-
+    <div
+      className="flex flex-col justify-center items-center gap-4 p-4  md:flex-row-reverse
+    "
+    >
       <div>
-        {PRICE_LIST.map((price) => (
-          <VendingMachineProduct
-            key={`FE${price}`}
-            onClick={() => onPurchase(price)}
-            onMouseDown={() => handleMouseDown(price)}
-            onMouseUp={handleMouseUp}
-            data-testid="product"
-            data-price={price}
-            price={price}
-          />
-        ))}
+        <VendingMachineControlPanel
+          value={value}
+          onChangeNumber={onChangeNumber}
+          onInsert={onInsert}
+          onReturn={onReturn}
+        />
+        <VendingMachineLogs logs={state.logs} />
+      </div>
+      <div>
+        <VendingMachineDisplayPanel displayText={displayScreen} />
+
+        <div className="grid grid-cols-3 gap-2">
+          {PRICE_LIST.map((price) => (
+            <VendingMachineProduct
+              key={`FE${price}`}
+              onClick={() => onPurchase(price)}
+              onMouseDown={() => handleMouseDown(price)}
+              onMouseUp={handleMouseUp}
+              data-testid="product"
+              data-price={price}
+              price={price}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
