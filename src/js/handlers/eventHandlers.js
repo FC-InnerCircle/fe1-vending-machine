@@ -1,4 +1,4 @@
-import { returnMoney, insertMoney, buyItem } from './util.js';
+import { returnMoney, insertMoney, buyItem } from '../utils/util.js';
 
 export const handleReturnButtonClick = (
   event,
