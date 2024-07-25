@@ -1,5 +1,15 @@
 import './style/main.css';
 document.addEventListener("DOMContentLoaded", () => {
+    const buttonValues = [300, 400, 500, 600, 700, 800, 900, 1000, 1100];
+    const buttonsContainer = document.querySelector('.buttons');
+
+    buttonValues.forEach(value => {
+        const button = document.createElement('button');
+        button.className = 'button';
+        button.value = String(value); // 숫자를 문자열로 변환하여 할당
+        button.textContent = `FE${value}`;
+        buttonsContainer.appendChild(button);
+    });
     const inputDisplay = document.querySelector(".input-display");
     const messageBox = document.querySelector(".message-box");
     const buttons = document.querySelectorAll(".button");
