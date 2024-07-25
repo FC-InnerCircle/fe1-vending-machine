@@ -12,8 +12,10 @@ export const initializeBalance = (displayElement) => {
 export const getBalance = () => balance;
 
 export const setBalance = (newBalance) => {
-  balance = newBalance;
-  updateBalance();
+  if (isValidBalance(newBalance)) {
+    balance = newBalance;
+    updateBalance();
+  }
 };
 
 export const updateBalance = () => {
@@ -23,14 +25,22 @@ export const updateBalance = () => {
 };
 
 export const insertMoney = (amount) => {
-  balance += amount;
-  updateBalance();
-  addLog(`${amount.toLocaleString()}원을 투입했습니다.`);
+  const moneyInput = document.getElementById('money-input');
+  if (isValidAmount(amount)) {
+    balance += amount;
+    updateBalance();
+    addLog(`${amount.toLocaleString()}원을 투입했습니다.`);
+    moneyInput.value = '';
+  } else {
+    addLog('유효하지 않은 금액입니다.');
+  }
 };
 
 export const decreaseBalance = (amount) => {
-  balance -= amount;
-  updateBalance();
+  if (isValidAmount(amount) && balance >= amount) {
+    balance -= amount;
+    updateBalance();
+  }
 };
 
 export const returnMoney = () => {
@@ -40,4 +50,12 @@ export const returnMoney = () => {
     updateBalance();
     saveToLocalStorage();
   }
+};
+
+const isValidBalance = (amount) => {
+  return typeof amount === 'number' && amount >= 0 && amount % 1 === 0;
+};
+
+const isValidAmount = (amount) => {
+  return typeof amount === 'number' && amount > 0 && amount % 1 === 0;
 };
