@@ -19,7 +19,7 @@ export function createProductButtons(products, onPurchase) {
   products.forEach((product) => {
     const button = document.createElement('button');
     button.className = 'product-button';
-    button.innerHTML = `${product.name}<br>${formatPrice(product.price)}원`;
+    button.innerHTML = `${product.name}`;
 
     button.addEventListener('click', () => onPurchase(product));
 

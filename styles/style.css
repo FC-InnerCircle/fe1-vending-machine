@@ -63,25 +63,6 @@ h1 {
   color: #888;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -90,13 +71,11 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 #app {
   display: flex;
+  gap: 10px;
 }
 
 #vendingMachine {
@@ -107,9 +86,44 @@ button:focus-visible {
 
 #totalAmountDisplay {
   display: flex;
-  height: 30px;
+  height: 40px;
   align-items: center;
   justify-content: center;
+  border: 1px solid black;
+}
+
+#logContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+}
+
+#logScreen {
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+#logScreen div {
+  margin-bottom: 5px;
+}
+
+#inputContainer {
+  display: flex;
+  gap: 10px;
+}
+
+#inputAmount {
+  height: 40px;
+  border: 1px solid black;
+  padding: 0;
+}
+
+#depositButton #refundButton {
+  border: 1px solid black;
 }
 
 .product-grid {
@@ -119,6 +133,7 @@ button:focus-visible {
 }
 
 .product-button {
+  height: 50px;
   padding: 10px;
   text-align: center;
   background-color: lightblue;
@@ -135,4 +150,8 @@ button:focus-visible {
 .product-button:active {
   background-color: blue;
   color: white;
+}
+
+.product-button:checked {
+  outline: none;
 }
