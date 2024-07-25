@@ -15,7 +15,7 @@ interface PurchaseLog {
   productName: string;
 }
 
-type Log = InsertLog | ReturnLog | PurchaseLog;
+export type Log = InsertLog | ReturnLog | PurchaseLog;
 
 export interface VendingMachineState {
   totalCost: number;
