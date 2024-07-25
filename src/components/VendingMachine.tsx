@@ -4,16 +4,17 @@ import {productPrice} from "../reducers/reducer";
 
 interface VendingMachineProps {
     formattedTotalInserted: string;
-    onPurchase: (price: number) => void;
+    onMouseUpPurchase: (price: number) => void;
+    onMouseDownPurchase: (price: number) => void;
 }
 
-const VendingMachine: React.FC<VendingMachineProps> = ({ formattedTotalInserted, onPurchase }) => {
+const VendingMachine: React.FC<VendingMachineProps> = ({ formattedTotalInserted, onMouseUpPurchase, onMouseDownPurchase }) => {
     return (
         <Container>
             <Screen type="text" value={formattedTotalInserted} readOnly />
             <Buttons>
                 {productPrice.map((price) => (
-                    <Button key={price} onClick={() => onPurchase(price)}>FE{price}</Button>
+                    <Button key={price} onMouseUp={() => onMouseUpPurchase(price)} onMouseDown={() => onMouseDownPurchase(price)} >FE{price}</Button>
                 ))}
             </Buttons>
         </Container>

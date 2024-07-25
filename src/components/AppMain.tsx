@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, {useContext, useState} from 'react';
 import styled from 'styled-components';
 import VendingMachine from './VendingMachine';
 import Controls from './Controls';
@@ -34,26 +34,34 @@ const AppMain: React.FC = () => {
             dispatch({ type: 'REFUND'});
         }
     };
-    const handlePurchaseButton = (price: number) => {
+    const handleOnMouseUpPurchase = (price: number) => {
         const { totalInserted } = state;
         const remainingAmount = totalInserted - price;
-
         if (totalInserted >= price) {
             setMessage(prev => [...prev, `FE${price}을 구매했습니다.`]);
             dispatch({ type: 'PURCHASE', inputValue: price });
-
-            if (remainingAmount > 0 && remainingAmount < Math.min(...productPrice)) {
+            dispatch({ type: 'DISPLAY', inputValue: remainingAmount });
+            if (remainingAmount && remainingAmount < Math.min(...productPrice)) {
                 setMessage(prev => [...prev, `${formatCurrency(remainingAmount)}원을 반환합니다.`]);
                 dispatch({ type: 'REFUND' });
             }
+        }else{
+            dispatch({ type: 'DISPLAY', inputValue: totalInserted });
+        }
+    };
+    const handleOnMouseDownPurchase = (price: number) => {
+        const { totalInserted } = state;
+        if (totalInserted < price) {
+            dispatch({ type: 'DISPLAY', inputValue: price });
         }
     };
 
     return (
         <AppContainer>
             <VendingMachine
-                formattedTotalInserted={formatCurrency(state.totalInserted)}
-                onPurchase={handlePurchaseButton}
+                formattedTotalInserted={formatCurrency(state.displayValue)}
+                onMouseUpPurchase={handleOnMouseUpPurchase}
+                onMouseDownPurchase={handleOnMouseDownPurchase}
             />
             <Controls
                 inputValue={inputValue}
