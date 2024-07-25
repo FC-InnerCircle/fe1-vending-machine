@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {formatCurrency} from "../reducers/reducer";
 
@@ -11,6 +11,14 @@ interface ControlsProps {
 }
 
 const Controls: React.FC<ControlsProps> = ({ inputValue, message, onInputChange, onInsertButton, onRefundButton }) => {
+
+    const messageBoxRef = useRef<HTMLTextAreaElement>(null);
+    useEffect(() => {
+        if (messageBoxRef.current) {
+            messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+        }
+    }, [message]);
+
     return (
         <Container>
             <ControlDisplay>
@@ -25,7 +33,7 @@ const Controls: React.FC<ControlsProps> = ({ inputValue, message, onInputChange,
                 <ControlButton type="button" onClick={onInsertButton}>투입</ControlButton>
                 <ControlButton type="button" onClick={onRefundButton}>반환</ControlButton>
             </ControlDisplay>
-            <MessageBox readOnly value={message.join('\n')} />
+            <MessageBox readOnly ref={messageBoxRef} value={message.join('\n')} />
         </Container>
     );
 };
