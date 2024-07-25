@@ -1,5 +1,3 @@
-import { formatPrice } from '../utils/formatUtils.js';
-
 export function createProducts(count, increment, startPrice) {
   return Array.from({ length: count }, (_, index) => {
     const price = startPrice + index * increment;
