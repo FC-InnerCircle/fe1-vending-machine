@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,9 +14,9 @@
           class="flex flex-col gap-2 border border-black box-border p-8 rounded"
         >
           <input
-            id="balance"
             type="text"
-            class="p-12 border border-gray-300"
+            class="balance p-12 border border-gray-300"
+            value="0"
             readonly
           />
 
@@ -34,9 +34,10 @@
         >
           <div class="flex gap-2">
             <input
-              id="user-balance"
               type="number"
-              class="border border-gray-300"
+              min="0"
+              value="0"
+              class="user-insert-coin border border-gray-300"
             />
             <div class="calc-btn-group flex gap-2">
               <button
@@ -52,14 +53,10 @@
             </div>
           </div>
 
-          <div class="overflow-y-auto box-border p-2 bg-red-500">
-            <ul class="log">
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-            </ul>
+          <div
+            class="log-container h-[360px] overflow-y-auto box-border p-2 bg-red-500"
+          >
+            <ul class="log"></ul>
           </div>
         </div>
       </section>
