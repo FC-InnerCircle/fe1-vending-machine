@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/main.css">
+    <script src="index.js" defer></script>
+    <title>Vending Machine</title>
+</head>
+<body>
+<div class="container">
+    <div class="machine">
+        <input type="text" id="screen" value="0" min="0" readonly>
+        <div class="buttons"></div>
+    </div>
+    <div class="controls">
+        <form class="controls-header">
+            <input id="money" type="text" class="input-display" value="" placeholder="자판기에 돈을 투입해 주세요">
+            <button id="insert" type="button" class="control-button">투입</button>
+            <button id="refund" type="button" class="control-button">반환</button>
+        </form>
+        <textarea class="message-box" readonly></textarea>
+    </div>
+</div>
+</body>
+</html>

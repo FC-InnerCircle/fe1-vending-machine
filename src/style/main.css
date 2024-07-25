@@ -1,0 +1,115 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 90%;
+  height: 60%;
+}
+
+.machine, .controls {
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.machine {
+  border: 2px solid black;
+  width: 60%;
+}
+
+.controls {
+  width: 40%;
+}
+
+.machine #screen, .controls .controls-header .input-display {
+  text-align: right;
+  font-size: 24px;
+  padding: 10px;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+.machine #screen {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.machine .buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.button, .controls .controls-header .control-button {
+  background-color: #87CEFA;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: 2px solid black;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.button:hover {
+  background-color: #00BFFF;
+}
+
+.button:active {
+  background-color: #1E90FF;
+}
+
+.controls .controls-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.controls .controls-header .input-display {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.controls .controls-header .control-button {
+  background-color: #D3D3D3;
+  padding: 10px 20px;
+  margin: 0 5px;
+}
+
+.controls .message-box {
+  border: 2px solid black;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+
+/* 화면이 1024px 이하일 때 레이아웃을 세로로 배치 */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .machine, .controls {
+    width: 100%;
+    height: auto;
+  }
+}
