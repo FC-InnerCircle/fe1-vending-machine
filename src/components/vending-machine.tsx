@@ -21,11 +21,13 @@ export function VendingMachine() {
   const onChangeNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const positiveNumber = value.replace(/[^0-9]/g, "");
-
     setValue(positiveNumber);
   };
 
   const onInsert = () => {
+    const amount = Number(value);
+    if (amount === 0) return;
+
     dispatch({ type: "INSERT_MONEY", value: Number(value) });
     setValue("");
   };
