@@ -6,6 +6,8 @@ import { formatPrice } from './src/utils/formatUtils.js'
 
 
 let globalTotalAmount = INITIAL_TOTAL_AMOUNT;
+let temporaryUpdateTimeout = null;
+
 
 const products = createProducts(9, 100, 300);
 createProductButtons(products, handleProductPurchase);
@@ -14,10 +16,23 @@ setupEventListeners(handleDeposit, handleRefund);
 updateTotalAmount(globalTotalAmount);
 
 function handleProductPurchase(product) {
+  if (temporaryUpdateTimeout !== null) {
+    clearTimeout(temporaryUpdateTimeout);
+    temporaryUpdateTimeout = null;
+  }
+
   if (globalTotalAmount >= product.price) {
     appendLog(`${product.name}을 구매했습니다.`);
     globalTotalAmount -= product.price;
     updateTotalAmount(globalTotalAmount);
+  } else {
+    const prevTotalAmount = globalTotalAmount;
+    updateTotalAmount(product.price);
+
+    temporaryUpdateTimeout = setTimeout(() => {
+      updateTotalAmount(prevTotalAmount);
+      temporaryUpdateTimeout = null;
+    }, 500);
   }
 }
 
