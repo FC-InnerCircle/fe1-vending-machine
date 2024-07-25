@@ -1,4 +1,10 @@
-import { ChangeEvent, useReducer, useState } from "react";
+import {
+  ChangeEvent,
+  useLayoutEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import {
   initialVendingMachineState,
   vendingMachineReducer,
@@ -17,6 +23,8 @@ export function VendingMachine() {
   );
   const [value, setValue] = useState<string>("");
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
+  const logsEndRef = useRef<HTMLDivElement>(null);
+
   const displayScreen =
     currentPrice !== null && currentPrice > state.totalAmount
       ? currentPrice.toLocaleString()
@@ -54,6 +62,12 @@ export function VendingMachine() {
     setCurrentPrice(null);
   };
 
+  useLayoutEffect(() => {
+    if (logsEndRef.current) {
+      logsEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [state.logs]);
+
   return (
     <div
       className="flex flex-col justify-center items-center gap-4 p-4  md:flex-row-reverse
@@ -66,7 +80,10 @@ export function VendingMachine() {
           onInsert={onInsert}
           onReturn={onReturn}
         />
-        <VendingMachineLogs logs={state.logs} />
+        <VendingMachineLogs
+          logs={state.logs}
+          logEndRef={logsEndRef as React.RefObject<HTMLDivElement>}
+        />
       </div>
       <div>
         <VendingMachineDisplayPanel displayText={displayScreen} />

@@ -1,8 +1,14 @@
+import { RefObject, useEffect, useRef } from "react";
+
 interface VendingMachineLogsProps {
   logs: string[];
+  logEndRef: RefObject<HTMLDivElement>;
 }
 
-export function VendingMachineLogs({ logs }: VendingMachineLogsProps) {
+export function VendingMachineLogs({
+  logs,
+  logEndRef,
+}: VendingMachineLogsProps) {
   return (
     <div
       data-testid="logs"
@@ -11,6 +17,8 @@ export function VendingMachineLogs({ logs }: VendingMachineLogsProps) {
       {logs.map((log, index) => (
         <div key={log + index}>{log}</div>
       ))}
+
+      <div ref={logEndRef}></div>
     </div>
   );
 }
