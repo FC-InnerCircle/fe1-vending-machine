@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "css": "npx tailwindcss -i ./src/style/input.css -o ./src/style/output.css --watch"
+    "css": "npx tailwindcss -i ./src/style/input.css -o ./src/style/output.css --watch",
+    "dev": "vite"
   },
   "repository": "https://github.com/jangwonyoon/fe1-vending-machine.git",
   "author": "jangwon <yoonjangwon94@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "tailwindcss": "^3.4.6"
+    "tailwindcss": "^3.4.6",
+    "vite": "^5.3.5"
   }
 }
