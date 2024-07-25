@@ -3,6 +3,8 @@ import {
     inputDisplayKeypressListener,
     insertButtonListener,
     refundButtonListener,
+    productButtonMouseDownListener,
+    productButtonMouseUpListener,
     productButtonListener
 } from './eventHandlers.js';
 
@@ -33,5 +35,8 @@ export const setupEventListeners = () => {
     inputDisplay.addEventListener("keypress", inputDisplayKeypressListener(insertButton));
     insertButton.addEventListener("click", insertButtonListener(inputDisplay, messageBox, screenInput, totalInserted));
     refundButton.addEventListener("click", refundButtonListener(inputDisplay, messageBox, screenInput, totalInserted));
-    buttons.forEach(button => button.addEventListener("click", productButtonListener(button, screenInput, messageBox, totalInserted, productMinimum)));
-};
+    buttons.forEach(button => {
+        button.addEventListener("mousedown", productButtonMouseDownListener(button, screenInput, totalInserted));
+        button.addEventListener("mouseup", productButtonMouseUpListener(screenInput, totalInserted));
+        button.addEventListener("click", productButtonListener(button, screenInput, messageBox, totalInserted, productMinimum));
+    });};

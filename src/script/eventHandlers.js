@@ -32,8 +32,16 @@ export const refundButtonListener = (inputDisplay, messageBox, screenInput, tota
         totalInserted.value = 0;
         updateScreen(screenInput, totalInserted.value);
         inputDisplay.value = "";
-    } else {
-        updateMessageBox(messageBox, "반환할 금액이 없습니다.");
+    }
+};
+
+export const productButtonMouseUpListener = (screenInput, totalInserted) => () => {
+    updateScreen(screenInput, totalInserted.value);
+};
+
+export const productButtonMouseDownListener = (button, screenInput) => () => {
+    if(Number(screenInput.value) < button.value){
+        updateScreen(screenInput, button.value);
     }
 };
 
