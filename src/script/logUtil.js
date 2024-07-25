@@ -7,4 +7,5 @@ export const updateScreen = (screenInput, totalInserted) => {
 export const updateMessageBox = (messageBox, text, amount) => {
     const newMessage = amount ? `${formatCurrency(amount)}원을 ${text}` : `${text}`;
     messageBox.value += messageBox.value ? `\n${newMessage}` : newMessage;
+    messageBox.scrollTop = messageBox.scrollHeight;
 };
