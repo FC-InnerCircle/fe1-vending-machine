@@ -1,5 +1,4 @@
-import { formatPrice } from '../utils/utils.js';
-import { appendLog, updateTotalAmount } from './uiService.js';
+import { formatPrice } from '../utils/formatUtils.js';
 
 export function createProducts(count, increment, startPrice) {
   return Array.from({ length: count }, (_, index) => {
@@ -11,7 +10,7 @@ export function createProducts(count, increment, startPrice) {
   });
 }
 
-export function createProductButtons(products) {
+export function createProductButtons(products, onPurchase) {
   const productContainer = document.getElementById('productContainer');
 
   const gridContainer = document.createElement('div');
@@ -22,20 +21,10 @@ export function createProductButtons(products) {
     button.className = 'product-button';
     button.innerHTML = `${product.name}<br>${formatPrice(product.price)}원`;
 
-    button.addEventListener('click', () => handleProductPurchase(product));
+    button.addEventListener('click', () => onPurchase(product));
 
     gridContainer.appendChild(button);
   });
 
   productContainer.appendChild(gridContainer);
-}
-
-function handleProductPurchase(product) {
-  const totalAmountElement = document.querySelector('#totalAmountDisplay');
-  const currentAmount = Number(totalAmountElement.innerText.replace(/,/g, ''));
-
-  if (currentAmount >= product.price) {
-    appendLog(`${product.name}을 구매했습니다.`);
-    updateTotalAmount(currentAmount - product.price);
-  }
 }
