@@ -1,11 +1,7 @@
-import { btnStyle, Items } from './contants.js';
+import { btnStyle } from './constants/contants.js';
 
-import {
-  handleReturnButtonClick,
-  handleInsertButtonClick,
-  handleOrderButtonClick,
-} from './eventHandlers.js';
-import { getViewElements, initView } from './view.js';
+import { getViewElements, initView } from './views/view.js';
+import { initializeEventHandlers } from './handlers/index.js';
 
 // 사용할 Elements 가져오기
 const {
@@ -21,36 +17,12 @@ const {
 // view 초기화
 initView(menuSection, btnStyle);
 
-// 이벤트 핸들러 연결
-insertBtn.addEventListener('click', (event) =>
-  handleInsertButtonClick(
-    event,
-    insertCoinView,
-    totalBalanceView,
-    transactionLog,
-    transactionLogContainer,
-  ),
+// 이벤트 핸들러 초기화
+initializeEventHandlers(
+  insertBtn,
+  returnBtn,
+  insertCoinView,
+  totalBalanceView,
+  transactionLog,
+  transactionLogContainer,
 );
-returnBtn.addEventListener('click', (event) =>
-  handleReturnButtonClick(
-    event,
-    totalBalanceView,
-    transactionLog,
-    transactionLogContainer,
-  ),
-);
-
-// 버튼 전체 order
-const orderBtns = document.querySelectorAll('.order-btn');
-
-orderBtns.forEach((btn) => {
-  btn.addEventListener('click', (event) =>
-    handleOrderButtonClick(
-      event,
-      Items,
-      totalBalanceView,
-      transactionLog,
-      transactionLogContainer,
-    ),
-  );
-});

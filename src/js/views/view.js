@@ -1,4 +1,4 @@
-import { Items } from './contants.js';
+import { Items } from '../constants/contants.js';
 
 export const initView = (menuSection, btnStyle) => {
   Items.forEach((item) => {
