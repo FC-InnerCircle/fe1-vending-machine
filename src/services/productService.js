@@ -10,7 +10,7 @@ export function createProducts(count, increment, startPrice) {
   });
 }
 
-export function createProductButtons(products, onPurchase) {
+export function createProductButtons(products, onClick, onMouseDown, onMouseOut) {
   const productContainer = document.getElementById('productContainer');
 
   const gridContainer = document.createElement('div');
@@ -21,7 +21,10 @@ export function createProductButtons(products, onPurchase) {
     button.className = 'product-button';
     button.innerHTML = `${product.name}`;
 
-    button.addEventListener('click', () => onPurchase(product));
+    button.addEventListener('click', () => onClick(product));
+    button.addEventListener('mousedown', () => onMouseDown(product));
+    button.addEventListener('mouseup', onMouseOut);
+    button.addEventListener('mouseleave', onMouseOut);
 
     gridContainer.appendChild(button);
   });

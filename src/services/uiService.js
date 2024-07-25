@@ -1,6 +1,6 @@
 import { formatPrice } from '../utils/formatUtils.js';
 
-export function updateTotalAmount(amount) {
+export function updateTotalAmountDisplay(amount) {
   const totalAmountElement = document.querySelector('#totalAmountDisplay');
   totalAmountElement.innerText = formatPrice(amount);
 }

@@ -2,7 +2,7 @@ import './styles/reset.css';
 import './styles/style.css';
 
 import { createProducts, createProductButtons } from './src/services/productService.js';
-import { setupEventListeners, updateTotalAmount } from './src/services/uiService.js';
+import { setupEventListeners, updateTotalAmountDisplay } from './src/services/uiService.js';
 import { INITIAL_TOTAL_AMOUNT, MIN_PRODUCT_PRICE } from './src/constants.js';
 import { formatPrice } from './src/utils/formatUtils.js';
 
@@ -10,10 +10,15 @@ let globalTotalAmount = INITIAL_TOTAL_AMOUNT;
 let temporaryUpdateTimeout = null;
 
 const products = createProducts(9, 100, MIN_PRODUCT_PRICE);
-createProductButtons(products, handleProductPurchase);
+createProductButtons(
+  products,
+  handleProductPurchase,
+  handleProductMouseDown,
+  handleProductMouseOut
+);
 setupEventListeners(handleDeposit, handleRefund);
 
-updateTotalAmount(globalTotalAmount);
+updateTotalAmountDisplay(globalTotalAmount);
 
 function handleProductPurchase(product) {
   if (temporaryUpdateTimeout !== null) {
@@ -26,20 +31,30 @@ function handleProductPurchase(product) {
     globalTotalAmount -= product.price;
 
     if (globalTotalAmount === 0 || globalTotalAmount >= MIN_PRODUCT_PRICE) {
-      updateTotalAmount(globalTotalAmount);
+      updateTotalAmountDisplay(globalTotalAmount);
       return;
     }
 
     handleRefund();
   } else {
     const prevTotalAmount = globalTotalAmount;
-    updateTotalAmount(product.price);
+    updateTotalAmountDisplay(product.price);
 
     temporaryUpdateTimeout = setTimeout(() => {
-      updateTotalAmount(prevTotalAmount);
+      updateTotalAmountDisplay(prevTotalAmount);
       temporaryUpdateTimeout = null;
     }, 500);
   }
+}
+
+function handleProductMouseDown(product) {
+  if (globalTotalAmount < product.price) {
+    updateTotalAmountDisplay(product.price);
+  }
+}
+
+function handleProductMouseOut() {
+  updateTotalAmountDisplay(globalTotalAmount);
 }
 
 function handleDeposit(inputValue) {
@@ -49,14 +64,14 @@ function handleDeposit(inputValue) {
 
   appendLog(`${formatPrice(inputValue)}원을 투입했습니다.`);
   globalTotalAmount += inputValue;
-  updateTotalAmount(globalTotalAmount);
+  updateTotalAmountDisplay(globalTotalAmount);
 }
 
 function handleRefund() {
   const totalAmount = formatPrice(globalTotalAmount);
   appendLog(`${totalAmount}원을 반환합니다.`);
   globalTotalAmount = 0;
-  updateTotalAmount(globalTotalAmount);
+  updateTotalAmountDisplay(globalTotalAmount);
 }
 
 function appendLog(text) {
