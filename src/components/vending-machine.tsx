@@ -52,7 +52,7 @@ const reducer = (state: State, action: Action) => {
       const rest = state.totalAmount - price;
       const newLogs = [...state.logs, `FE${price}를 구매하였습니다.`];
 
-      if (rest < Math.min(...PRICE_LIST)) {
+      if (rest !== 0 && rest < Math.min(...PRICE_LIST)) {
         newLogs.push(`잔돈 ${rest.toLocaleString()}원을 반환합니다.`);
         return {
           ...state,

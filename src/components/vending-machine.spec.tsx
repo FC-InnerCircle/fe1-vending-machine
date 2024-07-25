@@ -91,6 +91,25 @@ describe("VendingMachine", () => {
     );
   });
 
+  it("상품을 구매하고 잔돈이 0원이 남는 경우 log를 출력하지 않는다.", () => {
+    render(<VendingMachine />);
+
+    const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
+    const insertButton = screen.getByRole("button", { name: /투입/i });
+
+    const itemButton = screen.getAllByTestId("product")[0] as HTMLButtonElement;
+    const price = parseInt(itemButton.dataset.price!, 10);
+
+    fireEvent.change(input, { target: { value: price.toString() } });
+    fireEvent.click(insertButton);
+    fireEvent.click(itemButton);
+
+    expect(screen.getByTestId("display")).toHaveTextContent("0");
+    expect(screen.getByTestId("logs")).not.toHaveTextContent(
+      `잔돈 0원을 반환합니다.`
+    );
+  });
+
   it("자판기 컴포넌트가 금액이 부족할 때 상품을 구매하지 않고, 아무것도 하지 않는다.", () => {
     render(<VendingMachine />);
 
