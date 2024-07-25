@@ -2,10 +2,10 @@ import { formatPrice } from '../utils/formatUtils.js';
 
 export function createProducts(count, increment, startPrice) {
   return Array.from({ length: count }, (_, index) => {
-    const price = startPrice + (index * increment);
+    const price = startPrice + index * increment;
     return {
       name: `FE${price}`,
-      price: price
+      price: price,
     };
   });
 }
@@ -16,7 +16,7 @@ export function createProductButtons(products, onPurchase) {
   const gridContainer = document.createElement('div');
   gridContainer.className = 'product-grid';
 
-  products.forEach(product => {
+  products.forEach((product) => {
     const button = document.createElement('button');
     button.className = 'product-button';
     button.innerHTML = `${product.name}<br>${formatPrice(product.price)}원`;

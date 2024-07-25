@@ -1,13 +1,11 @@
-import './styles/style.css'
+import './styles/style.css';
 import { createProducts, createProductButtons } from './src/services/productService.js';
 import { setupEventListeners, updateTotalAmount } from './src/services/uiService.js';
-import { INITIAL_TOTAL_AMOUNT, MIN_PRODUCT_PRICE } from './src/constants.js'
-import { formatPrice } from './src/utils/formatUtils.js'
-
+import { INITIAL_TOTAL_AMOUNT, MIN_PRODUCT_PRICE } from './src/constants.js';
+import { formatPrice } from './src/utils/formatUtils.js';
 
 let globalTotalAmount = INITIAL_TOTAL_AMOUNT;
 let temporaryUpdateTimeout = null;
-
 
 const products = createProducts(9, 100, MIN_PRODUCT_PRICE);
 createProductButtons(products, handleProductPurchase);
@@ -41,7 +39,6 @@ function handleProductPurchase(product) {
     }, 500);
   }
 }
-
 
 function handleDeposit(inputValue) {
   if (inputValue <= 0) {
