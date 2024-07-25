@@ -2,7 +2,7 @@ import {
   vendingMachineActions,
   vendingMachineStore,
 } from '../../stores/vendingMachine';
-
+import { VENDING_MACHINE_ITEMS } from '../vending-machine-products';
 class VendingMachineProduct extends HTMLElement {
   private shadow;
 
@@ -56,6 +56,13 @@ class VendingMachineProduct extends HTMLElement {
 
     if (totalCost >= Number(cost)) {
       vendingMachineActions.purchase(name, Number(cost));
+
+      if (
+        totalCost - Number(cost) <
+        Math.min(...VENDING_MACHINE_ITEMS.map((item) => item.cost))
+      ) {
+        vendingMachineActions.returnCost();
+      }
     }
   }
 

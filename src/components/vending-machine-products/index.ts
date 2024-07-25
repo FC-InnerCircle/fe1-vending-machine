@@ -1,4 +1,4 @@
-const VENDING_MACHINE_ITEMS = [
+export const VENDING_MACHINE_ITEMS = [
   { id: 0, name: 'FE300', cost: 300 },
   { id: 1, name: 'FE400', cost: 400 },
   { id: 2, name: 'FE500', cost: 500 },
