@@ -19,6 +19,7 @@
 
 
 .balance_btns_warp .btn_wrap{
+    display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
@@ -42,6 +43,7 @@
     background-color: yellowgreen;
 }
 .controler_history_wrap .controller{
+    display: grid;
     grid-template-columns: 3fr 1fr 1fr;
     gap: 8px;
     height: 80px;
