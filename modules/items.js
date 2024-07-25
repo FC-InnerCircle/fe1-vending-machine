@@ -34,11 +34,12 @@ export const initializeItems = () => {
 
 const purchaseItem = (price, label) => {
   const balance = getBalance();
+  const minPrice = 300;
   if (balance >= price) {
     decreaseBalance(price);
     updateBalance();
     addLog(`${label}을(를) 구입했습니다.`);
-    if (getBalance() < 300) {
+    if (getBalance() < minPrice) {
       addLog(`${getBalance().toLocaleString()}원을 반환했습니다.`);
       decreaseBalance(getBalance());
     }
