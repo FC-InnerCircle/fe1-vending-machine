@@ -6,8 +6,8 @@ describe("VendingMachine", () => {
     render(<VendingMachine />);
 
     expect(screen.getByPlaceholderText("금액 입력")).toBeInTheDocument();
-    expect(screen.getByText("투입")).toBeInTheDocument();
-    expect(screen.getByText("반환")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /투입/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /반환/i })).toBeInTheDocument();
 
     expect(screen.getAllByTestId("product")).toHaveLength(9);
     expect(screen.getByTestId("display")).toHaveTextContent("0");
@@ -24,11 +24,11 @@ describe("VendingMachine", () => {
     expect(input.value).toBe("1000");
   });
 
-  it("자판기에 0원을 투입하면 로그가 표시되지 않는다", () => {
+  it("자판기에 0원을 투입하면 투입처리가 되지 않는다", () => {
     render(<VendingMachine />);
 
     const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
-    const insertButton = screen.getByText("투입");
+    const insertButton = screen.getByRole("button", { name: /투입/i });
 
     fireEvent.change(input, { target: { value: "0" } });
     fireEvent.click(insertButton);
@@ -43,7 +43,7 @@ describe("VendingMachine", () => {
     render(<VendingMachine />);
 
     const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
-    const insertButton = screen.getByText("투입");
+    const insertButton = screen.getByRole("button", { name: /투입/i });
 
     fireEvent.change(input, { target: { value: "1000" } });
     fireEvent.click(insertButton);
@@ -58,8 +58,8 @@ describe("VendingMachine", () => {
     render(<VendingMachine />);
 
     const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
-    const insertButton = screen.getByText("투입");
-    const returnButton = screen.getByText("반환");
+    const insertButton = screen.getByRole("button", { name: /투입/i });
+    const returnButton = screen.getByRole("button", { name: /반환/i });
 
     fireEvent.change(input, { target: { value: "1000" } });
     fireEvent.click(insertButton);
@@ -75,7 +75,7 @@ describe("VendingMachine", () => {
     render(<VendingMachine />);
 
     const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
-    const insertButton = screen.getByText("투입");
+    const insertButton = screen.getByRole("button", { name: /투입/i });
 
     fireEvent.change(input, { target: { value: "1000" } });
     fireEvent.click(insertButton);
@@ -97,8 +97,7 @@ describe("VendingMachine", () => {
     const itemButton = screen.getAllByTestId("product")[0] as HTMLButtonElement;
     const price = parseInt(itemButton.dataset.price!, 10);
 
-    fireEvent.mouseDown(itemButton);
-    fireEvent.mouseUp(itemButton);
+    fireEvent.click(itemButton);
 
     expect(screen.getByTestId("display")).toHaveTextContent("0");
     expect(screen.getByTestId("logs")).not.toHaveTextContent(
@@ -110,7 +109,7 @@ describe("VendingMachine", () => {
     render(<VendingMachine />);
 
     const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
-    const insertButton = screen.getByText("투입");
+    const insertButton = screen.getByRole("button", { name: /투입/i });
 
     fireEvent.change(input, { target: { value: "500" } });
     fireEvent.click(insertButton);
@@ -129,7 +128,7 @@ describe("VendingMachine", () => {
     render(<VendingMachine />);
 
     const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
-    const insertButton = screen.getByText("투입");
+    const insertButton = screen.getByRole("button", { name: /투입/i });
 
     fireEvent.change(input, { target: { value: "1000" } });
     fireEvent.click(insertButton);
@@ -137,11 +136,8 @@ describe("VendingMachine", () => {
     const itemButton = screen.getAllByTestId("product")[0] as HTMLButtonElement;
     const price = parseInt(itemButton.dataset.price!, 10);
 
-    fireEvent.mouseDown(itemButton);
-    fireEvent.mouseUp(itemButton);
-
-    fireEvent.mouseDown(itemButton);
-    fireEvent.mouseUp(itemButton);
+    fireEvent.click(itemButton);
+    fireEvent.click(itemButton); // 두 번 클릭하여 잔액이 0 이하로 되는 경우
 
     expect(screen.getByTestId("display")).toHaveTextContent("0");
     expect(screen.getByTestId("logs")).not.toHaveTextContent(
