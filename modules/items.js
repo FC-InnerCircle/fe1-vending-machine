@@ -1,7 +1,10 @@
 import { addLog } from './log.js';
 import { saveToLocalStorage } from './storage.js';
-import { getBalance, updateBalance, decreaseBalance } from './balance.js';
+import { getBalance, setBalance, updateBalance, decreaseBalance } from './balance.js';
 import { showTemporaryMessage } from './messages.js';
+
+const MIN_PRICE = 300;
+const TEMP_DISPLAY_TIME = 800;
 
 export const initializeItems = () => {
   const items = [
@@ -27,26 +30,52 @@ export const initializeItems = () => {
     button.className = 'p-4 bg-blue-200 rounded item hover:bg-blue-300 active:bg-blue-400';
     button.textContent = item.label;
     button.dataset.price = item.price;
+
     button.addEventListener('click', () => purchaseItem(item.price, item.label));
     itemsContainer.appendChild(button);
   });
 };
 
-const purchaseItem = (price, label) => {
+export const purchaseItem = (price, label) => {
   const balance = getBalance();
-  const minPrice = 300;
+
   if (balance >= price) {
-    decreaseBalance(price);
-    updateBalance();
-    addLog(`${label}을(를) 구입했습니다.`);
-    if (getBalance() < minPrice) {
-      addLog(`${getBalance().toLocaleString()}원을 반환했습니다.`);
-      decreaseBalance(getBalance());
-    }
-    saveToLocalStorage();
+    completePurchase(price, label);
   } else {
-    const message = '잔액 부족';
-    addLog(message);
-    showTemporaryMessage(label, message);
+    displayTemporaryPrice(price);
+    notifyInsufficientBalance(label);
   }
+};
+
+const completePurchase = (price, label) => {
+  decreaseBalance(price);
+  updateBalance();
+  addLog(`${label}을(를) 구입했습니다.`);
+
+  if (getBalance() < MIN_PRICE) {
+    returnRemainingBalance();
+  }
+
+  saveToLocalStorage();
+};
+
+const displayTemporaryPrice = (price) => {
+  const currentBalance = getBalance();
+  setBalance(price);
+
+  setTimeout(() => {
+    setBalance(currentBalance);
+    updateBalance();
+  }, TEMP_DISPLAY_TIME);
+};
+
+const notifyInsufficientBalance = (label) => {
+  const message = '잔액 부족';
+  addLog(message);
+  showTemporaryMessage(label, message);
+};
+
+const returnRemainingBalance = () => {
+  addLog(`${getBalance().toLocaleString()}원을 반환했습니다.`);
+  decreaseBalance(getBalance());
 };
