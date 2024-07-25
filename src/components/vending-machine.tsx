@@ -3,6 +3,10 @@ import {
   initialVendingMachineState,
   vendingMachineReducer,
 } from "./vending-machine.reducer";
+import { VendingMachineLogs } from "./vending-machine-logs";
+import { VendingMachineControlPanel } from "./vending-machine-controll-panel";
+import { VendingMachineDisplayPanel } from "./vending-machine-display-panel";
+import { VendingMachineProduct } from "./vending-machine-product";
 
 export const PRICE_LIST = [300, 400, 500, 600, 700, 800, 900, 1000, 1100];
 
@@ -52,38 +56,26 @@ export function VendingMachine() {
 
   return (
     <div>
-      <div>
-        <input
-          type="number"
-          name="금액"
-          placeholder="금액 입력"
-          value={value}
-          onChange={onChangeNumber}
-        />
-        <button onClick={onInsert}>투입</button>
-        <button onClick={onReturn}>반환</button>
-      </div>
-      <div data-testid="logs" className="logs">
-        {state.logs.map((log, index) => (
-          <div key={index + log}>{log}</div>
-        ))}
-      </div>
+      <VendingMachineControlPanel
+        value={value}
+        onChangeNumber={onChangeNumber}
+        onInsert={onInsert}
+        onReturn={onReturn}
+      />
+      <VendingMachineLogs logs={state.logs} />
+      <VendingMachineDisplayPanel displayText={displayScreen} />
 
-      <div data-testid="display" className="display">
-        {displayScreen}
-      </div>
       <div>
         {PRICE_LIST.map((price) => (
-          <button
-            key={price}
+          <VendingMachineProduct
+            key={`FE${price}`}
             onClick={() => onPurchase(price)}
             onMouseDown={() => handleMouseDown(price)}
             onMouseUp={handleMouseUp}
             data-testid="product"
             data-price={price}
-          >
-            {`FE${price}`}
-          </button>
+            price={price}
+          />
         ))}
       </div>
     </div>
