@@ -1,3 +1,5 @@
+import { formatPrice } from '../utils/utils.js';
+
 export function appendLog(text) {
   const newLog = document.createElement('div');
   newLog.innerText = text;
@@ -6,21 +8,27 @@ export function appendLog(text) {
   logScreen.append(newLog);
 }
 
+export function updateTotalAmount(amount) {
+  const totalAmountElement = document.querySelector('#totalAmountDisplay');
+  totalAmountElement.innerText = formatPrice(amount);
+}
+
 function handleDeposit() {
   const inputAmountElement = document.querySelector('#inputAmount');
   const totalAmountElement = document.querySelector('#totalAmountDisplay');
-  const inputValue = inputAmountElement.value;
-  appendLog(`${inputValue}원을 투입했습니다.`);
-  const totalAmount = Number(totalAmountElement.innerText.replace(/,/g, '')) + Number(inputValue);
+  const inputValue = Number(inputAmountElement.value);
+
+  appendLog(`${formatPrice(inputValue)}원을 투입했습니다.`);
+  const currentAmount = Number(totalAmountElement.innerText.replace(/,/g, ''));
+  updateTotalAmount(currentAmount + inputValue);
   inputAmountElement.value = '';
-  totalAmountElement.innerText = totalAmount.toLocaleString('ko-KR');
 }
 
 function handleRefund() {
   const totalAmountElement = document.querySelector('#totalAmountDisplay');
   const totalAmount = totalAmountElement.innerText;
   appendLog(`${totalAmount}원을 반환합니다.`);
-  totalAmountElement.innerText = '0';
+  updateTotalAmount(0);
 }
 
 export function setupEventListeners() {
