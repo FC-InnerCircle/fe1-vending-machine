@@ -2,6 +2,16 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { VendingMachine } from "./vending-machine";
 
 describe("VendingMachine", () => {
+  const scrollIntoViewMock = vitest.fn();
+
+  beforeAll(() => {
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+  });
+
+  beforeEach(() => {
+    scrollIntoViewMock.mockClear();
+  });
+
   it("자판기 컴포넌트가 렌더링되고 초기 상태를 보여준다.", () => {
     render(<VendingMachine />);
 
