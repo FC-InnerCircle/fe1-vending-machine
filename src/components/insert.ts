@@ -1,25 +1,21 @@
 const INIT_VALUE = "";
 
+const FUNCTION_KEYS = [
+  "Backspace",
+  "Delete",
+  "ArrowLeft",
+  "ArrowRight",
+  "Tab",
+  "Escape",
+  "Enter",
+];
 export class InsertAmountInput {
   private inputElement: HTMLInputElement;
   private initialValue: string;
   private preventNonNumericInput(event: KeyboardEvent) {
     const key = event.key;
-    if (
-      key === "Backspace" ||
-      key === "Delete" ||
-      key === "ArrowLeft" ||
-      key === "ArrowRight" ||
-      key === "Tab" ||
-      key === "Escape" ||
-      key === "Enter"
-    )
-      return;
-
-    // Prevent non-numeric input
-    if (key < "0" || key > "9") {
-      event.preventDefault();
-    }
+    if (FUNCTION_KEYS.some((funcKey) => funcKey === key)) return;
+    if (key < "0" || key > "9") event.preventDefault();
   }
   constructor() {
     this.inputElement = document.getElementById(
