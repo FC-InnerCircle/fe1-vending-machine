@@ -144,4 +144,23 @@ describe("VendingMachine", () => {
       `FE${price}를 구매했습니다.`
     );
   });
+
+  it("상품 버튼을 눌렀을 때 투입된 금액이 상품 가격보다 적으면 버튼을 누르는 동안 금액 표시창에 상품의 가격이 표시되고, 버튼을 놓으면 투입된 금액이 표시된다.", () => {
+    render(<VendingMachine />);
+
+    const input = screen.getByPlaceholderText("금액 입력") as HTMLInputElement;
+    const insertButton = screen.getByRole("button", { name: /투입/i });
+
+    fireEvent.change(input, { target: { value: "200" } });
+    fireEvent.click(insertButton);
+
+    const itemButton = screen.getAllByTestId("product")[0] as HTMLButtonElement;
+    const price = parseInt(itemButton.dataset.price!, 10);
+
+    fireEvent.mouseDown(itemButton);
+    expect(screen.getByTestId("display")).toHaveTextContent(`${price}`);
+
+    fireEvent.mouseUp(itemButton);
+    expect(screen.getByTestId("display")).toHaveTextContent("200");
+  });
 });

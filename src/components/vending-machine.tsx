@@ -25,6 +25,17 @@ const reducer = (state: State, action: Action) => {
       if (action.value <= 0) return state;
 
       const newTotalAmount = state.totalAmount + action.value;
+
+      if (newTotalAmount > Number.MAX_SAFE_INTEGER) {
+        return {
+          ...state,
+          logs: [
+            ...state.logs,
+            `입력 금액이 너무 큽니다. 현재 총 금액: ${state.totalAmount.toLocaleString()}원`,
+          ],
+        };
+      }
+
       return {
         ...state,
         totalAmount: newTotalAmount,
@@ -75,10 +86,16 @@ const reducer = (state: State, action: Action) => {
 export function VendingMachine() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [value, setValue] = useState<string>("");
+  const [currentPrice, setCurrentPrice] = useState<number | null>(null);
+  const displayScreen =
+    currentPrice !== null && currentPrice > state.totalAmount
+      ? currentPrice.toLocaleString()
+      : state.totalAmount.toLocaleString();
 
   const onChangeNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const positiveNumber = value.replace(/[^0-9]/g, "");
+
     setValue(positiveNumber);
   };
 
@@ -93,6 +110,16 @@ export function VendingMachine() {
 
   const onReturn = () => {
     dispatch({ type: "RETURN_MONEY" });
+  };
+
+  const handleMouseDown = (price: number) => {
+    if (state.totalAmount < price) {
+      setCurrentPrice(price);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setCurrentPrice(null);
   };
 
   return (
@@ -115,13 +142,15 @@ export function VendingMachine() {
       </div>
 
       <div data-testid="display" className="display">
-        {state.totalAmount.toLocaleString()}
+        {displayScreen}
       </div>
       <div>
         {PRICE_LIST.map((price) => (
           <button
             key={price}
             onClick={() => onPurchase(price)}
+            onMouseDown={() => handleMouseDown(price)}
+            onMouseUp={handleMouseUp}
             data-testid="product"
             data-price={price}
           >
