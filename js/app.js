@@ -1,3 +1,4 @@
+const CHEAPEST_PRICE = 300;
 let amount = 0;
 
 function insertMoney() {
@@ -32,7 +33,7 @@ function purchaseItem(price) {
         inputAmountDisplay.value = formatAmount(amount);
         logVendingMachine(price, "purchased");
 
-        if(amount < 300) {
+        if(amount < CHEAPEST_PRICE) {
             returnMoney();
         }
     }
@@ -54,4 +55,4 @@ function logVendingMachine(item, action) {
         output.value += formatAmount(item) + '원을 투입했습니다. '  + '\n';
         return;
     }
-}   
+}
