@@ -15,9 +15,11 @@ const ProductButton = ({
 }: ProductButtonProps) => {
   return (
     <button
-      className=" bg-blue-400 hover:bg-blue-600 active:bg-blue-800 text-white font-bold rounded"
+      className=" bg-blue-400 hover:bg-blue-600 active:bg-blue-800 text-white select-none font-bold rounded"
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
+      onTouchStart={onMouseDown}
+      onTouchEnd={onMouseUp}
       onClick={onClick}
     >
       {children}

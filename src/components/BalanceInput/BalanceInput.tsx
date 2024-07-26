@@ -14,6 +14,7 @@ const BalanceInput = ({ onChange, value }: BalanceInputProps) => {
       step={100}
       className="w-2/3 h-10 flex justify-center items-center border-2 border-black px-2"
       type="number"
+      placeholder="금액을 입력하세요"
     />
   );
 };
