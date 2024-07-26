@@ -52,7 +52,8 @@ export default class App extends Component<{}, State> {
     let balance = this.state.balance - price;
     let logs = [...this.state.logs, `${title}을 구매했습니다.`];
 
-    if (balance < prices[0]) {
+    const minPrice = prices[0];
+    if (balance < minPrice) {
       logs = [...logs, `${balance}원을 반환했습니다.`];
       balance = 0;
     }
