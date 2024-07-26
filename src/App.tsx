@@ -1,13 +1,26 @@
 import React from 'react';
-import { AppProvider } from './context/AppContext';
-import AppMain from './components/AppMain';
+import styled from 'styled-components';
+import VendingMachine from './components/VendingMachine';
+import Controls from './components/Controls';
+import {VendingMachineProvider} from './context/AppContext';
 
 const App: React.FC = () => {
     return (
-        <AppProvider>
-            <AppMain />
-        </AppProvider>
+        <AppContainer>
+            <VendingMachineProvider>
+                <VendingMachine/>
+                <Controls/>
+            </VendingMachineProvider>
+        </AppContainer>
     );
 };
 
 export default App;
+
+const AppContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 60%;
+  margin: 10% auto;
+`;
