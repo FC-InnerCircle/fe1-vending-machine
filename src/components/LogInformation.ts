@@ -3,7 +3,9 @@ export default class LogInformation {
 
   render(): HTMLElement {
     const $logInformation = document.createElement("div");
-    $logInformation.textContent = "logInformation";
+    $logInformation.className =
+      "border-2 border-inherit rounded overflow-y-auto overflow-x-clip";
+    $logInformation.style.height = "calc(100% - 42px)";
     return $logInformation;
   }
 }
