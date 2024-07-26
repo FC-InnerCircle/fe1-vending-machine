@@ -7,8 +7,14 @@ export type State = {
     displayValue: number;
     message: string;
 };
-
-export const productPrice: Array<number> = [300, 400, 500, 600, 700, 800, 900, 1000, 1100];
+export const productRange = (start: number, end: number, step: number = 100): number[] => {
+    const result = [];
+    for (let i = start; i <= end; i += step) {
+        result.push(i);
+    }
+    return result;
+};
+export const productPrice: number[] = productRange(300, 1100);
 
 export const initState: State = {
     totalInserted: 0,
