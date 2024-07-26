@@ -20,25 +20,29 @@ export default class Amount extends Component<Props> {
 
       const value = Math.floor(Number(input.value));
 
-      if (isNaN(value) || value < 1) {
-        input.value = '';
+      if (this.isPositiveNumber(value)) {
+        input.value = value.toString();
         return;
       }
-      
-      input.value = value.toString();
+
+      input.value = '';
     });
 
-    const handleClick = (handler?: (value: number) => void) => {
-      const input = this.target.querySelector('.amount__input') as HTMLInputElement;
-      handler?.(Number(input.value));
-    }
-
     this.addEvent('click', '.amount__deposit-button', () => {
-      handleClick(this.props.onDeposit?.bind(this));
+      this.handleClick(this.props.onDeposit);
     });
 
     this.addEvent('click', '.amount__withdraw-button', () => {
-      handleClick(this.props.onWithdraw?.bind(this));
+      this.handleClick(this.props.onWithdraw);
     });
+  }
+
+  private isPositiveNumber(value: number) {
+    return !isNaN(value) && value > 0;
+  }
+
+  private handleClick(handler?: (value: number) => void) {
+    const input = this.target.querySelector('.amount__input') as HTMLInputElement;
+    handler?.(Number(input.value));
   }
 }
