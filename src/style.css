@@ -19,7 +19,13 @@ body {
 
 .main {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 }
 
 .vending-machine {
