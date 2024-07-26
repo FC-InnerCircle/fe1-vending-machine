@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { VendingMachineContext } from '../context/AppContext';
+import { VendingMachineContext } from '../context/VendingMachineContext';
 
 interface ControlButtonProps {
     text: string;

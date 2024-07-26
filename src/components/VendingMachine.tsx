@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { formatCurrency, productPrice } from '../reducers/reducer';
-import { VendingMachineContext } from '../context/AppContext';
-import VendingMachineButton from './VendingMachineButton';
+import { VendingMachineContext } from '../context/VendingMachineContext';
+import VendingMachineButton from './vendingMachineButton';
 
 const VendingMachine: React.FC = () => {
     const { state } = useContext(VendingMachineContext)!;

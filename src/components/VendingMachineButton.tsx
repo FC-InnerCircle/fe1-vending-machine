@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { formatCurrency, productPrice } from '../reducers/reducer';
-import { VendingMachineContext } from '../context/AppContext';
+import { VendingMachineContext } from '../context/VendingMachineContext';
 
 interface VendingMachineButtonProps {
     price: number;

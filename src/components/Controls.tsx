@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { formatCurrency } from '../reducers/reducer';
-import { VendingMachineContext } from '../context/AppContext';
+import { VendingMachineContext } from '../context/VendingMachineContext';
 import ControlButton from './ControlButton';
 
 const Controls: React.FC = () => {
-    const messageBoxRef = useRef<HTMLTextAreaElement>(null);
+    const messageBoxRef = useRef<HTMLTextAreaElement | null>(null);
     const [inputValue, setInputValue] = useState(0);
     const { state } = useContext(VendingMachineContext)!;
 
@@ -18,7 +18,10 @@ const Controls: React.FC = () => {
 
     useEffect(() => {
         if (messageBoxRef.current) {
-            messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+            const { current } = messageBoxRef;
+            if (current !== null) {
+                current.scrollTop = current.scrollHeight;
+            }
         }
     }, [state.message]);
 
