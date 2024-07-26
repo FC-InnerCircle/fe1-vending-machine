@@ -17,8 +17,8 @@ const HistoryContainer = () => {
       ref={divRef}
       className="w-full h-full overflow-auto border-2 p-1 border-black"
     >
-      {history.map((h) => (
-        <Message key={h}>{h}</Message>
+      {history.map((h, i) => (
+        <Message key={h + i}>{h}</Message>
       ))}
     </div>
   );
