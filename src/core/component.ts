@@ -15,19 +15,18 @@ export default abstract class Component<Props = {}, State = {}> {
     return {} as State;
   }
 
-  protected mounted() {};
+  protected mounted() {
+  };
 
-  protected template() { return ''; }
-
-  private render() {
-    this.target.innerHTML = this.template();
-    this.mounted();
+  protected template() {
+    return '';
   }
 
-  protected setEvent() {}
+  protected setEvent() {
+  }
 
   protected setState(newState: Partial<State>) {
-    this.state = { ...this.state, ...newState };
+    this.state = {...this.state, ...newState};
     this.render();
   }
 
@@ -36,5 +35,10 @@ export default abstract class Component<Props = {}, State = {}> {
       if (!(event.target as Element).closest(selector)) return;
       callback(event);
     })
+  }
+
+  private render() {
+    this.target.innerHTML = this.template();
+    this.mounted();
   }
 }

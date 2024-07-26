@@ -10,14 +10,7 @@ interface State {
 }
 
 export default class App extends Component<{}, State> {
-  protected initializeState(): State {
-    return {
-      balance: 0,
-      logs: [],
-    };
-  }
-
-  template () {
+  template() {
     return `
       <main class="main">
         <div>
@@ -31,15 +24,25 @@ export default class App extends Component<{}, State> {
     `;
   }
 
+  protected initializeState(): State {
+    return {
+      balance: 0,
+      logs: [],
+    };
+  }
+
   protected mounted() {
-    const vendingMachineElement =  document.querySelector('.vending-machine') as HTMLDivElement;
+    const vendingMachineElement = document.querySelector('.vending-machine') as HTMLDivElement;
     const amountElement = document.querySelector('.amount') as HTMLDivElement;
     const logElement = document.querySelector('.log') as HTMLDivElement;
 
     const {balance, logs} = this.state;
 
     new VendingMachine(vendingMachineElement, {balance, onPurchase: this.purchase.bind(this)});
-    new Amount(amountElement, {onDeposit: this.deposit.bind(this), onWithdraw: this.withdraw.bind(this)});
+    new Amount(amountElement, {
+      onDeposit: this.deposit.bind(this),
+      onWithdraw: this.withdraw.bind(this)
+    });
     new Log(logElement, {logs});
   }
 

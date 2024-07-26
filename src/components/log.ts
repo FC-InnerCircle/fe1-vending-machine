@@ -5,7 +5,7 @@ interface Props {
 }
 
 export default class Log extends Component<Props> {
-  template () {
+  template() {
     const {logs} = this.props;
 
     return logs.map(log => (`<div class="log__item">${log}</div>`)).join('');

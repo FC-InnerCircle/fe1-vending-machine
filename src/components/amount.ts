@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default class Amount extends Component<Props> {
-  template () {
+  template() {
     return `
       <input type="number" class="amount__input" step="1">
       <button type="button" class="amount__deposit-button">투입</button>
@@ -24,7 +24,7 @@ export default class Amount extends Component<Props> {
         input.value = '';
         return;
       }
-
+      
       input.value = value.toString();
     });
 
