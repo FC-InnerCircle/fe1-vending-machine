@@ -1,10 +1,13 @@
 import React from "react";
 import VendingMachineContext from "../context/VendingMachineContext";
 import useVendingMachine from "../hooks/useVendingMachine";
+import { VendingMachine } from "../features";
 
 interface VendingMachineProviderProps {
   children: React.ReactNode;
 }
+
+const vendingMachine = new VendingMachine();
 
 const VendingMachineProvider = ({ children }: VendingMachineProviderProps) => {
   const {
@@ -18,7 +21,7 @@ const VendingMachineProvider = ({ children }: VendingMachineProviderProps) => {
     hideProductPrice,
     buyProduct,
     products,
-  } = useVendingMachine();
+  } = useVendingMachine(vendingMachine);
 
   return (
     <VendingMachineContext.Provider

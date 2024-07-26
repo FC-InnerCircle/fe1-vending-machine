@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { VendingMachine } from "../features";
+import type { VendingMachine } from "../features";
 import formatNumberWithCommas from "../utils/formatNumberWithCommas";
 
-const vendingMachine = new VendingMachine();
-
-const useVendingMachine = () => {
+const useVendingMachine = (vendingMachine: VendingMachine) => {
   const [balance, setBalance] = useState("0");
   const [history, setHistory] = useState<string[]>([]);
   const [inputBalance, setInputBalance] = useState("");
