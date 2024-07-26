@@ -1,5 +1,4 @@
-import store from "../store";
-
+import { store } from "../store";
 export default class MoneySlot {
   constructor() {}
 
@@ -16,20 +15,17 @@ export default class MoneySlot {
     `;
 
     const $form = $moneySlot.querySelector("form") as HTMLFormElement;
-    // const $amountInput = $moneySlot.querySelector(
-    //   "input[name='amount']"
-    // ) as HTMLInputElement;
 
     $form?.addEventListener("submit", (e) => {
       e.preventDefault();
       const $input = $form["amount"];
       if (!$input.value) return;
-      // TODO: show message
+      store.setControl({ type: "insert", value: $input.value });
       $input.value = "";
     });
 
-    $form?.addEventListener("reset", (v) => {
-      // TODO: show message
+    $form?.addEventListener("reset", () => {
+      store.setControl({ type: "return" });
     });
     return $moneySlot;
   }
