@@ -83,15 +83,14 @@ window.addEventListener("load", () => {
     el.addEventListener("mousedown", function () {
       store.activeProduct(el);
     });
-    el.addEventListener("mouseout", function () {
+    el.addEventListener("mouseleave", function () {
       if (store.getActiveProduct() === el) {
         store.deactiveProduct();
       }
     });
-    el.addEventListener("mouseup", function () {
+    el.addEventListener("click", function () {
       if (store.getActiveProduct() === el) {
         store.consumeCoin(el);
-        // active는 마지막에 호출되어야한다.
         store.deactiveProduct();
       }
     });
