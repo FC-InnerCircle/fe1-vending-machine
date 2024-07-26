@@ -1,6 +1,3 @@
-import {Simulate} from "react-dom/test-utils";
-import input = Simulate.input;
-
 export const formatCurrency = (value: number): string => {
     return value.toLocaleString();
 };
@@ -8,19 +5,22 @@ export const formatCurrency = (value: number): string => {
 export type State = {
     totalInserted: number;
     displayValue: number;
+    message: string;
 };
 
-export const productPrice : Array<number> = [300, 400, 500, 600, 700, 800, 900, 1000, 1100];
+export const productPrice: Array<number> = [300, 400, 500, 600, 700, 800, 900, 1000, 1100];
 
-export const initState : State = {
+export const initState: State = {
     totalInserted: 0,
     displayValue: 0,
+    message: '',
 };
 export type Action =
-    |{ type: 'INSERT'; inputValue: number }
-    |{ type: 'REFUND'}
-    |{ type: 'PURCHASE'; inputValue: number;}
-    |{ type: 'DISPLAY'; inputValue: number }
+    | { type: 'INSERT'; inputValue: number }
+    | { type: 'REFUND' }
+    | { type: 'PURCHASE'; inputValue: number; }
+    | { type: 'DISPLAY'; inputValue: number }
+    | { type: 'LOG'; inputValue: string }
 
 export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
@@ -38,15 +38,20 @@ export const reducer = (state: State, action: Action): State => {
                 displayValue: 0
             };
         case 'PURCHASE':
-            const updatedTotalInserted  = state.totalInserted - action.inputValue;
+            const updatedTotalInserted = state.totalInserted - action.inputValue;
             return {
                 ...state,
-                totalInserted: updatedTotalInserted ,
+                totalInserted: updatedTotalInserted,
             };
         case 'DISPLAY':
             return {
                 ...state,
-                displayValue: action.inputValue ,
+                displayValue: action.inputValue,
+            };
+        case 'LOG':
+            return {
+                ...state,
+                message: state.message + action.inputValue + '\n',
             };
         default:
             throw new Error('알수 없는 액션입니다.');
