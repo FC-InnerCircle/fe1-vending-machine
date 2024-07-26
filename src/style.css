@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.vending-machine {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  padding: 20px;
+  background-color: #DAE5F1;
+}
+
+.vending-machine__balance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 80px;
+  font-size: 1.5rem;
+  background-color: white;
+}
+
+.vending-machine__purchase-container {
+  display: grid;
+  margin-top: 40px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.vending-machine__purchase-button {
+  height: 80px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: #91B3D7;
+}
+
+.vending-machine__purchase-button:hover {
+  background-color: #6D99C9;
+}
+
+.vending-machine__purchase-button:active {
+  background-color: #004EA2;
+}
+
+.amount__input {
+  width: 240px;
+  height: 60px;
+  font-size: 1.5rem;
+}
+
+.amount__deposit-button {
+  font-size: 1.125rem;
+}
+
+.amount__withdraw-button {
+  font-size: 1.125rem;
+}
+
+.log {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  margin-top: 20px;
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+  overflow: scroll;
+}
