@@ -7,15 +7,15 @@ interface Props {
 }
 
 export default class VendingMachine extends Component<Props> {
+  private isPriceShowing = false;
+
   template() {
     const {balance} = this.props;
 
     return `
       <div class="vending-machine__balance">${balance.toLocaleString()}</div>
       <div class="vending-machine__purchase-container">
-        ${prices
-      .map(price => `<button type="button" class="vending-machine__purchase-button" data-price=${price}>FE${price}</button>`)
-      .join('')}
+      ${this.renderPrices(prices)}
       </div>
     `;
   }
@@ -28,27 +28,32 @@ export default class VendingMachine extends Component<Props> {
       this.props.onPurchase?.(title, price);
     });
 
-    let isPriceShowing = false;
 
     this.addEvent('mousedown', '.vending-machine__purchase-button', (e: MouseEvent) => {
-      const purchaseButtonElement = e.target as HTMLButtonElement;
-      const price = Number(purchaseButtonElement.dataset.price);
+      const button = e.target as HTMLButtonElement;
+      const price = Number(button.dataset.price);
 
       if (this.props.balance >= price) return;
 
       const balanceElement = this.target.querySelector('.vending-machine__balance') as HTMLDivElement;
       balanceElement.textContent = price.toLocaleString();
 
-      isPriceShowing = true;
+      this.isPriceShowing = true;
     });
 
     document.addEventListener('mouseup', () => {
-      if (!isPriceShowing) return;
+      if (!this.isPriceShowing) return;
 
       const balanceElement = this.target.querySelector('.vending-machine__balance') as HTMLDivElement;
       balanceElement.textContent = this.props.balance.toLocaleString();
 
-      isPriceShowing = false;
+      this.isPriceShowing = false;
     });
+  }
+
+  private renderPrices(prices: number[]) {
+    return prices
+      .map(price => `<button type="button" class="vending-machine__purchase-button" data-price=${price}>FE${price}</button>`)
+      .join('');
   }
 }
