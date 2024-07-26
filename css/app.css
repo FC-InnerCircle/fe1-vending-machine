@@ -1,0 +1,16 @@
+.purchase-item-class {
+    background-color: #A4D8FF;
+    min-height: 3rem;
+}
+
+.purchase-item-class:hover {
+    background-color: #4DABF7;
+}
+
+.purchase-item-class:active {
+    background-color: #1871C2;
+}
+
+#output {
+    min-height: 3rem;
+}
