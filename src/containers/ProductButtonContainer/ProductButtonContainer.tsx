@@ -2,7 +2,7 @@ import { useContext } from "react";
 import VendingMachineContext from "../../context/VendingMachineContext";
 import { ProductButton } from "../../components";
 
-const ProductButtonConainer = () => {
+const ProductButtonContainer = () => {
   const { products, buyProduct, showProductPrice, hideProductPrice } =
     useContext(VendingMachineContext);
 
@@ -24,4 +24,4 @@ const ProductButtonConainer = () => {
   );
 };
 
-export default ProductButtonConainer;
+export default ProductButtonContainer;
