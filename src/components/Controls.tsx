@@ -1,23 +1,26 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import {formatCurrency} from "../reducers/reducer";
+import { formatCurrency } from '../reducers/reducer';
+import { VendingMachineContext } from '../context/AppContext';
+import ControlButton from './ControlButton';
 
-interface ControlsProps {
-    inputValue: number;
-    message: string[];
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onInsertButton: () => void;
-    onRefundButton: () => void;
-}
-
-const Controls: React.FC<ControlsProps> = ({ inputValue, message, onInputChange, onInsertButton, onRefundButton }) => {
-
+const Controls: React.FC = () => {
     const messageBoxRef = useRef<HTMLTextAreaElement>(null);
+    const [inputValue, setInputValue] = useState(0);
+    const { state } = useContext(VendingMachineContext)!;
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/,/g, '');
+        if (!isNaN(Number(value))) {
+            setInputValue(Number(value));
+        }
+    };
+
     useEffect(() => {
         if (messageBoxRef.current) {
             messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
         }
-    }, [message]);
+    }, [state.message]);
 
     return (
         <Container>
@@ -28,12 +31,12 @@ const Controls: React.FC<ControlsProps> = ({ inputValue, message, onInputChange,
                     type="text"
                     placeholder="자판기에 돈을 투입해 주세요"
                     value={inputValue ? formatCurrency(inputValue) : ''}
-                    onChange={onInputChange}
+                    onChange={handleInputChange}
                 />
-                <ControlButton type="button" onClick={onInsertButton}>투입</ControlButton>
-                <ControlButton type="button" onClick={onRefundButton}>반환</ControlButton>
+                <ControlButton text="투입" inputValue={inputValue} actionType="INSERT" setInputValue={setInputValue} />
+                <ControlButton text="반환" inputValue={inputValue} actionType="REFUND" setInputValue={setInputValue} />
             </ControlDisplay>
-            <MessageBox readOnly ref={messageBoxRef} value={message.join('\n')} />
+            <MessageBox readOnly ref={messageBoxRef} value={state.message} />
         </Container>
     );
 };
@@ -63,13 +66,6 @@ const InputDisplay = styled.input`
   border: 2px solid black;
   box-sizing: border-box;
   margin-right: 10px;
-`;
-
-const ControlButton = styled.button`
-  background-color: #D3D3D3;
-  padding: 1em 1em;
-  margin: 0 3px;
-  white-space: nowrap;
 `;
 
 const MessageBox = styled.textarea`

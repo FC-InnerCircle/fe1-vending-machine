@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import {productPrice} from "../reducers/reducer";
+import { formatCurrency, productPrice } from '../reducers/reducer';
+import { VendingMachineContext } from '../context/AppContext';
+import VendingMachineButton from './VendingMachineButton';
 
-interface VendingMachineProps {
-    formattedTotalInserted: string;
-    onMouseUpPurchase: (price: number) => void;
-    onMouseDownPurchase: (price: number) => void;
-}
-
-const VendingMachine: React.FC<VendingMachineProps> = ({ formattedTotalInserted, onMouseUpPurchase, onMouseDownPurchase }) => {
+const VendingMachine: React.FC = () => {
+    const { state } = useContext(VendingMachineContext)!;
     return (
         <Container>
-            <Screen type="text" value={formattedTotalInserted} readOnly />
+            <Screen type="text" value={formatCurrency(state.displayValue)} readOnly />
             <Buttons>
                 {productPrice.map((price) => (
-                    <Button key={price} onMouseUp={() => onMouseUpPurchase(price)} onMouseDown={() => onMouseDownPurchase(price)} >FE{price}</Button>
+                    <VendingMachineButton key={price} price={price} />
                 ))}
             </Buttons>
         </Container>
@@ -46,23 +43,4 @@ const Buttons = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   flex-grow: 1;
-`;
-
-const Button = styled.button`
-  background-color: #87CEFA;
-  text-align: center;
-  padding: 30%;
-  font-size: 18px;
-  cursor: pointer;
-  border: 2px solid black;
-  box-sizing: border-box;
-  white-space: nowrap;
-
-  &:hover {
-    background-color: #00BFFF;
-  }
-
-  &:active {
-    background-color: #1E90FF;
-  }
 `;
