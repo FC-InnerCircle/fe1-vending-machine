@@ -17,8 +17,9 @@ const useVendingMachine = () => {
   const handleInputBalance = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
 
-    // 음수값 입력 방지 (- 입력 방지)
-    if (target.value === "") {
+    // 음수값 입력 방지
+    if (target.value.includes("-")) {
+      alert("음수값은 입력할 수 없습니다.");
       setInputBalance("");
       return;
     }
