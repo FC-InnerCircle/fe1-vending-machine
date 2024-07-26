@@ -64,6 +64,8 @@ const useVendingMachine = () => {
     renderBalanceAndHistory();
   };
 
+  const products = vendingMachine.getAllProduct();
+
   return {
     balance,
     history,
@@ -74,7 +76,7 @@ const useVendingMachine = () => {
     showProductPrice,
     hideProductPrice,
     buyProduct,
-    products: vendingMachine.getAllProduct(),
+    products,
   };
 };
 
