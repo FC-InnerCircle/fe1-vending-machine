@@ -40,6 +40,10 @@ const handleReturnButton = () => {
     //current-amount 빈스트링으로 만들기
     currentAmountInput.resetInsertAmount();
   }
+
+  //InsertAmountInput에 값을 적고 반환을 눌렀다면, InsertAmountInput의 값도 리셋해주기
+  if (insertAmountInput.getInsertAmount() > 0)
+    insertAmountInput.resetInsertAmount();
 };
 
 const handlePurchaseItem = (price: number, itemName: string) => {
