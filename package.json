@@ -1,0 +1,21 @@
+{
+  "name": "fe1-vending-machine",
+  "version": "1.0.0",
+  "description": "자판기 애플리케이션 과제. 바닐라 자바스크립트 버전으로 단순한 자판기를 구현하는 과제입니다.",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./styles.css -o ./build.css --watch",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.25.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^24.1.1",
+    "tailwindcss": "^3.4.6"
+  }
+}
