@@ -1,4 +1,4 @@
-import { Item } from "./components/VendingItems";
+import { Item, items } from "./components/VendingItems";
 
 interface Control {
   type: "buy" | "insert" | "return";
@@ -24,6 +24,12 @@ class Store {
     } else if (type === "buy" && value && typeof value !== "number") {
       this.balance = this.balance - value.price;
       this.logs.push(`${value.label}을 구매 했습니다.`);
+
+      const min = Math.min(...items.map((v) => v.price));
+      if (this.balance < min) {
+        this.logs.push(`${this.balance}원을 반환합니다.`);
+        this.balance = 0;
+      }
     }
     this.notify();
   }

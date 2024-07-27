@@ -8,7 +8,7 @@ export type Item = {
 
 const range = (start: number, stop: number, step = 1) =>
   Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
-const items: Item[] = range(300, 1100, 100).map((price, i) => ({
+export const items: Item[] = range(300, 1100, 100).map((price, i) => ({
   price,
   label: `FE${price}`,
   index: i + 1,
@@ -31,7 +31,8 @@ export default class VendingItems {
     return $vendingItems;
   }
   selectItem(item: Item) {
-    console.log("s", item);
+    const balance = store.getBalance();
+    if (balance === 0 || balance < item.price) return;
     store.setControl({ type: "buy", value: item });
   }
 }
