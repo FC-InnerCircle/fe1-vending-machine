@@ -1,8 +1,6 @@
+import { REGEX } from './constants/regex.js';
 import { $ } from './utils/dom.js';
-
-const REGEX = {
-  NUMBER: /^\d+$/,
-};
+import { createButtons, logMessage, setVendingMachinePrice } from './view.js';
 
 function init() {
   document.addEventListener('DOMContentLoaded', () => {
@@ -12,18 +10,6 @@ function init() {
 
     bindEvents();
   });
-}
-
-function createButtons(target) {
-  let htmlString = '';
-
-  for (let i = 300; i <= 1100; i += 100) {
-    htmlString += `
-    <button class="p-2 bg-sky-200 flex-1 hover:bg-sky-400 active:bg-sky-800" type="button">FE${i}</button>
-    `;
-  }
-
-  target.innerHTML = htmlString;
 }
 
 function bindEvents() {
@@ -81,26 +67,6 @@ function bindEvents() {
       }
     }
   });
-}
-
-function logMessage(messageHtml) {
-  const $logMessageContainer = $('.log-message-container');
-
-  $logMessageContainer.insertAdjacentHTML('afterbegin', messageHtml);
-}
-
-function setVendingMachinePrice(price) {
-  const $price = $('.vending-machine-price');
-
-  $price.textContent = commaizeNumber(price);
-}
-
-function commaizeNumber(value) {
-  return value.toLocaleString();
-}
-
-function insertMoneyToVendingMachine(money) {
-  setVendingMachinePrice(money);
 }
 
 init();
