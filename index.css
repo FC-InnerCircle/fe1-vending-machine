@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  position: relative;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  max-width: 950px;
+  max-height: 422px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.machine,
+.controls {
+  width: 100%;
+  padding: 20px;
+  max-width: 400px;
+}
+
+.machine {
+  border: 1px solid #eaeaea;
+}
+
+.controls .coin-control {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.controls .coin-control > input {
+  height: 40px;
+}
+
+.machine .balance-box {
+  width: 100%;
+  border: 1px solid #000;
+  text-align: center;
+  padding: 0.7rem 0;
+  margin-bottom: 15px;
+}
+
+.balance-box #balance,
+.coin-control > input,
+.coin-control > button {
+  font-size: 1.3rem;
+}
+
+.coin-control > input {
+  flex: 3;
+}
+.coin-control > button {
+  flex: 1;
+}
+
+.machine .product-box {
+  width: 100%;
+  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.machine .product-box button {
+  /* display: block; */
+  width: 30%;
+  height: 6rem;
+  cursor: pointer;
+  background-color: #95ceff;
+  transition: 0.5s;
+  font-size: 1.5rem;
+}
+.machine .product-box .row > button:hover {
+  background-color: #3f97f5;
+}
+
+.machine .product-box .row > button:active {
+  background-color: #165bb5;
+}
+
+.controls .coin-history {
+  padding: 15px;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+  min-height: calc(100% - 72px);
+  max-height: calc(100% - 72px);
+  border: 1px solid #eaeaea;
+}
