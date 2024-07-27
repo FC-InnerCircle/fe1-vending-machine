@@ -12,12 +12,7 @@ export const convertCurrency = (formattedAmount) => {
 };
 
 // 로그 함수
-export const addLog = (
-  coin,
-  action,
-  transactionLog,
-  transactionLogContainer,
-) => {
+export const addLog = (coin, action) => {
   let actionText;
 
   switch (action) {
@@ -39,6 +34,9 @@ export const addLog = (
     action === 'buy' ? coin : formatCurrency(coin)
   }을 ${actionText} 했습니다.`;
 
+  const transactionLog = document.querySelector('.log');
+  const transactionLogContainer = document.querySelector('.log-container');
+
   li.textContent = logMessage;
   transactionLog.appendChild(li);
 
@@ -47,17 +45,12 @@ export const addLog = (
 };
 
 // 반환 함수
-export const returnMoney = (
-  amount,
-  totalBalanceView,
-  transactionLog,
-  transactionLogContainer,
-) => {
+export const returnMoney = (amount, totalBalanceView) => {
   const totalBalance = convertCurrency(amount);
 
   if (totalBalance > 0) {
     // 반환 로그 남기기
-    addLog(totalBalance, 'return', transactionLog, transactionLogContainer);
+    addLog(totalBalance, 'return');
     totalBalanceView.value = formatCurrency(0);
   } else {
     alert('반환할 금액이 없습니다.');
@@ -65,19 +58,13 @@ export const returnMoney = (
 };
 
 // 투입 함수
-export const insertMoney = (
-  amount,
-  totalBalanceView,
-  insertCoinView,
-  transactionLog,
-  transactionLogContainer,
-) => {
+export const insertMoney = (amount, totalBalanceView, insertCoinView) => {
   let totalBalance = convertCurrency(totalBalanceView.value);
   totalBalance += parseInt(amount, 10);
   totalBalanceView.value = formatCurrency(totalBalance);
 
   // 로그 남기기
-  addLog(amount, 'insert', transactionLog, transactionLogContainer);
+  addLog(amount, 'insert');
 
   // insert coin init
   insertCoinView.value = 0;
@@ -91,14 +78,7 @@ export const findMinPrice = (items) => {
 };
 
 // 구매 함수
-export const buyItem = (
-  item,
-  price,
-  totalBalanceView,
-  items,
-  transactionLog,
-  transactionLogContainer,
-) => {
+export const buyItem = (item, price, totalBalanceView, items) => {
   let totalBalance = convertCurrency(totalBalanceView.value);
 
   const cost = price;
@@ -108,16 +88,11 @@ export const buyItem = (
     totalBalance -= cost;
 
     // 구매 로그
-    addLog(item, 'buy', transactionLog, transactionLogContainer);
+    addLog(item, 'buy');
 
     if (totalBalance < minCost && totalBalance > 0) {
       // 반환
-      returnMoney(
-        totalBalance,
-        totalBalanceView,
-        transactionLog,
-        transactionLogContainer,
-      );
+      returnMoney(totalBalance, totalBalanceView);
     } else {
       totalBalanceView.value = formatCurrency(totalBalance);
     }

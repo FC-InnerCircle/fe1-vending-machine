@@ -8,23 +8,13 @@ const {
   menuSection,
   insertBtn,
   returnBtn,
-  transactionLog,
-  transactionLogContainer,
+
   insertCoinView,
   totalBalanceView,
-  orderBtns,
 } = getViewElements();
 
 // view 초기화
 initView(menuSection, BTN_STYLE);
 
 // 이벤트 핸들러 초기화
-initializeEventHandlers(
-  insertBtn,
-  returnBtn,
-  insertCoinView,
-  totalBalanceView,
-  transactionLog,
-  transactionLogContainer,
-  orderBtns,
-);
+initializeEventHandlers(insertBtn, returnBtn, insertCoinView, totalBalanceView);

@@ -10,24 +10,13 @@ export const initializeEventHandlers = (
   returnBtn,
   insertCoinView,
   totalBalanceView,
-  transactionLog,
-  transactionLogContainer,
 ) => {
   insertBtn.addEventListener('click', (event) =>
-    handleInsertButtonClick(
-      insertCoinView,
-      totalBalanceView,
-      transactionLog,
-      transactionLogContainer,
-    ),
+    handleInsertButtonClick(insertCoinView, totalBalanceView),
   );
 
   returnBtn.addEventListener('click', (event) =>
-    handleReturnButtonClick(
-      totalBalanceView,
-      transactionLog,
-      transactionLogContainer,
-    ),
+    handleReturnButtonClick(totalBalanceView),
   );
 
   // 주문 버튼
@@ -35,13 +24,7 @@ export const initializeEventHandlers = (
 
   orderBtns.forEach((btn) => {
     btn.addEventListener('click', (event) =>
-      handleOrderButtonClick(
-        event,
-        ITEMS,
-        totalBalanceView,
-        transactionLog,
-        transactionLogContainer,
-      ),
+      handleOrderButtonClick(event, ITEMS, totalBalanceView),
     );
   });
 };
