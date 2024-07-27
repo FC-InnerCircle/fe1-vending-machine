@@ -38,16 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  moneyInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      insertMoneyBtn.click();
-    }
-  });
+  const moneyForm = document.getElementById('money-form');
+  if (!moneyForm) {
+    console.error('Money form not found');
+    return;
+  }
 
-  insertMoneyBtn.addEventListener('click', () => {
+  moneyForm.addEventListener('submit', (event) => {
+    event.preventDefault();
     const input = moneyInput.value;
     const amount = parseInt(input, 10);
-    
+
     if (isNaN(amount) || amount <= 0) {
       console.error('Invalid amount value');
       return;

@@ -14,15 +14,17 @@
       </div>
 
       <div id="control-panel" class="flex flex-col p-5 space-y-5 bg-white border-black rounded-lg shadow-lg w-96 h-72 border-1">
-        <div class="flex w-full gap-2">
-          <input type="number" id="money-input" max="100000" class="flex-auto p-2 border rounded" min="0" placeholder="자판기에 돈을 투입해 주세요.">
-          <div class="flex space-x-2">
-            <button id="insert-money" class="w-1/2 p-2 text-white bg-blue-500 rounded hover:bg-green-600">투입</button>
-            <button id="return-money" class="w-1/2 p-2 text-white rounded bg-slate-500 hover:bg-red-600">반환</button>
+        <form id="money-form" class="flex flex-col space-y-5">
+          <div class="flex w-full gap-2">
+            <input type="number" id="money-input" max="100000" class="flex-auto p-2 border rounded" min="0" placeholder="자판기에 돈을 투입해 주세요.">
+            <div class="flex space-x-2">
+              <button type="submit" id="insert-money" class="w-1/2 p-2 text-white bg-blue-500 rounded hover:bg-green-600">투입</button>
+              <button type="button" id="return-money" class="w-1/2 p-2 text-white rounded bg-slate-500 hover:bg-red-600">반환</button>
+            </div>
           </div>
-        </div>
+        </form>
         <div id="log-container" class="flex-1 w-full p-2 overflow-y-auto border rounded h-44">
-          <ul id="log-display"><ul/>
+          <ul id="log-display"></ul>
         </div>
       </div>
     </div>
