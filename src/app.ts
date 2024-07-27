@@ -3,7 +3,19 @@ import { InsertAmountInput } from "./components/insert.js";
 import { ItemButton } from "./components/item-button.js";
 import { LogDisplay } from "./components/log-display.js";
 
-const MIN_ITEM_PRICE = 300;
+const ITEM_BUTTONS = [
+  { name: "FE300", price: 300 },
+  { name: "FE400", price: 400 },
+  { name: "FE500", price: 500 },
+  { name: "FE600", price: 600 },
+  { name: "FE700", price: 700 },
+  { name: "FE800", price: 800 },
+  { name: "FE900", price: 900 },
+  { name: "FE1000", price: 1000 },
+  { name: "FE1100", price: 1100 },
+];
+
+let minPrice: number;
 let insertAmountInput: InsertAmountInput;
 let currentAmountInput: CurrentAmountInput;
 let logDisplay: LogDisplay;
@@ -44,7 +56,7 @@ const handlePurchaseItem = (price: number, itemName: string) => {
 
   //만약 잔액이 최소 상품보다 작으면 남은 금액 반환하기
   const remainingAmount = currentAmountInput.getCurrentAmount();
-  if (remainingAmount < MIN_ITEM_PRICE) handleReturnButton();
+  if (remainingAmount < minPrice) handleReturnButton();
 };
 
 const handleClickItem = (e: MouseEvent) => {
@@ -61,24 +73,24 @@ const handleClickItem = (e: MouseEvent) => {
   }
 };
 
+const getProductItemElements = (items: { name: string; price: number }[]) => {
+  return items.map(({ name, price }) => new ItemButton(name, price));
+};
+
+const getMinPrice = (items: { name: string; price: number }[]) =>
+  Math.min(...items.map(({ price }) => price));
+
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
 
   if (app) {
-    const itemButtons = [
-      new ItemButton("FE300", 300),
-      new ItemButton("FE400", 400),
-      new ItemButton("FE500", 500),
-      new ItemButton("FE600", 600),
-      new ItemButton("FE700", 700),
-      new ItemButton("FE800", 800),
-      new ItemButton("FE900", 900),
-      new ItemButton("FE1000", 1000),
-      new ItemButton("FE1100", 1100),
-    ];
+    //초기셋팅
+    minPrice = getMinPrice(ITEM_BUTTONS);
     insertAmountInput = new InsertAmountInput();
     currentAmountInput = new CurrentAmountInput();
     logDisplay = new LogDisplay();
+
+    const itemButtons = getProductItemElements(ITEM_BUTTONS);
     const insertButton = document.querySelector<HTMLButtonElement>(
       ".control-button#insert"
     );
