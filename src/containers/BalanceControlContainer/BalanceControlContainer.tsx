@@ -6,12 +6,19 @@ const BalanceControlContainer = () => {
   const { insertBalance, refundBalance, inputBalance, handleInputBalance } =
     useContext(VendingMachineContext);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    insertBalance();
+  };
+
   return (
-    <div className="flex justify-between">
+    <form onSubmit={handleSubmit} className="flex justify-between">
       <BalanceInput onChange={handleInputBalance} value={inputBalance} />
-      <Button onClick={insertBalance}>투입</Button>
-      <Button onClick={refundBalance}>반환</Button>
-    </div>
+      <Button type="submit">투입</Button>
+      <Button type="button" onClick={refundBalance}>
+        반환
+      </Button>
+    </form>
   );
 };
 
