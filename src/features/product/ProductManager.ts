@@ -26,6 +26,9 @@ export default class ProductManager {
   }
 
   getMinPrice() {
-    return Math.min(...this.products.map((product) => product.getPrice()));
+    return this.products.reduce((min, product) => {
+      const price = product.getPrice();
+      return price < min ? price : min;
+    }, Infinity);
   }
 }
