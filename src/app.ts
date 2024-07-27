@@ -17,9 +17,6 @@ const handleInsertButton = () => {
     currentAmountInput.addAmount(amount);
     //input 0으로 초기화
     insertAmountInput.resetInsertAmount();
-  } else {
-    // 아무것도 일어나지 않음
-    return;
   }
 };
 
@@ -30,15 +27,12 @@ const handleReturnButton = () => {
     logDisplay.addLog(`${currentAmount}원을 반환합니다.`);
     //current-amount 빈스트링으로 만들기
     currentAmountInput.resetInsertAmount();
-  } else {
-    // 아무일도 일어나지 않음
-    return;
   }
 };
 
 const handlePurchaseItem = (price: number, itemName: string) => {
   const currentAmount = currentAmountInput.getCurrentAmount();
-  //price보다 current amount가 작으면 current amount에 상품 가격 3초동안 띄우고 리턴
+  //price보다 current amount가 작으면 current amount에 상품 가격 2초동안 띄우고 리턴
   if (currentAmount < price)
     return currentAmountInput.alertInsufficientAmount(price);
 
