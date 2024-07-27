@@ -1,0 +1,42 @@
+.vending-machine {
+  background-color: #ffffff;
+  border: 2px solid #000;
+  padding: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.display {
+  width: 90%;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+#buttons-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.item-button {
+  padding: 10px;
+  font-size: 16px;
+  width: 85px;
+  height: 60px;
+  background-color: #e0f0ff;
+  border: 1px solid #007bff;
+  cursor: pointer;
+}
+
+.item-button.hover {
+  background-color: #7db9f9;
+}
+
+.item-button.active {
+  background-color: #247bdf;
+}

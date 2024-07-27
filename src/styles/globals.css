@@ -1,0 +1,18 @@
+@charset "utf-8";
+@import 'vending-machine.css';
+@import 'controller.css';
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
