@@ -1,30 +1,20 @@
-import { ITEMS } from '../constants/contants.js';
+import { getViewElements } from '../views/view.js';
 import {
   handleReturnButtonClick,
   handleInsertButtonClick,
   handleOrderButtonClick,
 } from './eventHandlers.js';
 
-export const initializeEventHandlers = (
-  insertBtn,
-  returnBtn,
-  insertCoinView,
-  totalBalanceView,
-) => {
-  insertBtn.addEventListener('click', (event) =>
-    handleInsertButtonClick(insertCoinView, totalBalanceView),
-  );
+export const initializeEventHandlers = () => {
+  // 사용할 Elements 가져오기
+  const { insertBtn, returnBtn, orderBtns } = getViewElements();
 
-  returnBtn.addEventListener('click', (event) =>
-    handleReturnButtonClick(totalBalanceView),
-  );
+  insertBtn.addEventListener('click', () => handleInsertButtonClick());
+
+  returnBtn.addEventListener('click', () => handleReturnButtonClick());
 
   // 주문 버튼
-  const orderBtns = document.querySelectorAll('.order-btn');
-
   orderBtns.forEach((btn) => {
-    btn.addEventListener('click', (event) =>
-      handleOrderButtonClick(event, ITEMS, totalBalanceView),
-    );
+    btn.addEventListener('click', (event) => handleOrderButtonClick(event));
   });
 };

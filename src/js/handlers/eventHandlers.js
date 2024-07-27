@@ -1,11 +1,17 @@
+import { ITEMS } from '../constants/contants.js';
 import { returnMoney, insertMoney, buyItem } from '../utils/util.js';
+import { getViewElements } from '../views/view.js';
 
-export const handleReturnButtonClick = (totalBalanceView) => {
+export const handleReturnButtonClick = () => {
+  const { totalBalanceView } = getViewElements();
+
   const totalBalance = totalBalanceView.value;
   returnMoney(totalBalance, totalBalanceView);
 };
 
-export const handleInsertButtonClick = (insertCoinView, totalBalanceView) => {
+export const handleInsertButtonClick = () => {
+  const { insertCoinView, totalBalanceView } = getViewElements();
+
   const coin = insertCoinView.value;
 
   if (coin > 0) {
@@ -18,11 +24,13 @@ export const handleInsertButtonClick = (insertCoinView, totalBalanceView) => {
   }
 };
 
-export const handleOrderButtonClick = (event, items, totalBalanceView) => {
+export const handleOrderButtonClick = (event) => {
+  const { totalBalanceView } = getViewElements();
+
   const itemName = event.target.textContent;
-  const item = items.find((i) => i.name === itemName);
+  const item = ITEMS.find((i) => i.name === itemName);
 
   if (item) {
-    buyItem(item.name, item.price, totalBalanceView, items);
+    buyItem(item.name, item.price, totalBalanceView, ITEMS);
   }
 };

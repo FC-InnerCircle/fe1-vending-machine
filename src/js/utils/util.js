@@ -31,7 +31,7 @@ export const addLog = (coin, action) => {
 
   const li = document.createElement('li');
   const logMessage = `${
-    action === 'buy' ? coin : formatCurrency(coin)
+    action === 'buy' ? coin : `${formatCurrency(coin)}원`
   }을 ${actionText} 했습니다.`;
 
   const transactionLog = document.querySelector('.log');
