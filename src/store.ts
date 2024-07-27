@@ -1,6 +1,8 @@
+import { Item } from "./components/VendingItems";
+
 interface Control {
   type: "buy" | "insert" | "return";
-  value?: number;
+  value?: number | Item;
 }
 type Listener = () => void;
 
@@ -12,12 +14,16 @@ class Store {
 
   setControl(newValue: Control) {
     this.control = newValue;
-    if (newValue.type === "insert") {
-      this.balance = this.balance + Number(newValue.value!);
+    const { type, value } = newValue;
+    if (type === "insert" && value) {
+      this.balance = this.balance + Number(value);
       this.logs.push(`${newValue.value}원이 투입되었습니다.`);
-    } else if (newValue.type === "return") {
+    } else if (type === "return") {
       this.logs.push(`${this.balance}원을 반환합니다.`);
       this.balance = 0;
+    } else if (type === "buy" && value && typeof value !== "number") {
+      this.balance = this.balance - value.price;
+      this.logs.push(`${value.label}을 구매 했습니다.`);
     }
     this.notify();
   }

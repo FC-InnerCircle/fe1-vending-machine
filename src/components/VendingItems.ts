@@ -1,4 +1,6 @@
-type Item = {
+import { store } from "../store";
+
+export type Item = {
   price: number;
   label: string;
   index: number;
@@ -16,20 +18,20 @@ export default class VendingItems {
 
   render(): HTMLElement {
     const $vendingItems = document.createElement("div");
-    $vendingItems.innerHTML = `
-      <div class="grid grid-cols-3 gap-1">
-        ${items
-          .map(
-            (item) => `
-          <button type="button" class="flex w-full justify-center rounded bg-indigo-300 hover:bg-indigo-400 active:bg-indigo-600 active:text-white font-semibold py-3">
-            ${item.label}
-          </button>
-        `
-          )
-          .join("")}  
-      </div>
-    `;
-    // $vendingItems.textContent = "vendingItems";
+    $vendingItems.className = "grid grid-cols-3 gap-1";
+    items.forEach((item) => {
+      const button = document.createElement("button");
+      button.textContent = item.label;
+      button.className =
+        "flex w-full justify-center rounded bg-indigo-300 hover:bg-indigo-400 active:bg-indigo-600 active:text-white font-semibold py-3";
+      button.addEventListener("click", () => this.selectItem(item));
+      $vendingItems.appendChild(button);
+    });
+
     return $vendingItems;
+  }
+  selectItem(item: Item) {
+    console.log("s", item);
+    store.setControl({ type: "buy", value: item });
   }
 }
