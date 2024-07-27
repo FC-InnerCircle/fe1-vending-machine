@@ -82,7 +82,7 @@ const getProductItemElements = (items: { name: string; price: number }[]) => {
 };
 
 const getMinPrice = (items: { name: string; price: number }[]) =>
-  Math.min(...items.map(({ price }) => price));
+  items.reduce((prev, { price }) => (price < prev ? price : prev), 0);
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
