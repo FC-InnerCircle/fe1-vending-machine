@@ -83,6 +83,10 @@ function handleDeposit(inputValue) {
 }
 
 function handleRefund() {
+  if (globalTotalAmount === 0) {
+    return;
+  }
+
   const totalAmount = formatPrice(globalTotalAmount);
   appendLog(`${totalAmount}원을 반환합니다.`);
   globalTotalAmount = 0;
