@@ -1,10 +1,8 @@
+import { $ } from './utils/dom.js';
+
 const REGEX = {
   NUMBER: /^\d+$/,
 };
-
-function $(selector, element = document) {
-  return element.querySelector(selector);
-}
 
 function init() {
   document.addEventListener('DOMContentLoaded', () => {
@@ -30,8 +28,8 @@ function createButtons(target) {
 
 function bindEvents() {
   const $priceInput = $('.price-input');
-  const $insertMoneyButton = $('.insert-money-button');
   const $returnMoneyButton = $('.return-money-button');
+  const $vendingMachineInsertForm = $('.vending-machine-insert-form');
   const $vendingMachineButtonContainer = $('.vending-machine-button-container');
   const $vendingMachinePriceInput = $('.vending-machine-price');
 
@@ -44,7 +42,9 @@ function bindEvents() {
     }
   });
 
-  $insertMoneyButton.addEventListener('click', () => {
+  $vendingMachineInsertForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
     const money = $priceInput.value;
 
     setVendingMachinePrice(money);
@@ -62,6 +62,10 @@ function bindEvents() {
   });
 
   $vendingMachineButtonContainer.addEventListener('click', (event) => {
+    if (event.target.tagName !== 'BUTTON') {
+      return;
+    }
+
     const { textContent: productName } = event.target;
     const [, price] = productName.split('FE');
     const vendingMachinePrice = Number($vendingMachinePriceInput.textContent);
