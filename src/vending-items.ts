@@ -23,7 +23,7 @@ export class VendingItems {
     this.initialize();
   }
 
-  initialize() {
+  private initialize() {
     this.render();
     this.setUpEvent();
   }

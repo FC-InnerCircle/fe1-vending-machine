@@ -4,7 +4,8 @@ import { DisplayLog } from "./display-log";
 import { VendingItems } from "./vending-items";
 
 export class VendingMachine {
-  private template = `<div class="vending-machine-container">
+  private getTemplate(): string {
+    return `<div class="vending-machine-container">
   <div class="vending-machine">
     <div class="display-container"></div>
     <div class="item-container"></div>
@@ -19,6 +20,7 @@ export class VendingMachine {
     <div class="log-container"></div>
   </div>
   </div>`;
+  }
 
   private displayInfo: DisplayInfo | undefined;
   private logDisplay: DisplayLog | undefined;
@@ -39,7 +41,7 @@ export class VendingMachine {
   }
 
   private initialize() {
-    this.container.innerHTML = this.template;
+    this.container.innerHTML = this.getTemplate();
     const displayContainer = this.container.querySelector(
       ".display-container"
     )! as HTMLDivElement;
