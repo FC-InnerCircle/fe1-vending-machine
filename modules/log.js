@@ -1,12 +1,18 @@
+import { getState } from './state.js';
+
 export const addLog = (message) => {
-  const logDisplay = document.getElementById('log');
+  const { logDisplay } = getState();
   const logEntry = document.createElement('li');
   logEntry.textContent = message;
-  logDisplay.appendChild(logEntry);
+  if (logDisplay) {
+    logDisplay.appendChild(logEntry);
+  }
   scrollLogToBottom();
 };
 
 export const scrollLogToBottom = () => {
-  const logContainer = document.getElementById('log-container');
-  logContainer.scrollTop = logContainer.scrollHeight;
+  const { logContainer } = getState();
+  if (logContainer) {
+    logContainer.scrollTop = logContainer.scrollHeight;
+  }
 };

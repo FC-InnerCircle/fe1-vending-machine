@@ -1,12 +1,12 @@
 import { addLog } from './log.js';
 import { saveToLocalStorage } from './storage.js';
+import { getState } from './state.js';
 
 let balance = 0;
-let balanceDisplay = null;
 
-export const initializeBalance = (displayElement) => {
-  balanceDisplay = displayElement;
-  updateBalance();
+export const initializeBalance = () => {
+  const { balanceDisplay } = getState();
+  updateBalance(balanceDisplay);
 };
 
 export const getBalance = () => balance;
@@ -19,18 +19,21 @@ export const setBalance = (newBalance) => {
 };
 
 export const updateBalance = () => {
+  const { balanceDisplay } = getState();
   if (balanceDisplay) {
     balanceDisplay.innerText = balance.toLocaleString();
   }
 };
 
 export const insertMoney = (amount) => {
-  const moneyInput = document.getElementById('money-input');
+  const { moneyInput } = getState();
   if (isValidAmount(amount)) {
     balance += amount;
     updateBalance();
     addLog(`${amount.toLocaleString()}원을 투입했습니다.`);
-    moneyInput.value = '';
+    if (moneyInput) {
+      moneyInput.value = '';
+    }
   } else {
     addLog('유효하지 않은 금액입니다.');
   }

@@ -1,21 +1,32 @@
-import { getBalance, initializeBalance, updateBalance, setBalance } from './balance.js';
-import { scrollLogToBottom } from './log.js';
+import { getBalance, setBalance, updateBalance } from './balance.js';
+import { addLog, scrollLogToBottom } from './log.js';
+import { getState } from './state.js';
 
 export const saveToLocalStorage = () => {
   localStorage.setItem('balance', getBalance());
-  localStorage.setItem('log', document.getElementById('log').innerHTML);
+  
+  const { logDisplay } = getState();
+  if (logDisplay) {
+    const logs = Array.from(logDisplay.children).map(logItem => logItem.textContent);
+    localStorage.setItem('log', JSON.stringify(logs));
+  }
 };
 
 export const loadFromLocalStorage = () => {
   const savedBalance = localStorage.getItem('balance');
   const savedLog = localStorage.getItem('log');
+  
   if (savedBalance !== null) {
-    initializeBalance(document.getElementById('balance-display'));
-    setBalance(parseInt(savedBalance)); // 전역 변수 balance 초기화
+    setBalance(parseInt(savedBalance));
     updateBalance();
   }
+
   if (savedLog !== null) {
-    document.getElementById('log').innerHTML = savedLog;
-    scrollLogToBottom();
+    const { logDisplay } = getState();
+    if (logDisplay) {
+      const logs = JSON.parse(savedLog);
+      logs.forEach(log => addLog(log));
+      scrollLogToBottom();
+    }
   }
 };
