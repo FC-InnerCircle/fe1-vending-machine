@@ -8,7 +8,8 @@ export type Item = {
 
 const range = (start: number, stop: number, step = 1) =>
   Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
-export const items: Item[] = range(300, 1100, 100).map((price, i) => ({
+
+export const ITEMS: Item[] = range(300, 1100, 100).map((price, i) => ({
   price,
   label: `FE${price}`,
   index: i + 1,
@@ -19,7 +20,8 @@ export default class VendingItems {
   render(): HTMLElement {
     const $vendingItems = document.createElement("div");
     $vendingItems.className = "grid grid-cols-3 gap-1";
-    items.forEach((item) => {
+    // TODO: 이벤트 위임
+    ITEMS.forEach((item) => {
       const button = document.createElement("button");
       button.textContent = item.label;
       button.className =
