@@ -1,0 +1,23 @@
+@import '../utils/mixins';
+
+.button-primary {
+  border: 1px solid black;
+  @include button-styles(#A4D8FF, #4DABF7, #1871C2);
+}
+
+.button-secondary {
+  padding: 0;
+  min-width: 50px;
+  @include button-styles(#6c757d, #5a6268, #4e555b);
+}
+
+.button-success {
+  @include button-styles(#28a745, #218838, #1e7e34);
+}
+
+.container__vendingmachine__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 columns of equal width
+  grid-gap: 10px; // Gap between buttons
+  padding: 20px; // Optional padding around the grid
+}
