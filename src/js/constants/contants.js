@@ -1,4 +1,4 @@
-export const Items = [
+export const ITEMS = [
   {
     name: 'FE 300',
     price: 300,
@@ -37,5 +37,5 @@ export const Items = [
   },
 ];
 
-export const btnStyle =
+export const BTN_STYLE =
   'flex items-center justify-center w-32 h-20 bg-blue-300 hover:bg-blue-400 active:bg-blue-500 text-white font-bold rounded shadow-md transition-all duration-200';

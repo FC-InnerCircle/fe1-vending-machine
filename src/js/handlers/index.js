@@ -1,4 +1,4 @@
-import { Items } from '../constants/contants.js';
+import { ITEMS } from '../constants/contants.js';
 import {
   handleReturnButtonClick,
   handleInsertButtonClick,
@@ -15,7 +15,6 @@ export const initializeEventHandlers = (
 ) => {
   insertBtn.addEventListener('click', (event) =>
     handleInsertButtonClick(
-      event,
       insertCoinView,
       totalBalanceView,
       transactionLog,
@@ -25,7 +24,6 @@ export const initializeEventHandlers = (
 
   returnBtn.addEventListener('click', (event) =>
     handleReturnButtonClick(
-      event,
       totalBalanceView,
       transactionLog,
       transactionLogContainer,
@@ -39,7 +37,7 @@ export const initializeEventHandlers = (
     btn.addEventListener('click', (event) =>
       handleOrderButtonClick(
         event,
-        Items,
+        ITEMS,
         totalBalanceView,
         transactionLog,
         transactionLogContainer,

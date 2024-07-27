@@ -1,4 +1,4 @@
-import { btnStyle } from './constants/contants.js';
+import { BTN_STYLE } from './constants/contants.js';
 
 import { getViewElements, initView } from './views/view.js';
 import { initializeEventHandlers } from './handlers/index.js';
@@ -12,10 +12,11 @@ const {
   transactionLogContainer,
   insertCoinView,
   totalBalanceView,
+  orderBtns,
 } = getViewElements();
 
 // view 초기화
-initView(menuSection, btnStyle);
+initView(menuSection, BTN_STYLE);
 
 // 이벤트 핸들러 초기화
 initializeEventHandlers(
@@ -25,4 +26,5 @@ initializeEventHandlers(
   totalBalanceView,
   transactionLog,
   transactionLogContainer,
+  orderBtns,
 );

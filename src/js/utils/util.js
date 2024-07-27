@@ -1,15 +1,14 @@
 // 돈 단위 3자리 계산 함수
 export const formatCurrency = (amount) => {
-  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return new Intl.NumberFormat('ko-KR', {
+    style: 'currency',
+    currency: 'KRW',
+  }).format(amount);
 };
 
-// convert
-export const convertCurrency = (amount) => {
-  if (amount < 1000) {
-    return parseInt(amount, 10);
-  }
-
-  return parseInt(amount.replace(/,/g, ''), 10);
+export const convertCurrency = (formattedAmount) => {
+  const numericString = formattedAmount.replace(/[^\d.-]/g, '');
+  return parseFloat(numericString);
 };
 
 // 로그 함수
@@ -36,7 +35,9 @@ export const addLog = (
   }
 
   const li = document.createElement('li');
-  const logMessage = `${formatCurrency(coin)}을 ${actionText} 했습니다.`;
+  const logMessage = `${
+    action === 'buy' ? coin : formatCurrency(coin)
+  }을 ${actionText} 했습니다.`;
 
   li.textContent = logMessage;
   transactionLog.appendChild(li);
@@ -94,13 +95,14 @@ export const buyItem = (
   item,
   price,
   totalBalanceView,
-  Items,
+  items,
   transactionLog,
   transactionLogContainer,
 ) => {
   let totalBalance = convertCurrency(totalBalanceView.value);
+
   const cost = price;
-  const minCost = findMinPrice(Items); // 최소금액
+  const minCost = findMinPrice(items); // 최소금액
 
   if (totalBalance >= cost) {
     totalBalance -= cost;

@@ -1,13 +1,10 @@
 import { returnMoney, insertMoney, buyItem } from '../utils/util.js';
 
 export const handleReturnButtonClick = (
-  event,
   totalBalanceView,
   transactionLog,
   transactionLogContainer,
 ) => {
-  event.preventDefault();
-
   const totalBalance = totalBalanceView.value;
   returnMoney(
     totalBalance,
@@ -18,13 +15,11 @@ export const handleReturnButtonClick = (
 };
 
 export const handleInsertButtonClick = (
-  event,
   insertCoinView,
   totalBalanceView,
   transactionLog,
   transactionLogContainer,
 ) => {
-  event.preventDefault();
   const coin = insertCoinView.value;
 
   if (coin > 0) {
@@ -45,22 +40,20 @@ export const handleInsertButtonClick = (
 
 export const handleOrderButtonClick = (
   event,
-  Items,
+  items,
   totalBalanceView,
   transactionLog,
   transactionLogContainer,
 ) => {
-  event.preventDefault();
-
   const itemName = event.target.textContent;
-  const item = Items.find((i) => i.name === itemName);
+  const item = items.find((i) => i.name === itemName);
 
   if (item) {
     buyItem(
       item.name,
       item.price,
       totalBalanceView,
-      Items,
+      items,
       transactionLog,
       transactionLogContainer,
     );
