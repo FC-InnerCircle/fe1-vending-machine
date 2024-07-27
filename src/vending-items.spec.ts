@@ -24,7 +24,6 @@ describe("VendingItems", () => {
     });
 
     vendingItems.render();
-    vendingItems.setUpEvent();
   });
 
   afterEach(() => {

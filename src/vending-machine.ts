@@ -1,10 +1,17 @@
+import { Component } from "./component";
 import { PRICE_LISTS } from "./constants";
 import { DisplayInfo } from "./display-info";
 import { DisplayLog } from "./display-log";
 import { VendingItems } from "./vending-items";
 
-export class VendingMachine {
-  private getTemplate(): string {
+interface VendingMachineState {
+  totalAmount: number;
+  logs: string[];
+  displayOnlyPrice?: number;
+}
+
+export class VendingMachine extends Component<VendingMachineState> {
+  protected getTemplate(): string {
     return `<div class="vending-machine-container">
   <div class="vending-machine">
     <div class="display-container"></div>
@@ -26,38 +33,34 @@ export class VendingMachine {
   private logDisplay: DisplayLog | undefined;
   private vendingItems: VendingItems | undefined;
 
-  private state: {
-    totalAmount: number;
-    logs: string[];
-    displayOnlyPrice?: number;
-  } = {
-    totalAmount: 0,
-    logs: [],
-    displayOnlyPrice: undefined,
-  };
-
-  constructor(private container: HTMLElement) {
-    this.initialize();
+  constructor($container: HTMLElement, initialState?: VendingMachineState) {
+    const state: VendingMachineState = {
+      totalAmount: 0,
+      logs: [],
+      displayOnlyPrice: undefined,
+      ...initialState,
+    };
+    super($container, state);
   }
 
-  private initialize() {
-    this.container.innerHTML = this.getTemplate();
-    const displayContainer = this.container.querySelector(
+  protected onRender() {
+    this.$container.innerHTML = this.getTemplate();
+    const displayContainer = this.$container.querySelector(
       ".display-container"
     )! as HTMLDivElement;
-    const logContainer = this.container.querySelector(
+    const logContainer = this.$container.querySelector(
       ".log-container"
     )! as HTMLDivElement;
-    const itemContainer = this.container.querySelector(
+    const itemContainer = this.$container.querySelector(
       ".item-container"
     )! as HTMLDivElement;
 
     this.displayInfo = new DisplayInfo(displayContainer, {
-      totalAmount: this.state.totalAmount,
+      totalAmount: this.state?.totalAmount ?? 0,
     });
 
     this.logDisplay = new DisplayLog(logContainer, {
-      logs: this.state.logs,
+      logs: this.state?.logs ?? [],
     });
 
     this.vendingItems = new VendingItems(itemContainer, {
@@ -65,35 +68,38 @@ export class VendingMachine {
       onItemMouseDown: this.onItemMouseDown.bind(this),
       onItemMouseUp: this.onItemMouseUp.bind(this),
     });
-
-    this.render();
-    this.setUpEvent();
   }
 
   render() {
+    super.render();
     this.displayInfo?.render();
     this.logDisplay?.render();
     this.vendingItems?.render();
   }
 
-  setState(nextState: Partial<typeof this.state>) {
-    this.state = { ...this.state, ...nextState };
-
+  setState(nextState: Partial<VendingMachineState>) {
+    if (!this.state) return;
+    super.setState(nextState);
     this.displayInfo?.setState({
       totalAmount:
         this.state.totalAmount - (this.state.displayOnlyPrice ?? 0) > 0
           ? this.state.totalAmount
           : this.state.displayOnlyPrice ?? this.state.totalAmount,
     });
-
     this.logDisplay?.setState({ logs: this.state.logs });
   }
 
   private insertCoin(amount: number) {
     if (amount <= 0) return;
+    const totalAmount = (this.state?.totalAmount ?? 0) + amount;
+    const logs = [
+      ...(this.state?.logs ?? []),
+      `${amount.toLocaleString()}원을 넣었습니다.`,
+    ];
+
     this.setState({
-      totalAmount: this.state.totalAmount + amount,
-      logs: [...this.state.logs, `${amount.toLocaleString()}원을 넣었습니다.`],
+      totalAmount,
+      logs,
     });
   }
 
@@ -132,20 +138,32 @@ export class VendingMachine {
     this.setState({ displayOnlyPrice: undefined });
   }
 
-  private setUpEvent() {
-    const amountInput = this.container.querySelector(
+  protected setUpEvent() {
+    const amountInput = this.$container.querySelector(
       ".amount-input"
     )! as HTMLInputElement;
-    const insertButton = this.container.querySelector(
+    const insertButton = this.$container.querySelector(
       ".insert"
     )! as HTMLButtonElement;
-    const returnButton = this.container.querySelector(
+    const returnButton = this.$container.querySelector(
       ".return"
     )! as HTMLButtonElement;
 
     amountInput.addEventListener("input", this.onChangeAmount);
     insertButton.addEventListener("mouseup", this.onClickInsert.bind(this));
     returnButton.addEventListener("mouseup", this.onClickReturn.bind(this));
+
+    return () => {
+      amountInput.removeEventListener("input", this.onChangeAmount);
+      insertButton.removeEventListener(
+        "mouseup",
+        this.onClickInsert.bind(this)
+      );
+      returnButton.removeEventListener(
+        "mouseup",
+        this.onClickReturn.bind(this)
+      );
+    };
   }
 
   private onChangeAmount(e: Event) {
@@ -154,7 +172,7 @@ export class VendingMachine {
   }
 
   private onClickInsert() {
-    const amountInput = this.container.querySelector(
+    const amountInput = this.$container.querySelector(
       ".amount-input"
     )! as HTMLInputElement;
     const amount = Number(amountInput.value);

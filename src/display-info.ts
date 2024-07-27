@@ -1,21 +1,21 @@
-export class DisplayInfo {
-  private getTemplate(): string {
+import { Component } from "./component";
+
+interface DisplayInfoState {
+  totalAmount: number;
+}
+
+export class DisplayInfo extends Component<DisplayInfoState> {
+  protected getTemplate(): string {
     return `
       <div class="display"></div>  
     `;
   }
 
   constructor(
-    private $container: HTMLElement,
-    private state: {
-      totalAmount: number;
-    }
+    protected $container: HTMLElement,
+    protected state: DisplayInfoState
   ) {
-    this.initialize();
-  }
-
-  private initialize() {
-    this.render();
+    super($container, state);
   }
 
   render() {
@@ -24,10 +24,5 @@ export class DisplayInfo {
     if (display) {
       display.textContent = `${this.state.totalAmount.toLocaleString()}원`;
     }
-  }
-
-  setState(nextState: Partial<typeof this.state>) {
-    this.state = { ...this.state, ...nextState };
-    this.render();
   }
 }

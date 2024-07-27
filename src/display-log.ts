@@ -1,21 +1,17 @@
-export class DisplayLog {
-  private getTemplate(): string {
+import { Component } from "./component";
+
+export class DisplayLog extends Component<{ logs: string[] }> {
+  protected getTemplate(): string {
     return `
       <div class="logs"></div>  
     `;
   }
 
   constructor(
-    private $container: HTMLElement,
-    private state: {
-      logs: string[];
-    }
+    protected $container: HTMLElement,
+    protected state: { logs: string[] }
   ) {
-    this.initialize();
-  }
-
-  private initialize() {
-    this.render();
+    super($container, state);
   }
 
   render() {
@@ -27,11 +23,6 @@ export class DisplayLog {
         .join("");
     }
     this.scrollToBottom();
-  }
-
-  setState(nextState: Partial<typeof this.state>) {
-    this.state = { ...this.state, ...nextState };
-    this.render();
   }
 
   private scrollToBottom() {
