@@ -49,52 +49,81 @@ class AppStore extends Store {
   }
 }
 
-function createLogMessage(message) {
+const createLogMessage = (message) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
   span.className = "log";
   span.textContent = message;
   li.appendChild(span);
   return li;
-}
+};
 
-window.addEventListener("load", () => {
+const createLogMessageHandler = (element) => {
+  return (message) => {
+    element.appendChild(createLogMessage(message));
+    element.scrollTop = element.scrollHeight;
+  };
+};
+
+const INIT_PRODUCT_ITEMS = () => {
+  return new Array(9).fill().map((_, i) => {
+    const price = (i + 3) * 100;
+    return { price, label: `FE${price}` };
+  });
+};
+
+window.addEventListener("DOMContentLoaded", () => {
   // Program 시작점
+  const PRODUCT_ITEMS = INIT_PRODUCT_ITEMS();
+  const RETURN_BALANCE_PIVOT = Math.min(...PRODUCT_ITEMS.map(({ price }) => price));
   const store = new AppStore();
-  const RETURN_BALANCE_PIVOT = 300;
 
   const els = {
     balance: document.querySelector("#balance"),
-    products: document.querySelectorAll(".product-box button"),
+    productBox: document.querySelector(".product-box"),
     inputCoin: document.querySelector("#input-coin"),
     btnInsert: document.querySelector("#btn-insert"),
     btnReturn: document.querySelector("#btn-return"),
     logger: document.querySelector("#logger"),
   };
 
-  function appendLogMessage(message) {
-    els.logger.appendChild(createLogMessage(message));
-    els.logger.scrollTop = els.logger.scrollHeight;
-  }
+  // append products
+  els.productBox.innerHTML = PRODUCT_ITEMS.map(({ label }, idx) => `<button type="button" data-key="${idx}">${label}</button>`).join("");
 
-  // 상품 버튼에 대한 이벤트 바인딩
-  els.products.forEach((el) => {
-    el.price = parseInt(el.getAttribute("value"));
-    el.addEventListener("mousedown", function () {
-      store.activeProduct(el);
-    });
-    el.addEventListener("mouseleave", function () {
-      if (store.getActiveProduct() === el) {
+  const handleProductMouseEvent = (listener) => {
+    return function onProductBoxMouseEventListener(e) {
+      if (e.target && e.target.dataset.key) {
+        const product = PRODUCT_ITEMS[e.target.dataset.key];
+        listener.call(this, e, product);
+      }
+    };
+  };
+
+  els.productBox.addEventListener(
+    "mousedown",
+    handleProductMouseEvent(function (e, product) {
+      store.activeProduct(product);
+    })
+  );
+
+  els.productBox.addEventListener(
+    "mouseleave",
+    handleProductMouseEvent(function (e, product) {
+      if (store.getActiveProduct() === product) {
         store.deactiveProduct();
       }
-    });
-    el.addEventListener("click", function () {
-      if (store.getActiveProduct() === el) {
-        store.consumeCoin(el);
+    })
+  );
+
+  els.productBox.addEventListener(
+    "click",
+    handleProductMouseEvent(function (e, product) {
+      if (store.getActiveProduct() === product) {
+        store.consumeCoin(product);
         store.deactiveProduct();
       }
-    });
-  });
+    })
+  );
 
   // 입력값 유효성 숫자만 입력할 수 있다.
   els.inputCoin.addEventListener("input", function () {
@@ -130,6 +159,9 @@ window.addEventListener("load", () => {
     }
   });
 
+  // 로그 핸들링 함수
+  const appendLogMessage = createLogMessageHandler(els.logger);
+
   // 금액 투입에 대한 화면 처리
   store.on("insert:coin", (insertCoin) => {
     els.balance.textContent = store.getCoin().toLocaleString();
@@ -138,7 +170,7 @@ window.addEventListener("load", () => {
 
   // 상품 구매에 대한 화면 처리
   store.on("consume:coin", (product) => {
-    appendLogMessage(`${product.textContent}을 구입합니다.`);
+    appendLogMessage(`${product.label}을 구입합니다.`);
     if (store.getCoin() < RETURN_BALANCE_PIVOT) {
       // 반환처리
       store.returnCoin();
