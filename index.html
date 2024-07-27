@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <div id="app">
+    <div id="vendingMachine">
+      <div id="totalAmountDisplay"></div>
+      <div id="productContainer"></div>
+    </div>
+    <div id="logContainer">
+      <div id="inputContainer">
+        <input type="number" id="inputAmount" min="1">
+        <button id="depositButton">투입</button>
+        <button id="refundButton">반환</button>
+      </div>
+      <div id="logScreen"></div>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
