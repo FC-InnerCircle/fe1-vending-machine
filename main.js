@@ -17,18 +17,13 @@ function init() {
 
 function btnRender() {
   const buttonsContainer = document.getElementById('buttons-container');
-  items.forEach((item) => {
-    const button = document.createElement('button');
-    button.textContent = item;
-    button.classList.add('item-button');
-
-    button.addEventListener('mouseover', onHoverButton);
-    button.addEventListener('mouseout', onLeaveButton);
-    button.addEventListener('mousedown', onClickButton);
-    button.addEventListener('mouseup', onReleaseButton);
-
-    buttonsContainer.appendChild(button);
-  });
+  const buttonsHTML = items
+    .map((item) => {
+      const price = item.slice(2);
+      return `<button class="item-button" data-price="${price}">${item}</button>`;
+    })
+    .join('');
+  buttonsContainer.innerHTML = buttonsHTML;
 }
 
 function onChangeCurrentAmount(e) {
@@ -47,12 +42,38 @@ function onDeposit() {
   currentAmount.value = null;
 }
 
+function handleButtonEvent(event) {
+  const target = event.target;
+  if (target.classList.contains('item-button')) {
+    switch (event.type) {
+      case 'mouseover':
+        onHoverButton(event);
+        break;
+      case 'mouseout':
+        onLeaveButton(event);
+        break;
+      case 'mousedown':
+        onClickButton(event);
+        break;
+      case 'mouseup':
+        onReleaseButton(event);
+        break;
+    }
+  }
+}
+
 function addEvent() {
   document
     .querySelector('.current-amount')
     .addEventListener('input', onChangeCurrentAmount);
   document.querySelector('.deposit').addEventListener('click', onDeposit);
   document.querySelector('.return').addEventListener('click', onReturn);
+
+  const buttonsContainer = document.getElementById('buttons-container');
+  buttonsContainer.addEventListener('mouseover', handleButtonEvent);
+  buttonsContainer.addEventListener('mouseout', handleButtonEvent);
+  buttonsContainer.addEventListener('mousedown', handleButtonEvent);
+  buttonsContainer.addEventListener('mouseup', handleButtonEvent);
 }
 
 function main() {

@@ -12,26 +12,16 @@ export function onLeaveButton(e) {
   elem.classList.remove('hover');
 }
 
-function CheckBalance() {
-  if (BalanceState.get() < items[0].slice(2)) {
-    onReturn();
-  }
-}
-
 export function onClickButton(e) {
   const elem = e.target;
   elem.classList.add('active');
-  const itemValue = getItemValue(elem.textContent);
+  const itemValue = elem.dataset.price;
 
   if (canPurchaseItem(itemValue)) {
     processPurchase(elem.textContent, itemValue);
   } else {
-    showInsufficientBalance(itemValue);
+    showItemPrice(itemValue);
   }
-}
-
-function getItemValue(itemText) {
-  return Number(itemText.slice(2));
 }
 
 function canPurchaseItem(itemValue) {
@@ -45,7 +35,7 @@ function processPurchase(itemText, itemValue) {
   checkMinimumBalance();
 }
 
-function showInsufficientBalance(itemValue) {
+function showItemPrice(itemValue) {
   updateDisplay(itemValue);
 }
 
