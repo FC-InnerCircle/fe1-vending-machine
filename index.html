@@ -29,7 +29,7 @@
       </section>
 
       <section class="vending-machine__calc border border-black bg-blue-500">
-        <div
+        <form
           class="vending-machine__calc-container flex flex-col gap-2 box-border p-4"
         >
           <div class="flex gap-2">
@@ -42,11 +42,13 @@
             <div class="calc-btn-group flex gap-2">
               <button
                 class="insert-btn flex items-center justify-center w-12 h-12 bg-blue-300 hover:bg-blue-400 active:bg-blue-500 text-white font-bold rounded shadow-md transition-all duration-200"
+                type="button"
               >
                 투입
               </button>
               <button
                 class="return-btn flex items-center justify-center w-12 h-12 bg-blue-300 hover:bg-blue-400 active:bg-blue-500 text-white font-bold rounded shadow-md transition-all duration-200"
+                type="button"
               >
                 반환
               </button>
@@ -58,7 +60,7 @@
           >
             <ul class="log"></ul>
           </div>
-        </div>
+        </form>
       </section>
     </main>
 
