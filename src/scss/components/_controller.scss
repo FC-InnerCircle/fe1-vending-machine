@@ -1,0 +1,75 @@
+// components/_controller.scss
+.controller {
+  @include flex-center;
+  height: 100%;
+  flex: 1;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+}
+
+.controller__button {
+  padding: 10px 15px;
+  background-color: $success-color;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($success-color, 10%);
+  }
+}
+
+.controller__status {
+  margin-left: 15px;
+}
+
+.container__controller__logger {
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 300px;
+  padding: 20px;
+  height: 140px;
+  overflow-y: scroll;
+
+  li {
+    text-decoration: none;
+    list-style-type: none;
+  }
+}
+
+.container__controller__logger::-webkit-scrollbar {
+  display: none;
+  /* Hide the scrollbar */
+}
+
+.container__controller__coinslot {
+  display: flex;
+  gap: 10px;
+}
+
+.container__toast {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.toast {
+  list-style: none;
+  padding: 20px;
+  width: 200px;
+  border: 1px solid aqua;
+  background-color: #fff;
+  gap: 20px;
+  transform: translateX(1000px);
+  transition: all 0.5s;
+
+  &.active {
+    transform: translateX(0px);
+  }
+}

@@ -1,0 +1,30 @@
+// utils/_mixins.scss
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin input-size($width: 100%, $height: 40px, $padding: 10px) {
+  width: $width;
+  height: $height;
+  padding: $padding;
+  box-sizing: border-box;
+}
+
+@mixin button-styles($bgcolor, $hovercolor, $activecolor, $textcolor: #fff) {
+  background-color: $bgcolor;
+  color: $textcolor;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $hovercolor;
+  }
+
+  &:active {
+    background-color: $activecolor;
+  }
+}
