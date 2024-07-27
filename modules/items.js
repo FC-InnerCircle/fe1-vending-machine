@@ -3,8 +3,8 @@ import { saveToLocalStorage } from './storage.js';
 import { getBalance, setBalance, updateBalance, decreaseBalance } from './balance.js';
 import { showTemporaryMessage } from './messages.js';
 
-const MIN_PRICE = 300;
 const TEMP_DISPLAY_TIME = 800;
+let minPrice = 0;
 
 export const initializeItems = () => {
   const items = [
@@ -24,6 +24,8 @@ export const initializeItems = () => {
     console.error('Items container not found');
     return;
   }
+
+  minPrice = Math.min(...items.map(item => item.price));
 
   items.forEach(item => {
     const button = document.createElement('button');
@@ -52,7 +54,7 @@ const completePurchase = (price, label) => {
   updateBalance();
   addLog(`${label}을(를) 구입했습니다.`);
 
-  if (getBalance() < MIN_PRICE) {
+  if (getBalance() < minPrice) {
     returnRemainingBalance();
   }
 
