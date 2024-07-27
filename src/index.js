@@ -26,6 +26,7 @@ function createButtons(target) {
 function bindEvents() {
   const $priceInput = $('.price-input');
   const $insertMoneyButton = $('.insert-money-button');
+  const $returnMoneyButton = $('.return-money-button');
 
   $priceInput.addEventListener('input', (event) => {
     const { value } = event.target;
@@ -45,6 +46,23 @@ function bindEvents() {
 
     $priceInput.value = null;
   });
+
+  $returnMoneyButton.addEventListener('click', () => {
+    const $vendingMachinePriceInput = $('.vending-machine-price');
+
+    const money = $vendingMachinePriceInput.textContent;
+
+    const htmlString = `<div>${money}원을 반환합니다.</div>`;
+
+    $vendingMachinePriceInput.textContent = '';
+    logMessage(htmlString);
+  });
+}
+
+function logMessage(messageHtml) {
+  const $logMessageContainer = $('.log-message-container');
+
+  $logMessageContainer.insertAdjacentHTML('afterbegin', messageHtml);
 }
 
 function setVendingMachinePrice(price) {
