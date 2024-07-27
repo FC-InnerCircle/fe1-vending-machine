@@ -24,8 +24,10 @@ function createButtons(target) {
 }
 
 function bindEvents() {
-  const priceInput = $('.price-input');
-  priceInput.addEventListener('input', (event) => {
+  const $priceInput = $('.price-input');
+  const $insertMoneyButton = $('.insert-money-button');
+
+  $priceInput.addEventListener('input', (event) => {
     const { value } = event.target;
 
     if (!REGEX.NUMBER.test(value)) {
@@ -34,6 +36,14 @@ function bindEvents() {
     }
 
     priceInput.value = value;
+  });
+
+  $insertMoneyButton.addEventListener('click', () => {
+    const money = $priceInput.value;
+
+    setVendingMachinePrice(money);
+
+    $priceInput.value = null;
   });
 }
 
@@ -45,6 +55,10 @@ function setVendingMachinePrice(price) {
 
 function commaizeNumber(value) {
   return value.toLocaleString();
+}
+
+function insertMoneyToVendingMachine(money) {
+  setVendingMachinePrice(money);
 }
 
 init();
