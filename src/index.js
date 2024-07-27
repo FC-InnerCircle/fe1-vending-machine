@@ -4,6 +4,7 @@ function $(selector, element = document) {
 
 function init() {
   document.addEventListener('DOMContentLoaded', () => {
+    bindEvents();
     const $buttonContainer = $('.vending-machine-buttons');
 
     createButtons($buttonContainer);
@@ -22,4 +23,32 @@ function createButtons(target) {
   target.innerHTML = htmlString;
 }
 
+function bindEvents() {
+  const priceInput = $('.price-input');
+  priceInput.addEventListener('input', (event) => {
+    const { value } = event.target;
+
+    if (!REGEX.NUMBER.test(value)) {
+      priceInput.value = '';
+      return;
+    }
+
+    priceInput.value = value;
+  });
+}
+
+function setVendingMachinePrice(price) {
+  const $price = $('.vending-machine-price');
+
+  $price.textContent = commaizeNumber(price);
+}
+
+function commaizeNumber(value) {
+  return value.toLocaleString();
+}
+
 init();
+
+const REGEX = {
+  NUMBER: /^\d+$/,
+};
