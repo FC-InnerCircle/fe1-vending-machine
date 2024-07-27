@@ -21,7 +21,7 @@ function createButtons(target) {
 
   for (let i = 300; i <= 1100; i += 100) {
     htmlString += `
-    <button class="p-2 bg-sky-200 flex-1" type="button">FE${i}</button>
+    <button class="p-2 bg-sky-200 flex-1 hover:bg-sky-400 active:bg-sky-800" type="button">FE${i}</button>
     `;
   }
 
