@@ -1,13 +1,18 @@
+const REGEX = {
+  NUMBER: /^\d+$/,
+};
+
 function $(selector, element = document) {
   return element.querySelector(selector);
 }
 
 function init() {
   document.addEventListener('DOMContentLoaded', () => {
-    bindEvents();
-    const $buttonContainer = $('.vending-machine-buttons');
+    const $buttonContainer = $('.vending-machine-button-container');
 
     createButtons($buttonContainer);
+
+    bindEvents();
   });
 }
 
@@ -27,16 +32,16 @@ function bindEvents() {
   const $priceInput = $('.price-input');
   const $insertMoneyButton = $('.insert-money-button');
   const $returnMoneyButton = $('.return-money-button');
+  const $vendingMachineButtonContainer = $('.vending-machine-button-container');
+  const $vendingMachinePriceInput = $('.vending-machine-price');
 
   $priceInput.addEventListener('input', (event) => {
     const { value } = event.target;
 
     if (!REGEX.NUMBER.test(value)) {
-      priceInput.value = '';
+      $priceInput.value = '';
       return;
     }
-
-    priceInput.value = value;
   });
 
   $insertMoneyButton.addEventListener('click', () => {
@@ -48,14 +53,29 @@ function bindEvents() {
   });
 
   $returnMoneyButton.addEventListener('click', () => {
-    const $vendingMachinePriceInput = $('.vending-machine-price');
-
     const money = $vendingMachinePriceInput.textContent;
 
     const htmlString = `<div>${money}원을 반환합니다.</div>`;
 
     $vendingMachinePriceInput.textContent = '';
     logMessage(htmlString);
+  });
+
+  $vendingMachineButtonContainer.addEventListener('click', (event) => {
+    const { textContent: productName } = event.target;
+    const [, price] = productName.split('FE');
+    const vendingMachinePrice = Number($vendingMachinePriceInput.textContent);
+
+    if (Number(price) <= vendingMachinePrice) {
+      logMessage(`<div>${productName}을 구매했습니다.</div>`);
+      $vendingMachinePriceInput.textContent =
+        vendingMachinePrice - Number(price);
+
+      if (vendingMachinePrice - Number(price) < 300) {
+        logMessage(`<div>${vendingMachinePrice}원을 반환합니다.</div>`);
+        $vendingMachinePriceInput.textContent = '';
+      }
+    }
   });
 }
 
@@ -80,7 +100,3 @@ function insertMoneyToVendingMachine(money) {
 }
 
 init();
-
-const REGEX = {
-  NUMBER: /^\d+$/,
-};
