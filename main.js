@@ -10,15 +10,40 @@ let globalTotalAmount = INITIAL_TOTAL_AMOUNT;
 let temporaryUpdateTimeout = null;
 
 const products = createProducts(9, 100, MIN_PRODUCT_PRICE);
-createProductButtons(
-  products,
-  handleProductPurchase,
-  handleProductMouseDown,
-  handleProductMouseOut
-);
-setupEventListeners(handleDeposit, handleRefund);
+const productGrid = createProductButtons(products);
 
+productGrid.addEventListener('click', handleProductClick);
+productGrid.addEventListener('mousedown', handleProductMouseDown);
+productGrid.addEventListener('mouseup', handleProductMouseOut);
+productGrid.addEventListener('mouseleave', handleProductMouseOut);
+
+setupEventListeners(handleDeposit, handleRefund);
 updateTotalAmountDisplay(globalTotalAmount);
+
+function handleProductClick(event) {
+  if (event.target.classList.contains('product-button')) {
+    const product = {
+      name: event.target.dataset.name,
+      price: parseInt(event.target.dataset.price),
+    };
+    handleProductPurchase(product);
+  }
+}
+
+function handleProductMouseDown(event) {
+  if (event.target.classList.contains('product-button')) {
+    const product = {
+      price: parseInt(event.target.dataset.price),
+    };
+    if (globalTotalAmount < product.price) {
+      updateTotalAmountDisplay(product.price);
+    }
+  }
+}
+
+function handleProductMouseOut(event) {
+  updateTotalAmountDisplay(globalTotalAmount);
+}
 
 function handleProductPurchase(product) {
   if (temporaryUpdateTimeout !== null) {
@@ -45,16 +70,6 @@ function handleProductPurchase(product) {
       temporaryUpdateTimeout = null;
     }, 500);
   }
-}
-
-function handleProductMouseDown(product) {
-  if (globalTotalAmount < product.price) {
-    updateTotalAmountDisplay(product.price);
-  }
-}
-
-function handleProductMouseOut() {
-  updateTotalAmountDisplay(globalTotalAmount);
 }
 
 function handleDeposit(inputValue) {

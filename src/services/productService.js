@@ -8,7 +8,7 @@ export function createProducts(count, increment, startPrice) {
   });
 }
 
-export function createProductButtons(products, onClick, onMouseDown, onMouseOut) {
+export function createProductButtons(products) {
   const productContainer = document.getElementById('productContainer');
 
   const gridContainer = document.createElement('div');
@@ -18,14 +18,12 @@ export function createProductButtons(products, onClick, onMouseDown, onMouseOut)
     const button = document.createElement('button');
     button.className = 'product-button';
     button.innerHTML = `${product.name}`;
-
-    button.addEventListener('click', () => onClick(product));
-    button.addEventListener('mousedown', () => onMouseDown(product));
-    button.addEventListener('mouseup', onMouseOut);
-    button.addEventListener('mouseleave', onMouseOut);
+    button.dataset.price = product.price;
+    button.dataset.name = product.name;
 
     gridContainer.appendChild(button);
   });
 
   productContainer.appendChild(gridContainer);
+  return gridContainer;
 }
