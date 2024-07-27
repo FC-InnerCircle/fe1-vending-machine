@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  margin: 0 auto;
+  padding: 1em;
+  text-align: center;
+  width: 360px;
+}
+
+input {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 0.3em 0.6em;
+  font-size: 0.8em;
+  font-family: inherit;
+  appearance: none;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.3em 0.6em;
+  font-size: 0.8em;
+  font-weight: 500;
+  border-width: 1px;
+  background-color: #77e4c8;
+  transition: border-color 0.25s;
+  cursor: pointer;
+}
+button:hover {
+  border-color: #478ccf;
+}
+button:active {
+  background-color: #478ccf;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.vending-machine-container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+.vending-machine {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  background-color: hsla(160, 100%, 75%, 0.5);
+  width: 250px;
+}
+
+.control-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 250px;
+}
+
+.item-list {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.display-container {
+  border: 2px solid #ccc;
+  padding-block: 0.5em;
+}
+
+.coin-control-container {
+  display: flex;
+  gap: 0.4em;
+  width: 250px;
+}
+
+.log-container {
+  font-size: 0.6em;
+  text-align: left;
+  border: 2px solid #ccc;
+  padding-block: 0.5em;
+  overflow-y: auto;
+  height: 15em;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  #app {
+    width: 768px;
+    margin: 0 auto;
+  }
+  .vending-machine-container {
+    flex-direction: row;
+  }
+}
