@@ -1,6 +1,6 @@
 import { commaizeNumber } from './utils/commaizeNumber.js';
 
-export function createButtons(target) {
+export function createVendingMachineButtons(target) {
   let htmlString = '';
 
   for (let i = 300; i <= 1100; i += 100) {

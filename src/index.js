@@ -1,12 +1,16 @@
 import { REGEX } from './constants/regex.js';
 import { $ } from './utils/dom.js';
-import { createButtons, logMessage, setVendingMachinePrice } from './view.js';
+import {
+  createVendingMachineButtons,
+  logMessage,
+  setVendingMachinePrice,
+} from './view.js';
 
 function init() {
   document.addEventListener('DOMContentLoaded', () => {
     const $buttonContainer = $('.vending-machine-button-container');
 
-    createButtons($buttonContainer);
+    createVendingMachineButtons($buttonContainer);
 
     bindEvents();
   });
