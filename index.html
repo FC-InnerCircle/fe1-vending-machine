@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./build/css/main.css">
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
 </head>
 
 <body>
@@ -13,27 +13,18 @@
     <div class="container__vendingmachine ">
       <div class="vendingmachine striped-background">
         <div class="container__vendingmachine__display">
-          <input class="display" type="text" disabled value="0">
+          <input class="display" type="text" disabled value=0>
         </div>
         <div class="container__vendingmachine__buttons">
-          <button class="button-primary">FE300</button>
-          <button class="button-primary">FE400</button>
-          <button class="button-primary">FE500</button>
-          <button class="button-primary">FE600</button>
-          <button class="button-primary">FE700</button>
-          <button class="button-primary">FE800</button>
-          <button class="button-primary">FE900</button>
-          <button class="button-primary">FE1000</button>
-          <button class="button-primary">FE1100</button>
         </div>
       </div>
     </div>
     <div class="container__controller">
       <div class="controller">
         <div class="container__controller__coinslot">
-          <input type="text">
-          <button class="button-secondary">투입</button>
-          <button class="button-secondary">반환</button>
+          <input type="text" value="0" class="insertedCoin">
+          <button class="button-secondary insertCoin">투입</button>
+          <button class="button-secondary returnCoin">반환</button>
         </div>
         <div class="container__controller__logger">
         </div>
@@ -42,7 +33,7 @@
     <div class="container__toast">
     </div>
   </div>
-
+  <script type="module" src="./src/main.js"></script>
 </body>
 
 </html>
