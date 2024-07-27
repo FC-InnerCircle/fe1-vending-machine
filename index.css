@@ -17,6 +17,7 @@ body {
   max-height: 422px;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 50px;
 }
 
@@ -24,6 +25,7 @@ body {
 .controls {
   width: 100%;
   padding: 20px;
+  max-width: 400px;
 }
 
 .machine {
@@ -64,19 +66,14 @@ body {
 
 .machine .product-box {
   width: 100%;
-  flex-direction: column;
   gap: 15px;
   display: flex;
+  flex-wrap: wrap;
 }
 
-.machine .product-box .row {
-  width: 100%;
-  gap: 5px;
-  display: flex;
-}
-
-.machine .product-box .row > button {
-  width: 100%;
+.machine .product-box button {
+  /* display: block; */
+  width: 30%;
   height: 6rem;
   cursor: pointer;
   background-color: #95ceff;
