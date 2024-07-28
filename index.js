@@ -9,8 +9,6 @@ const $historyUl = document.querySelector(".history");
 
 let balance = 0;
 
-const addComma = (number) =>
-  number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 const changeBalance = (balance) => {
   $balance.value = balance.toLocaleString();
 };
