@@ -1,3 +1,5 @@
+import { CHEAPEST_PRICE, ALL_ITEMS_COUNT, GENTLEE } from "./CONSTANT.js";
+
 const $controllerInput = document.querySelector(".controller_input");
 const $controllerForm = document.querySelector(".controller");
 const $balance = document.querySelector(".balance");
@@ -5,9 +7,6 @@ const $btnWrap = document.querySelector(".btn_wrap");
 const $returnBalanceBtn = document.querySelector(".return_balance");
 const $historyUl = document.querySelector(".history");
 
-const CHEAPEST_PRICE = 300;
-const ALL_ITEMS_COUNT = 9;
-const GENTLEE = "GT";
 let balance = 0;
 
 const addComma = (number) =>
