@@ -1,11 +1,12 @@
 import { CHEAPEST_PRICE, ALL_ITEMS_COUNT, GENTLEE } from "./CONSTANT.js";
-
-const $controllerInput = document.querySelector(".controller_input");
-const $controllerForm = document.querySelector(".controller");
-const $balance = document.querySelector(".balance");
-const $btnWrap = document.querySelector(".btn_wrap");
-const $returnBalanceBtn = document.querySelector(".return_balance");
-const $historyUl = document.querySelector(".history");
+import {
+  $controllerInput,
+  $controllerForm,
+  $balance,
+  $btnWrap,
+  $returnBalanceBtn,
+  $historyUl,
+} from "./elements.js";
 
 let balance = 0;
 
