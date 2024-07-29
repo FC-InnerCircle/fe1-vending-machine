@@ -22,6 +22,7 @@ const onSubmitControllerForm = (submitEvent) => {
   $controllerInput.value = "";
 };
 const onClickReturnBtn = () => {
+  balance = 0;
   returnBalance(balance);
   logHistory(`${balance}원을 반환합니다.`);
 };
@@ -32,6 +33,7 @@ const onClickItem = (price, itemName) => {
   changeBalance(balance);
   logHistory(`${itemName}을 구입하였습니다.`);
   if (balance < CHEAPEST_PRICE && balance > 0) {
+    balance = 0;
     returnBalance(balance);
     logHistory(`${balance}원을 반환합니다.`);
   }
@@ -58,7 +60,7 @@ $btnWrap.addEventListener("click", (e) => {
       dataset: { price },
     },
   } = e;
-
+  if (!price) return;
   onClickItem(price, itemName);
 });
 $btnWrap.addEventListener("mousedown", (e) => {
@@ -67,6 +69,7 @@ $btnWrap.addEventListener("mousedown", (e) => {
       dataset: { price },
     },
   } = e;
+
   if (balance >= price) return;
   changeBalance(price);
 });
@@ -76,6 +79,7 @@ window.addEventListener("mouseup", (e) => {
       dataset: { price },
     },
   } = e;
+
   if (balance >= price) return;
   changeBalance(balance);
 });
