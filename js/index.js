@@ -1,30 +1,13 @@
 import { CHEAPEST_PRICE, ALL_ITEMS_COUNT, GENTLEE } from "./CONSTANT.js";
+import { changeBalance, returnBalance, logHistory } from "./util.js";
 import {
   $controllerInput,
   $controllerForm,
-  $balance,
   $btnWrap,
   $returnBalanceBtn,
-  $historyUl,
 } from "./elements.js";
 
 let balance = 0;
-
-const changeBalance = (balance) => {
-  $balance.value = balance.toLocaleString();
-};
-const returnBalance = () => {
-  if (balance === 0) return;
-  logHistory(`${balance}원을 반환합니다.`);
-  balance = 0;
-  changeBalance(balance);
-};
-const logHistory = (logText) => {
-  const $li = document.createElement("li");
-  $li.innerHTML = logText;
-  $historyUl.appendChild($li);
-  $historyUl.scrollTo({ top: $historyUl.scrollHeight, behavior: "smooth" });
-};
 
 const onChangeControllerInput = (inputEvent) => {
   const valueOnlyNumber = inputEvent.target.value.replace(/[^0-9]/g, "");
@@ -44,7 +27,7 @@ const onClickItem = (price, itemName) => {
   balance -= price;
   changeBalance(balance);
   logHistory(`${itemName}을 구입하였습니다.`);
-  if (balance < CHEAPEST_PRICE) returnBalance();
+  if (balance < CHEAPEST_PRICE) returnBalance(balance);
 };
 const makeBtns = () => {
   for (let i = 0; i < ALL_ITEMS_COUNT; i++) {
