@@ -9,16 +9,16 @@
   <body>
     <div id="app">
       <div id="products-container" class="container">
-        <div class="input-wrapper">
-          <input class="input" disabled value="0" id="current-amount-input" />
+        <div class="display">
+          <p class="amount" id="current-amount"></p>
         </div>
         <ul id="product-list"></ul>
       </div>
       <div id="controls" class="container">
         <form id="controller">
-          <div class="input-wrapper">
+          <div class="display">
             <input
-              class="input"
+              class="amount"
               value=""
               type="number"
               id="amount-input"
@@ -36,7 +36,7 @@
             </button>
           </div>
         </form>
-        <ul id="log-wrapper" class="input-wrapper"></ul>
+        <ul id="log-wrapper" class="display"></ul>
       </div>
     </div>
     <script type="module" src="dist/app.js"></script>
