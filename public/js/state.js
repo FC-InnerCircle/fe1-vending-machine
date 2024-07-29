@@ -29,7 +29,6 @@ const state = (function () {
         state = { ...state, ...newState };
 
         listeners.forEach(listener => {
-
             listener(state, setState)
         });
 
@@ -45,3 +44,5 @@ const state = (function () {
         getState
     };
 })();
+
+export default state
