@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vending-machine</title>
     <link rel="stylesheet" href="./output.css" />
-    <script src="./script.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </head>
   <body>
     <div class="flex justify-center">
@@ -19,23 +19,29 @@
         </div>
       </div>
       <div class="p-4">
-        <div class="flex gap-4">
+        <form id="vending-form" class="flex gap-4">
           <input id="input" class="border text-center" type="number" />
           <div id="btn-container" class="flex gap-2">
-            <div
+            <button
               id="insert"
               class="border p-4 cursor-pointer bg-gray-400 hover:bg-gray-600 active:bg-gray-700 text-white"
+              type="submit"
+              name="action"
+              value="insert"
             >
               투입
-            </div>
-            <div
+            </button>
+            <button
               id="repayment"
               class="border p-4 cursor-pointer bg-gray-400 hover:bg-gray-600 active:bg-gray-700 text-white"
+              type="submit"
+              name="action"
+              value="repayment"
             >
               반환
-            </div>
+            </button>
           </div>
-        </div>
+        </form>
         <div
           id="log-container"
           class="mt-4 px-3 border h-60 min-h-60 max-h-60 overflow-auto"
