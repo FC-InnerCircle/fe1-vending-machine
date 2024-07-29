@@ -13,13 +13,17 @@ const onChangeControllerInput = (inputEvent) => {
   const valueOnlyNumber = inputEvent.target.value.replace(/[^0-9]/g, "");
   $controllerInput.value = valueOnlyNumber;
 };
-const onSubmitControllerForm = (e) => {
-  e.preventDefault();
+const onSubmitControllerForm = (submitEvent) => {
+  submitEvent.preventDefault();
   if ($controllerInput.value === "") return;
   balance += +$controllerInput.value;
   changeBalance(balance);
   logHistory(`${$controllerInput.value}원을 투입했습니다.`);
   $controllerInput.value = "";
+};
+const onClickReturnBtn = () => {
+  returnBalance(balance);
+  logHistory(`${balance}원을 반환합니다.`);
 };
 const onClickItem = (price, itemName) => {
   if (balance < price) return;
@@ -27,7 +31,10 @@ const onClickItem = (price, itemName) => {
   balance -= price;
   changeBalance(balance);
   logHistory(`${itemName}을 구입하였습니다.`);
-  if (balance < CHEAPEST_PRICE) returnBalance(balance);
+  if (balance < CHEAPEST_PRICE && balance > 0) {
+    returnBalance(balance);
+    logHistory(`${balance}원을 반환합니다.`);
+  }
 };
 const makeBtns = () => {
   for (let i = 0; i < ALL_ITEMS_COUNT; i++) {
@@ -51,5 +58,5 @@ const makeBtns = () => {
 
 $controllerInput.addEventListener("input", onChangeControllerInput);
 $controllerForm.addEventListener("submit", onSubmitControllerForm);
-$returnBalanceBtn.addEventListener("click", returnBalance);
+$returnBalanceBtn.addEventListener("click", onClickReturnBtn);
 makeBtns();
