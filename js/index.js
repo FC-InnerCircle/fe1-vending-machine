@@ -1,5 +1,5 @@
 import { CHEAPEST_PRICE, ALL_ITEMS_COUNT, GENTLEE } from "./CONSTANT.js";
-import { changeBalance, returnBalance, logHistory } from "./util.js";
+import { changeBalance, logHistory } from "./util.js";
 import {
   $controllerInput,
   $controllerForm,
@@ -23,7 +23,7 @@ const onSubmitControllerForm = (submitEvent) => {
 };
 const onClickReturnBtn = () => {
   balance = 0;
-  returnBalance(balance);
+  changeBalance(balance);
   logHistory(`${balance}원을 반환합니다.`);
 };
 const onClickItem = (price, itemName) => {
@@ -34,7 +34,7 @@ const onClickItem = (price, itemName) => {
   logHistory(`${itemName}을 구입하였습니다.`);
   if (balance < CHEAPEST_PRICE && balance > 0) {
     balance = 0;
-    returnBalance(balance);
+    changeBalance(balance);
     logHistory(`${balance}원을 반환합니다.`);
   }
 };
@@ -73,14 +73,7 @@ $btnWrap.addEventListener("mousedown", (e) => {
   if (!price || balance >= price) return;
   changeBalance(price);
 });
-window.addEventListener("mouseup", (e) => {
-  const {
-    target: {
-      dataset: { price },
-    },
-  } = e;
-
-  if (!price || balance >= price) return;
+window.addEventListener("mouseup", () => {
   changeBalance(balance);
 });
 makeBtns();
