@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vending Machine</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="products-container" class="container">
+        <div class="display">
+          <p class="amount" id="current-amount"></p>
+        </div>
+        <ul id="product-list"></ul>
+      </div>
+      <div id="controls" class="container">
+        <form id="controller">
+          <div class="display">
+            <input
+              class="amount"
+              value=""
+              type="number"
+              id="amount-input"
+              min="1"
+              placeholder="금액"
+              name="insert-amount"
+            />
+          </div>
+          <div id="control-buttons-wrapper">
+            <button id="insert" class="control-button" type="submit">
+              투입
+            </button>
+            <button id="return" class="control-button" type="button">
+              반환
+            </button>
+          </div>
+        </form>
+        <ul id="log-wrapper" class="display"></ul>
+      </div>
+    </div>
+    <script type="module" src="dist/app.js"></script>
+  </body>
+</html>

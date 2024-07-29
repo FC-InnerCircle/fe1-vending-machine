@@ -1,0 +1,190 @@
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 40px;
+  background-color: #f0f0f0;
+  width: 100vw;
+  @media (max-width: 720px) {
+    padding: 20px;
+  }
+}
+
+#app {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+/* 공통영역 */
+
+.container {
+  flex: 1;
+  padding: 40px;
+  border: 1px solid black;
+  border-radius: 20px;
+  @media (max-width: 720px) {
+    padding: 20px;
+  }
+}
+
+.display {
+  background: #111;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #fff;
+  border: 5px solid #333;
+}
+
+.amount {
+  text-align: right;
+  width: 100%;
+  background: #222;
+  border-radius: 5px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  letter-spacing: 5px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #29d8ff;
+}
+
+/* products 영역 */
+
+#products-container {
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  background: linear-gradient(
+    90deg,
+    rgba(227, 227, 227, 1) 0%,
+    rgb(227, 229, 230) 65%,
+    rgb(211, 212, 212) 100%
+  );
+}
+
+#products-container #current-amount {
+  text-align: center;
+  margin: 0;
+}
+
+#product-list {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: min-content;
+  gap: 40px;
+
+  @media (max-width: 720px) {
+    gap: 20px;
+  }
+}
+
+.product-button {
+  width: 100%;
+  background-color: #87cefa;
+  border: 2px solid #005f99;
+  border-radius: 15px;
+  height: 80px;
+  margin: 5px;
+  font-size: max(16px, 2vw);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 5px #005f99, 0 5px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #6ec5fb;
+  }
+
+  &:active {
+    background: #4db6f8;
+    box-shadow: 0 2px #005f99, 0 2px 5px rgba(0, 0, 0, 0.5);
+    transform: translateY(3px);
+  }
+}
+
+/* 컨트롤러 영역 */
+
+#controls {
+  display: flex;
+  flex-direction: column;
+}
+
+#controller {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+#controller #control-buttons-wrapper {
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
+}
+
+#controller .control-button {
+  background: radial-gradient(circle, #b0b0b0, #707070);
+  border: 2px solid #505050;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 5px #505050, 0 5px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:active {
+    background: radial-gradient(circle, #707070, #b0b0b0);
+    box-shadow: 0 2px #505050, 0 2px 5px rgba(0, 0, 0, 0.5);
+    transform: translateY(3px);
+  }
+}
+
+#controller .amount-wrapper {
+  flex: 1;
+  min-width: 250px;
+}
+
+#controller .amount-wrapper .amount {
+  color: #e2ff29;
+}
+
+#controls #log-wrapper {
+  flex: 1;
+  min-height: 200px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: scroll;
+  text-align: left;
+}
