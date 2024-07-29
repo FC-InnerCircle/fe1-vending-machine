@@ -16,7 +16,7 @@ figure, blockquote, dl, dd {
 }
 
 ul[role='list'],
-ol[role='list'] {
+ol[role='list'],li {
   list-style: none;
 }
 
