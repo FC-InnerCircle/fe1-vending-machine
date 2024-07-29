@@ -55,13 +55,12 @@ const makeBtns = () => {
     $btn.innerHTML = itemName;
     $btn.addEventListener("click", () => onClickItem(price, itemName));
     $btn.addEventListener("mousedown", () => {
-      balance < price && changeBalance(price);
+      if (balance >= price) return;
+      changeBalance(price);
     });
-    $btn.addEventListener("mouseup", () => {
-      balance < price && changeBalance(balance);
-    });
-    $btn.addEventListener("mouseout", () => {
-      balance < price && changeBalance(balance);
+    window.addEventListener("mouseup", () => {
+      if (balance >= price) return;
+      changeBalance(balance);
     });
     $btnWrap.appendChild($btn);
   }
