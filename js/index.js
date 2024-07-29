@@ -41,17 +41,9 @@ const makeBtns = () => {
     const $btn = document.createElement("button");
     const price = CHEAPEST_PRICE + i * 100;
     const itemName = `${GENTLEE}${price}`;
+    $btn.setAttribute("data-price", price);
     $btn.classList.add("item");
     $btn.innerHTML = itemName;
-    $btn.addEventListener("click", () => onClickItem(price, itemName));
-    $btn.addEventListener("mousedown", () => {
-      if (balance >= price) return;
-      changeBalance(price);
-    });
-    window.addEventListener("mouseup", () => {
-      if (balance >= price) return;
-      changeBalance(balance);
-    });
     $btnWrap.appendChild($btn);
   }
 };
@@ -59,4 +51,32 @@ const makeBtns = () => {
 $controllerInput.addEventListener("input", onChangeControllerInput);
 $controllerForm.addEventListener("submit", onSubmitControllerForm);
 $returnBalanceBtn.addEventListener("click", onClickReturnBtn);
+$btnWrap.addEventListener("click", (e) => {
+  const {
+    target: {
+      innerHTML: itemName,
+      dataset: { price },
+    },
+  } = e;
+
+  onClickItem(price, itemName);
+});
+$btnWrap.addEventListener("mousedown", (e) => {
+  const {
+    target: {
+      dataset: { price },
+    },
+  } = e;
+  if (balance >= price) return;
+  changeBalance(price);
+});
+window.addEventListener("mouseup", (e) => {
+  const {
+    target: {
+      dataset: { price },
+    },
+  } = e;
+  if (balance >= price) return;
+  changeBalance(balance);
+});
 makeBtns();
