@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vending-machine</title>
+    <link rel="stylesheet" href="./output.css" />
+    <script type="module" src="./js/main.js"></script>
+  </head>
+  <body>
+    <div class="flex justify-center">
+      <div class="p-4 m-4 border">
+        <div id="balance" class="border p-4 text-center"></div>
+        <div
+          id="item-container"
+          class="grid grid-cols-3 grid-flow-row gap-4 pt-4"
+        >
+          <!-- items -->
+        </div>
+      </div>
+      <div class="p-4">
+        <form id="vending-form" class="flex gap-4">
+          <input id="input" class="border text-center" type="number" />
+          <div id="btn-container" class="flex gap-2">
+            <button
+              id="insert"
+              class="border p-4 cursor-pointer bg-gray-400 hover:bg-gray-600 active:bg-gray-700 text-white"
+              type="submit"
+              name="action"
+              value="insert"
+            >
+              투입
+            </button>
+            <button
+              id="repayment"
+              class="border p-4 cursor-pointer bg-gray-400 hover:bg-gray-600 active:bg-gray-700 text-white"
+              type="submit"
+              name="action"
+              value="repayment"
+            >
+              반환
+            </button>
+          </div>
+        </form>
+        <div
+          id="log-container"
+          class="mt-4 px-3 border h-60 min-h-60 max-h-60 overflow-auto"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>
