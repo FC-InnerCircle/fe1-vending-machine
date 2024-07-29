@@ -11,10 +11,11 @@
 }
 .balance_btns_warp .balance{
     width: 100%;
-    height: 80px;
+    line-height: 80px;
     text-align: center;
     margin-bottom: 24px;
     font-size: 36px;
+    background-color: white;
 }
 
 

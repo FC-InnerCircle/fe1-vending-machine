@@ -1,7 +1,7 @@
-import { $balance, $historyUl } from "./elements.js";
+import { $balanceDiv, $historyUl } from "./elements.js";
 
 export const changeBalance = (balance) => {
-  $balance.value = balance.toLocaleString();
+  $balanceDiv.innerHTML = balance.toLocaleString();
 };
 export const returnBalance = (balance) => {
   if (balance === 0) return;
