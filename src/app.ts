@@ -20,7 +20,8 @@ let insertAmountInput: InsertAmountInput;
 let currentAmountInput: CurrentAmountInput;
 let logDisplay: LogDisplay;
 
-const handleInsertButton = () => {
+const handleInsert = (event: SubmitEvent) => {
+  event.preventDefault();
   const amount = insertAmountInput.getInsertAmount();
   if (insertAmountInput.validateAmount()) {
     //log쌓고
@@ -29,6 +30,9 @@ const handleInsertButton = () => {
     currentAmountInput.addAmount(amount);
     //input 0으로 초기화
     insertAmountInput.resetInsertAmount();
+  } else {
+    //유효하지 않은 값 에러 알림
+    insertAmountInput.alertError();
   }
 };
 
@@ -95,16 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
     logDisplay = new LogDisplay();
 
     const itemButtons = getProductItemElements(ITEM_BUTTONS);
-    const insertButton = document.querySelector<HTMLButtonElement>(
-      ".control-button#insert"
-    );
+    const insertForm = document.querySelector<HTMLFormElement>("#controller");
     const returnButton = document.querySelector<HTMLButtonElement>(
       ".control-button#return"
     );
     const productContainer = document.getElementById("product-list");
 
-    if (insertButton)
-      insertButton.addEventListener("click", handleInsertButton);
+    if (insertForm) insertForm.addEventListener("submit", handleInsert);
     if (returnButton)
       returnButton.addEventListener("click", handleReturnButton);
     if (productContainer) {

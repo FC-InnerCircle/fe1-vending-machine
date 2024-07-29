@@ -12,10 +12,10 @@ const FUNCTION_KEYS = [
 export class InsertAmountInput {
   private inputElement: HTMLInputElement;
   private initialValue: string;
-  private preventNonNumericInput(event: KeyboardEvent) {
-    const key = event.key;
-    if (FUNCTION_KEYS.some((funcKey) => funcKey === key)) return;
-    if (key < "0" || key > "9") event.preventDefault();
+  private isValidAmount(amount: string) {
+    // 정규식을 사용하여 숫자만 포함하는지 확인
+    const regex = /^\d+$/;
+    return regex.test(amount);
   }
   constructor() {
     this.inputElement = document.getElementById(
@@ -25,7 +25,6 @@ export class InsertAmountInput {
       throw new Error(`Element with id amount-input not found`);
     }
     this.initialValue = INIT_VALUE;
-    this.inputElement.addEventListener("keydown", this.preventNonNumericInput);
   }
 
   getInsertAmount() {
@@ -36,6 +35,16 @@ export class InsertAmountInput {
     this.inputElement.value = this.initialValue;
   }
   validateAmount() {
-    return parseInt(this.inputElement.value) > 0;
+    return this.isValidAmount(this.inputElement.value);
+  }
+  alertError() {
+    const currentValue = this.inputElement.value;
+    //필요한 금액 알리기
+    this.inputElement.value = "유효한 숫자만 입력하세요";
+
+    setTimeout(() => {
+      //원래 금액으로
+      this.inputElement.value = currentValue;
+    }, 2000);
   }
 }
