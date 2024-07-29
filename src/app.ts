@@ -64,6 +64,7 @@ const handlePurchaseItem = (price: number, itemName: string) => {
 
   //만약 잔액이 최소 상품보다 작으면 남은 금액 반환하기
   const remainingAmount = currentAmountInput.getCurrentAmount();
+
   if (remainingAmount < minPrice) handleReturnButton();
 };
 
@@ -86,7 +87,10 @@ const getProductItemElements = (items: { name: string; price: number }[]) => {
 };
 
 const getMinPrice = (items: { name: string; price: number }[]) =>
-  items.reduce((prev, { price }) => (price < prev ? price : prev), 0);
+  items.reduce(
+    (prev, { price }) => (price < prev ? price : prev),
+    items?.[0]?.price
+  );
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
@@ -94,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (app) {
     //초기셋팅
     minPrice = getMinPrice(ITEM_BUTTONS);
-
     const currentAmountEl = document.getElementById(
       "current-amount"
     ) as HTMLParagraphElement;
