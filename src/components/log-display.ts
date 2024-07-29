@@ -1,15 +1,13 @@
 import { Log } from "./log.js";
 
 export class LogDisplay {
-  private logDisplayElement: HTMLElement;
+  private logDisplayElement: HTMLUListElement;
   private scrollDown() {
     this.logDisplayElement.scrollTop = this.logDisplayElement.scrollHeight;
   }
 
-  constructor() {
-    this.logDisplayElement = document.getElementById(
-      "log-wrapper"
-    ) as HTMLElement;
+  constructor(el: HTMLUListElement) {
+    this.logDisplayElement = el;
     if (!this.logDisplayElement) {
       throw new Error(`Element with id amount-input not found`);
     }

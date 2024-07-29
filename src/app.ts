@@ -1,5 +1,5 @@
 import { CurrentAmountInput } from "./components/current-amount.js";
-import { InsertAmountInput } from "./components/insert.js";
+import { InsertAmountController } from "./components/insert.js";
 import { ItemButton } from "./components/item-button.js";
 import { LogDisplay } from "./components/log-display.js";
 
@@ -16,23 +16,23 @@ const ITEM_BUTTONS = [
 ];
 
 let minPrice: number;
-let insertAmountInput: InsertAmountInput;
+let insertAmountController: InsertAmountController;
 let currentAmountInput: CurrentAmountInput;
 let logDisplay: LogDisplay;
 
 const handleInsert = (event: SubmitEvent) => {
   event.preventDefault();
-  const amount = insertAmountInput.getInsertAmount();
-  if (insertAmountInput.validateAmount()) {
+  const amount = insertAmountController.getInsertAmount();
+  if (insertAmountController.validateAmount()) {
     //log쌓고
     logDisplay.addLog(`${amount}원을 투입했습니다.`);
     //current-amount에 추가해주기
     currentAmountInput.addAmount(amount);
     //input 0으로 초기화
-    insertAmountInput.resetInsertAmount();
+    insertAmountController.resetInsertAmount();
   } else {
     //유효하지 않은 값 에러 알림
-    insertAmountInput.alertError();
+    insertAmountController.alertError();
   }
 };
 
@@ -45,9 +45,9 @@ const handleReturnButton = () => {
     currentAmountInput.resetInsertAmount();
   }
 
-  //InsertAmountInput에 값을 적고 반환을 눌렀다면, InsertAmountInput의 값도 리셋해주기
-  if (insertAmountInput.getInsertAmount() > 0)
-    insertAmountInput.resetInsertAmount();
+  //insertAmountController에 값을 적고 반환을 눌렀다면, insertAmountController의 값도 리셋해주기
+  if (insertAmountController.getInsertAmount() > 0)
+    insertAmountController.resetInsertAmount();
 };
 
 const handlePurchaseItem = (price: number, itemName: string) => {
@@ -94,21 +94,33 @@ document.addEventListener("DOMContentLoaded", () => {
   if (app) {
     //초기셋팅
     minPrice = getMinPrice(ITEM_BUTTONS);
-    insertAmountInput = new InsertAmountInput();
-    currentAmountInput = new CurrentAmountInput();
-    logDisplay = new LogDisplay();
 
-    const itemButtons = getProductItemElements(ITEM_BUTTONS);
-    const insertForm = document.querySelector<HTMLFormElement>("#controller");
+    const currentAmountEl = document.getElementById(
+      "current-amount"
+    ) as HTMLParagraphElement;
+    if (currentAmountEl)
+      currentAmountInput = new CurrentAmountInput(currentAmountEl);
+
+    const insertFormEl = document.querySelector<HTMLFormElement>("#controller");
+    if (insertFormEl) {
+      insertAmountController = new InsertAmountController(insertFormEl);
+      insertFormEl.addEventListener("submit", handleInsert);
+    }
+
+    const logDisplayEl = document.getElementById(
+      "log-wrapper"
+    ) as HTMLUListElement;
+    if (logDisplayEl) logDisplay = new LogDisplay(logDisplayEl);
+
     const returnButton = document.querySelector<HTMLButtonElement>(
       ".control-button#return"
     );
-    const productContainer = document.getElementById("product-list");
-
-    if (insertForm) insertForm.addEventListener("submit", handleInsert);
     if (returnButton)
       returnButton.addEventListener("click", handleReturnButton);
+
+    const productContainer = document.getElementById("product-list");
     if (productContainer) {
+      const itemButtons = getProductItemElements(ITEM_BUTTONS);
       itemButtons.forEach((button) =>
         productContainer.appendChild(button.render())
       );

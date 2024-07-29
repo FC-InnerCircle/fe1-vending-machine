@@ -1,15 +1,7 @@
 const INIT_VALUE = "";
 
-const FUNCTION_KEYS = [
-  "Backspace",
-  "Delete",
-  "ArrowLeft",
-  "ArrowRight",
-  "Tab",
-  "Escape",
-  "Enter",
-];
-export class InsertAmountInput {
+export class InsertAmountController {
+  private formElement: HTMLFormElement;
   private inputElement: HTMLInputElement;
   private initialValue: string;
   private isValidAmount(amount: string) {
@@ -17,13 +9,12 @@ export class InsertAmountInput {
     const regex = /^\d+$/;
     return regex.test(amount);
   }
-  constructor() {
-    this.inputElement = document.getElementById(
-      "amount-input"
-    ) as HTMLInputElement;
-    if (!this.inputElement) {
+  constructor(el: HTMLFormElement) {
+    this.formElement = el;
+    if (!this.formElement) {
       throw new Error(`Element with id amount-input not found`);
     }
+    this.inputElement = el["insert-amount"];
     this.initialValue = INIT_VALUE;
   }
 

@@ -9,10 +9,8 @@ export class CurrentAmountInput {
     this.currentAmountElement.textContent = value.toLocaleString();
   }
 
-  constructor() {
-    this.currentAmountElement = document.getElementById(
-      "current-amount"
-    ) as HTMLParagraphElement;
+  constructor(el: HTMLParagraphElement) {
+    this.currentAmountElement = el;
     if (!this.currentAmountElement) {
       throw new Error(`Element with id amount-input not found`);
     }
