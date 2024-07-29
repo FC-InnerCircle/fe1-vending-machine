@@ -1,0 +1,80 @@
+#Wrap{
+    max-width: 747px;
+    margin: 0 auto;
+    gap: 8px;
+}
+
+.balance_btns_warp{
+    width: 100%;
+    padding: 16px;
+    background-color: skyblue;
+}
+.balance_btns_warp .balance{
+    width: 100%;
+    line-height: 80px;
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 36px;
+    background-color: white;
+}
+
+
+.balance_btns_warp .btn_wrap{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.balance_btns_warp .btn_wrap .item{
+    height: 100px;
+    font-size: 24px;
+    background-color: turquoise;
+}
+.balance_btns_warp .btn_wrap .item:hover{
+    background-color: cornflowerblue;
+}
+.balance_btns_warp .btn_wrap .item:active{
+    background-color: blue;
+}
+
+.controler_history_wrap{
+    width: 100%;
+    padding: 16px;
+    background-color: yellowgreen;
+}
+.controler_history_wrap .controller{
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    gap: 8px;
+    height: 80px;
+    margin-bottom: 24px;
+    font-size: 36px;
+}
+.controler_history_wrap .controller .controller_input{
+    min-width: 0;
+    padding-left: 16px;
+}
+.controler_history_wrap .controller .controller_btn{
+    font-size: 24px;    
+}
+.controler_history_wrap .history{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    height: 321px;
+    padding: 16px;
+    background-color: white;
+    overflow: auto;
+    
+}
+@media screen and (min-width : 1024px) {
+    #Wrap{
+        display: flex;
+        max-width: 1024px;
+    }
+    .balance_btns_warp, .controler_history_wrap{
+        width: 50%;
+    }
+}
