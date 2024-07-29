@@ -70,7 +70,7 @@ $btnWrap.addEventListener("mousedown", (e) => {
     },
   } = e;
 
-  if (balance >= price) return;
+  if (!price || balance >= price) return;
   changeBalance(price);
 });
 window.addEventListener("mouseup", (e) => {
@@ -80,7 +80,7 @@ window.addEventListener("mouseup", (e) => {
     },
   } = e;
 
-  if (balance >= price) return;
+  if (!price || balance >= price) return;
   changeBalance(balance);
 });
 makeBtns();
